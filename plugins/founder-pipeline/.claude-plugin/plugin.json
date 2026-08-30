@@ -1,0 +1,23 @@
+{
+  "name": "founder-pipeline",
+  "displayName": "Founder Pipeline",
+  "description": "A gated 25-step pipeline for designing a new revenue stream. Forces evidence over assumption, refuses to advance without a human signature, and is allowed to kill the idea.",
+  "version": "0.1.0",
+  "author": {
+    "name": "Marian Kamenistak"
+  },
+  "homepage": "https://github.com/marian-kamenistak/founder-pipeline",
+  "repository": "https://github.com/marian-kamenistak/founder-pipeline",
+  "license": "MIT",
+  "keywords": [
+    "founder",
+    "validation",
+    "business-model",
+    "pricing",
+    "go-to-market",
+    "product-discovery",
+    "market-research",
+    "seo"
+  ],
+  "skills": "./skills/"
+}

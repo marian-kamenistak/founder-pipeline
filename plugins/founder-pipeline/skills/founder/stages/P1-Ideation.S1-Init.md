@@ -1,0 +1,60 @@
+# P1.S1 — Context pre-read + initialise stream
+
+**Phase: P1-Ideation**
+
+**Focus guard — run BEFORE anything else.** Scan each candidate parent directory for any other stream that is mid-pipeline: a `PROGRESS.md` with any row still `in progress` / `awaiting approval` / `pending` after an approved one (i.e. an unfinished pipeline), last touched < 90 days ago. For legacy streams without a `PROGRESS.md`, fall back to the old `*_in_progress.md` scan or an unfinished numeric pipeline. If one exists, STOP and force the decision: **finish it, park it (write a dated re-entry note into its `brief.md`), or kill it.** Focus is the scarcest resource a solo operator has — this skill never opens a second front silently.
+
+**Before asking anything**, load the context the user shouldn't have to re-type. **Ask where things live — assume no particular layout.** The workspace this runs in is the user's, not a fixed one:
+
+1. The user's global agent instructions, if any — persona, voice, preferences.
+2. The project's `CLAUDE.md` / `AGENTS.md`, if the skill was invoked from inside a project directory.
+3. Any long-term memory or notes files the user points you at for the active project.
+4. The **workspace root(s)** where the user keeps active brands and existing streams — ask for the path(s), then scan them for existing streams (folders with a `brief.md` or scattered planning docs) and any voice/positioning notes. This same set of roots is what the focus guard above scans.
+5. If the user invoked the skill from inside a project folder, treat that folder as the strong default for the parent location. Otherwise list the candidate parents you found under the roots they named so the user can pick.
+
+Record every path the user names in `brief.md` — later steps read them from there instead of asking again.
+
+Then ask the user one at a time:
+1. **Parent folder** — which directory should the stream folder live under? **Never assume `streams/`.** Typical choices: an existing brand or stream parent under a workspace root the user named, a new top-level folder, or any path they give you. If the skill was invoked from inside a project directory, suggest that directory as the default. Confirm the absolute path before creating anything.
+2. **Working name** for the stream (will be the slug — kebab-case)
+3. **One-sentence description** of what you think you're building (placeholder, we'll refine)
+4. **Time horizon** — live in 90 days, 6 months, or 12 months? (The pipeline ahead: 25 steps across 6 phases — Ideation, Viability, Clients, Build, Activation, Adoption.)
+5. **Type** — new SKU of an existing brand / fully new brand / productized consulting?
+6. **Portfolio trade + people (hard gate)** — you're a solo operator with multiple live streams. Which existing stream loses hours to this one, and is that trade worth it? Name the stream and the weekly hours it gives up. "I'll find the time" is not an answer — if nothing can be deprioritized, the stream stops here. Also name who/what carries the work that shouldn't land on you (a named collaborator, a contractor, a community member, automation) — "all me" is a red flag carried to P2.S1. Write the trade into `brief.md`; it becomes a kill criterion in the Viability phase.
+7. **Profit bar (hard gate)** — two numbers written into `brief.md` before any design work: (a) **hurdle rate** — profit per founder-hour of your best current stream (rough is fine, name the stream); (b) **absolute floor** — the minimum 12-month profit that makes this worth your focus. Default bar the pipeline enforces: the new stream must project **≥ 1.5× hurdle rate per hour at the 50% scenario** AND clear the floor, or P2.S4 kills it. Confirm or adjust the multiplier now — not later when you're attached to the idea.
+8. **House stack, markets and currency (declared ONCE here, referenced for the rest of the run)** — every later step assumes these and none of them re-asks. Write all three blocks into `brief.md` under a `## House stack` heading:
+   - **Stack rows:** web + hosting, deck path, analytics, forms + transactional email, CRM, automation. If the user already has a stack, take it as declared. If they don't, the pipeline's recommended default — and the worked example every later step is written against — is: web = Astro 5 on Cloudflare Workers via `/founder-pipeline:web-site-creator`; decks = HTML→PDF through system Chrome; analytics = PostHog; forms = Turnstile + Resend; CRM = Attio; automation = Make.com. The point is that the stack is written down once, not that it matches the default.
+   - **Home market + primary export market** — language + country for each. This drives the keyword locales at P4.S1, which search engines the stream has to satisfy (a home market where Google is not the monopoly needs its own engines — e.g. Seznam in the Czech market), and the directory/listing work at P5.S2.
+   - **Currency** — one currency carries every cost, price, hurdle rate and floor from here to P6. Mixing currencies mid-run silently breaks the profit-bar comparison.
+
+   Anything built outside the declared stack later needs a **recorded override with a reason**, not a silent swap.
+9. **Track** — full guided (all stages), **express** (skip honest-assessment intros, keep all gates), **overnight** (autonomous run per SKILL.md Overnight mode — auto-advance on fresh-judge gates, evidence gates never faked, morning review packet), or **48-hour smoke test** (see `stages/smoke_test.md` — 5 questions + 10 real outreaches first; the full pipeline must be earned by signal, not enthusiasm). Default is full guided, but if this is a "should I even build X?" hunch, recommend the smoke test.
+
+Then:
+- `mkdir -p "<parent>/<slug>/"` — using the path the user confirmed in question 1. (The intake folder is designated or created in the Ideation intake below.) Quote the path — workspace paths routinely contain spaces.
+- If `<parent>/<slug>/` already exists with prior `.md` files, ask: "Resume mid-stream, or restart fresh?"
+- Do NOT copy all templates upfront. Each step copies ONLY its own template from `templates/stream-folder/` to the step's canonical filename `P<X>-<Phase>.S<Y>-<Step>.md` when the step starts. Filenames never carry status — all status transitions live in `PROGRESS.md` (pending → in progress → awaiting approval → approved / skipped / killed) (see SKILL.md house rules). This keeps the folder readable as a progress board.
+- Create `PROGRESS.md` in the stream folder from `templates/stream-folder/PROGRESS.md` — all 25 step rows start `pending`; flip P1.S1's own row as it runs.
+- Initialize `brief.md` with the slug, working name, one-sentence description, time horizon, type, date, the chosen parent path (so resume-mode can find it), and the `## House stack` block from question 8.
+- **Project health check** — invoke `/founder-pipeline:health` on the project the stream lives in (the nearest project root with a `CLAUDE.md`, or the parent brand folder). Apply its safe auto-fixes (missing Golden Rule line, broken file references, orphaned memory entries); surface anything needing the owner's call. If the project has NO `CLAUDE.md` yet, create a minimal one (Golden Rule near the top + pointer to the stream folder and intake folder) so every future session loads the right context. The pipeline writes 25+ files into this project — it starts from a healthy root, not on top of rot.
+
+## Ideation intake (hard gate — the idea must be described well enough before design starts)
+
+The stream needs an **intake folder** of raw idea assets — memos, voice-note transcriptions, screenshots, photos of whiteboards/napkins, links, meeting notes, prior drafts. **No naming expectations whatsoever:** any folder name (`ideation/`, `inspiration/`, whatever exists), any file names. The only structural expectation is: **a designated folder exists and is not empty.** This is the pipeline's source material — every downstream step (and especially an overnight run) works from it, so the user never has to re-type thinking they already captured somewhere.
+
+1. **Designate** — ask which folder holds the idea assets. If the project already has one (e.g. `inspiration/`), use it as-is and record its path in `brief.md`. If none exists, create one (default `<parent>/<slug>/ideation/`) and copy assets in from wherever the user points — a screenshots folder, voice-memo transcripts, notes exports, meeting notes, email threads (copy, never move).
+2. **Capture** — if the folder would be empty, fill it NOW: have the user brain-dump in chat (or paste a voice transcript) and save it verbatim as a file in the folder. An idea that exists only in their head does not pass this gate.
+3. **Digest** — READ every file in the folder (images included), then write a digest file into it (`INTAKE.md` by default — the digest is the skill's output, so its name is the skill's choice, not an expectation on the user's files): what the idea appears to be (3-5 sentences), the claims found (each tagged with its source file), contradictions between assets, and the questions the assets do NOT answer. The digest seeds P1.S2's draft answers — the problem step starts from the user's own words, not from a blank page.
+4. **Gap check** — if the assets can't answer "what's the pain, who has it, why now" even roughly, say exactly what's missing and get it (step 2 above) before proceeding.
+
+**Def-of-success — ALL must pass before owner sign-off (fail → improvement loop per SKILL.md, never advance):**
+- Portfolio trade is concrete: a NAMED existing stream + a NUMBER of weekly hours it gives up (not "I'll find the time").
+- Focus-guard scan evidence recorded in `brief.md`: list of parent directories scanned + per-stream status found (clean / finish / parked / killed, with dates) — an unlisted directory means the scan didn't happen.
+- Parent folder confirmed as an absolute path; slug is kebab-case.
+- Time horizon, type, track, and profit bar (hurdle rate + absolute floor) recorded in `brief.md` — no "we'll see".
+- **House stack declared once** in `brief.md`: every stack row named (web + hosting, deck path, analytics, forms + transactional email, CRM, automation), home market + primary export market named with language + country, and a single currency named. An unfilled row is a FAIL here — every later step reads these instead of re-asking, and a stack decided at P4 is a stack decided too late.
+- **Ideation intake complete:** a designated intake folder (any name, any file names) exists, is non-empty, its path is recorded in `brief.md`, and the digest covers every file with per-file source tags — the idea is described well enough that a stranger could draft P1.S2 from the folder alone.
+- **Health compliance:** the host project passed `/founder-pipeline:health` (or its findings were fixed/consciously accepted) — CLAUDE.md exists with the Golden Rule, no broken references into the stream folder.
+- `/founder-pipeline:critical` on the portfolio trade run recorded (is the trade real and worth it?); the score is advisory (target ≥ 8/10) — the gate is the PASS/FAIL criteria below, not the number.
+
+**Gate out:** Confirm the setup with the owner before proceeding to P1.S2 (`stages/P1-Ideation.S2-Problem.md`). P1.S1's only critical pass is on the portfolio trade (the focus-kill decision) — there's no profit forecast to challenge yet. Run it as a **fresh-context dispatch**: a subagent given ONLY `brief.md`'s portfolio-trade + profit-bar sections — never the conversation history — so the judge can't inherit the room's enthusiasm. Note the dispatch (fresh-context, date) in the Validation loop block. That pass DOES challenge the trade: if the named trade looks like wishful thinking ("I'll work weekends"), say so and stop.

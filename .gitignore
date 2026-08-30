@@ -1,0 +1,35 @@
+# Python — both shipped scripts regenerate these on first run, and the bytecode
+# embeds source string literals from before the de-brand pass.
+__pycache__/
+*.py[cod]
+*$py.class
+.pytest_cache/
+.venv/
+venv/
+
+# Secrets — nothing in this repo should ever need them, which is exactly why
+# the ignore goes in before the first commit rather than after the first leak.
+.env
+.env.*
+!.env.example
+*.pem
+*.key
+credentials.json
+.dev.vars
+
+# Agent and editor state
+.memsearch/
+.claude/settings.local.json
+*.local.md
+.idea/
+.vscode/
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Working files that must not ship
+AUDIT-*.md
+*.bak
+*.orig
+*.tmp

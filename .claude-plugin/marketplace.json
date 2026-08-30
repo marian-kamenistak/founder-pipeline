@@ -1,0 +1,23 @@
+{
+  "name": "founder-pipeline",
+  "owner": {
+    "name": "Marian Kamenistak",
+    "url": "https://github.com/marian-kamenistak"
+  },
+  "plugins": [
+    {
+      "name": "founder-pipeline",
+      "source": "./plugins/founder-pipeline",
+      "displayName": "Founder Pipeline",
+      "description": "A gated 25-step pipeline for designing a new revenue stream. Forces evidence over assumption, refuses to advance without a human signature, and is allowed to kill the idea.",
+      "version": "0.1.0",
+      "keywords": [
+        "founder",
+        "validation",
+        "business-model",
+        "pricing",
+        "go-to-market"
+      ]
+    }
+  ]
+}

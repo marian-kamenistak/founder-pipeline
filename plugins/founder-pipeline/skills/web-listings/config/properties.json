@@ -1,0 +1,68 @@
+{
+  "_comment": [
+    "THE PROPERTY REGISTRY. Ships with EXAMPLE ROWS ONLY — replace them with your own before the first run.",
+    "One object per owned property. /founder-pipeline:web-listings and /founder-pipeline:web-backlinks both read this file.",
+    "",
+    "id: your own short identifier for the property. Used in folder names and log rows.",
+    "domain: the canonical site URL. Unique — this is the key you pass to the skill commands.",
+    "label: human-readable name.",
+    "brand_class: community | conference | personal-brand | services | marketplace-saas | app | product.",
+    "  This is the ONLY field config/targets.json filters on (each target row's `applies_to` is a list of brand classes).",
+    "  It drives which target categories get priority per web-backlinks/references/platform-matrix.md's weighting table.",
+    "active: true if the property is in the current registration push; false to keep it catalogued but unworked.",
+    "  Registering a property as a PRODUCT on general launch-discovery platforms is a deliberate choice recorded here,",
+    "  not something derived from brand_class — a community or a conference can be listed as a product if you want",
+    "  that discovery surface. It does not extend to category-specific platforms or to the `review` category.",
+    "territory: which language/market surfaces this property can be submitted to. Gates the localize-before-register",
+    "  rule (Law 4): 'worldwide' means English only; add a language code once localized pages exist and return 200",
+    "  with correct hreflang; '<code>-native' means the property was built in that language and the gate is satisfied.",
+    "legal_entity: for institutional/business-catalog listings that require a registered company. null if the",
+    "  property is not itself a legal entity — record which entity operates it in references/entity-pack.md instead.",
+    "notes: anything a listing pass needs to know before submitting.",
+    "",
+    "Numbers used in generated listing copy MUST come from your single numbers source of truth, not from this file",
+    "and not from site copy — published site figures go stale silently."
+  ],
+  "properties": [
+    {
+      "id": "example-community",
+      "domain": "community.example.com",
+      "label": "Example Community",
+      "brand_class": "community",
+      "active": true,
+      "territory": "worldwide",
+      "legal_entity": null,
+      "notes": "EXAMPLE ROW — replace. A peer network / membership community. Priority categories: entity, event, institution, catalog, review. If localized pages exist for a second market, add that market to `territory` and the local-tier catalog rows unlock."
+    },
+    {
+      "id": "example-conference",
+      "domain": "conference.example.com",
+      "label": "Example Conference",
+      "brand_class": "conference",
+      "active": true,
+      "territory": "worldwide",
+      "legal_entity": null,
+      "notes": "EXAMPLE ROW — replace. An annual event. Priority categories: event (conference-data repos, developer-event calendars, CFP platforms), media, entity. Top-of-funnel — highest value from event-listing placements. Launch-day campaign work is out of scope for this skill; it only stages the profile."
+    },
+    {
+      "id": "example-personal",
+      "domain": "coach.example.com",
+      "label": "Example Practice",
+      "brand_class": "personal-brand",
+      "active": true,
+      "territory": "worldwide",
+      "legal_entity": "<registered company name and number, or null>",
+      "notes": "EXAMPLE ROW — replace. A 1:1 practice under a named person. Priority categories: entity (person item, company-database person profile), vertical (practitioner directories), institution (the accreditation body for the discipline), speaker, review. Common open flag to record here: a marketplace profile strong enough to outrank the person's own site for their own name is an owner decision before submitting."
+    },
+    {
+      "id": "example-marketplace",
+      "domain": "marketplace.example.com",
+      "label": "Example Marketplace",
+      "brand_class": "marketplace-saas",
+      "active": false,
+      "territory": "worldwide",
+      "legal_entity": null,
+      "notes": "EXAMPLE ROW — replace. A product with something a user can actually sign up for and use. Priority categories: startup-platform, review, vertical. Fit warning worth keeping: the B2B software-review sites only fit a genuine software product — a curated network or a services practice will sit there empty and read as abandoned. The consumer-review platform is usually the right review surface for those instead."
+    }
+  ]
+}

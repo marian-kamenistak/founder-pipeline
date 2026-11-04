@@ -251,7 +251,7 @@ No. It's specifically built not to. If that's what you want, ask a normal chatbo
   something you already run, a promise backtest in the offer step, a sanitization check before
   launch, and search-data calls rewritten for the REST API.
 
-**0.1.0 (2026-08-30)** — first public release.
+**0.1.0 (2026-08-30)**: first public release.
 
 ---
 

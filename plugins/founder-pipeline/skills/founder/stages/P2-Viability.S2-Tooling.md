@@ -2,7 +2,7 @@
 
 **Phase: P2-Viability**
 
-**∥ note:** this step may draft in parallel with P2.S1 (economics) — its costs feed back into P2.S1's model before P2.S1's gate closes — but it gates separately, with its own `/founder-pipeline:critical` pass and its own owner sign-off.
+**∥ note:** this step may draft in parallel with P2.S1 (economics) — its costs feed back into P2.S1's model before P2.S1's gate closes — but it gates separately, with its own `/critical` pass and its own owner sign-off.
 
 **Earns its keep when** the stream needs new infrastructure (a site, an app, payments, scheduling, CRM). **Becomes performative when** the stream runs entirely on tools already paid for and wired up — then this is a 10-line inventory, not a project.
 
@@ -24,7 +24,7 @@ Use this if you have no opinion yet. It is one operator's working stack, shipped
 
 | Need | Recommended default | Why this shape |
 |---|---|---|
-| Web | A static-first framework on an edge host, scaffolded via `/founder-pipeline:web-site-creator` (the reference implementation targets Astro on Cloudflare Workers) | Ships fast, near-zero run-rate, no server to maintain |
+| Web | A static-first framework on an edge host, scaffolded via `/web-site-creator` (the reference implementation targets Astro on Cloudflare Workers) | Ships fast, near-zero run-rate, no server to maintain |
 | Decks | HTML → PDF through a headless system browser (P4.S5) | Version-controlled, diffable, no export dance; see P4.S5 for the override path |
 | Analytics | A product-analytics platform with event tracking and funnels (PostHog in the reference stack) | Events, not just pageviews — P6.S2's KPIs need behaviour |
 | Forms | A bot-challenge widget + a transactional email sender (Turnstile + Resend in the reference stack) | Spam control and deliverability are two jobs; one tool rarely does both well |
@@ -38,15 +38,15 @@ Use this if you have no opinion yet. It is one operator's working stack, shipped
 4. New subscriptions or one-off costs this stream adds — feed them back into `P2-Viability.S1-Economics.md` run-rate if not already there.
 5. Automation opportunities — what recurring work can the automation row of the stack absorb (automation platform, scheduled job, or an MCP integration) so the weekly hour budget from P2.S1 holds?
 
-**Skills:** `/founder-pipeline:web-site-creator` Phase 1.0 preflight — it runs a **brand-kit availability check** against your configured brand kit for this brand (does a kit exist, is it current, what is missing). Record its result here rather than discovering it mid-build in P4.S3. For the automation requirement below, **design** the automation — trigger, steps, failure path, owner, and where it runs — rather than naming a tool; if your automation platform ships a Claude Code plugin, install it separately and use it here. A named tool is not an automation.
+**Skills:** `/web-site-creator` Phase 1.0 preflight — it runs a **brand-kit availability check** against your configured brand kit for this brand (does a kit exist, is it current, what is missing). Record its result here rather than discovering it mid-build in P4.S3. For the automation requirement below, **design** the automation — trigger, steps, failure path, owner, and where it runs — rather than naming a tool; if your automation platform ships a Claude Code plugin, install it separately and use it here. A named tool is not an automation.
 
 **Write to** `P2-Viability.S2-Tooling.md`. Table: Need | Tool | Status (have / configure / buy) | Cost/month | Owner. Plus the client-motion coverage map (Touch | Stack row | Owner), the house-stack gap + override list (Row | House default | This stream | Reason), and the brand-kit check result (kit exists yes/no + action taken). Flag anything that adds to `P2-Viability.S1-Economics.md`. Costs use the currency declared at P1.S1.
 
 **Def-of-success — ALL must pass before owner sign-off (fail → improvement loop per SKILL.md, never advance):**
-- `/founder-pipeline:critical` run recorded; the score is advisory (target ≥ 8/10) — the gate is the PASS/FAIL criteria below, not the number.
+- `/critical` run recorded; the score is advisory (target ≥ 8/10) — the gate is the PASS/FAIL criteria below, not the number.
 - Minimum Ship stack identified — every tool on it traces to a named delivery or build need; zero "nice to have" in the Ship column.
 - Every new cost fed back into `P2-Viability.S1-Economics.md` run-rate (cross-checked, not assumed).
-- **House stack honoured:** every build need maps to a declared house-stack row, or to a recorded override naming the row, the replacement, and the reason. An undeclared new tool is a FAIL, not a footnote — and the web surface goes through `/founder-pipeline:web-site-creator` unless the override is recorded here.
+- **House stack honoured:** every build need maps to a declared house-stack row, or to a recorded override naming the row, the replacement, and the reason. An undeclared new tool is a FAIL, not a footnote — and the web surface goes through `/web-site-creator` unless the override is recorded here.
 - ≥ 1 automation identified that protects the P2.S1 weekly hour budget, specified as a design (trigger, steps, failure path, owner) — not as a tool name.
 - Every table row complete: named tool, Cost/month cited to a live pricing-page URL or invoice, named owner; zero TBD/decide-later rows — any unresolved gap becomes a `queues/manual-queue.md` row before the gate.
 - Brand-kit check result recorded in the output file: kit exists yes/no + action taken.
@@ -54,7 +54,7 @@ Use this if you have no opinion yet. It is one operator's working stack, shipped
 
 **Gate out (mandatory — see SKILL.md house rules):**
 1. Draft `P2-Viability.S2-Tooling.md`.
-2. Invoke `/founder-pipeline:critical` on the draft — hunt for tool-shopping disguised as necessity: which "needed" tools are actually procrastination? Which overrides are preference dressed as requirement? What's the minimum stack for Ship phase?
+2. Invoke `/critical` on the draft — hunt for tool-shopping disguised as necessity: which "needed" tools are actually procrastination? Which overrides are preference dressed as requirement? What's the minimum stack for Ship phase?
 3. Revise; note what changed.
 4. Present the draft + the critical findings + the changes to the owner. **Wait for their explicit approval. Never auto-advance.**
 

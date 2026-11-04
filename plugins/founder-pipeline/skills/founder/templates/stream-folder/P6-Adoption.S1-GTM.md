@@ -113,7 +113,7 @@ This stage earns its keep always. Most streams die in GTM, not product.
 
 ## Validation loop
 
-- [ ] `/founder-pipeline:critical` run — findings: [...] — **CRITICAL SCORE: [X]/10** — advisory; the gate is the def-of-success PASS/FAIL checklist
+- [ ] `/critical` run — findings: [...] — **CRITICAL SCORE: [X]/10** — advisory; the gate is the def-of-success PASS/FAIL checklist
 - [ ] Def-of-success (from the stage file): [each criterion — met/unmet]
 - [ ] Improvement loops run (if gate failed): [N — what changed each round]
 - [ ] Revised — what changed: [...]

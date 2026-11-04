@@ -12,7 +12,7 @@
 |---|---|---|---|---|
 | | | | | |
 
-## Opening message (via `/founder-pipeline:brand-voice`, mandatory)
+## Opening message (via `/brand-voice`, mandatory)
 
 [3 sentences max. Asks for a problem conversation, not a pitch.]
 
@@ -33,7 +33,7 @@ First touch → discovery call → pilot/LOI
 
 ## Validation loop
 
-- [ ] `/founder-pipeline:critical` run — findings: [...] — **CRITICAL SCORE: [X]/10** — advisory; the gate is the def-of-success PASS/FAIL checklist
+- [ ] `/critical` run — findings: [...] — **CRITICAL SCORE: [X]/10** — advisory; the gate is the def-of-success PASS/FAIL checklist
 - [ ] Def-of-success (from the stage file): [each criterion — met/unmet]
 - [ ] Improvement loops run (if gate failed): [N — what changed each round]
 - [ ] Revised — what changed: [...]

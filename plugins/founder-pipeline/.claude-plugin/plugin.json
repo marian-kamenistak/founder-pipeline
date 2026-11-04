@@ -2,7 +2,7 @@
   "name": "founder-pipeline",
   "displayName": "Founder Pipeline",
   "description": "A gated 25-step pipeline for designing a new revenue stream. Forces evidence over assumption, refuses to advance without a human signature, and is allowed to kill the idea.",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "author": {
     "name": "Marian Kamenistak"
   },

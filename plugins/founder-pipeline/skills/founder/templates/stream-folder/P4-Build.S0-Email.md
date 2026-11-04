@@ -45,7 +45,7 @@
 
 ## Validation loop
 
-- [ ] `/founder-pipeline:critical` run — findings: [...] — **CRITICAL SCORE: [X]/10** — advisory; the gate is the def-of-success PASS/FAIL checklist
+- [ ] `/critical` run — findings: [...] — **CRITICAL SCORE: [X]/10** — advisory; the gate is the def-of-success PASS/FAIL checklist
 - [ ] Def-of-success (from the stage file): [each criterion — met/unmet]
 - [ ] Every recorded value verified live (`dig`, real sent message), not just "saved in console"
 - [ ] Improvement loops run (if gate failed): [N — what changed each round]

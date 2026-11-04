@@ -4,17 +4,17 @@
 **Step:** P5.S2-Links (P5-Activation)
 **Last updated:** [date]
 
-> Executes TWO separate motions: the first link-building cycle via `/founder-pipeline:web-backlinks` (earned placements — adopting P1.S5's `_backlink-gap.md` + the surfaces in `${CLAUDE_PLUGIN_ROOT}/skills/founder/references/web-post-launch.md`), AND register-once identity presence via `/founder-pipeline:web-listings` (directories, registries, review sites, entity items). **Both, always.** The dividing test: needs an ask → `/founder-pipeline:web-backlinks`; self-serve form → `/founder-pipeline:web-listings`. Graduated link items live in the `/founder-pipeline:web-backlinks` playbook; listings state lives in `queues/` by default, or on your task board if you keep one (a `Listing` row type). Never merge the two counts — listings are citation surfaces, never referring domains.
+> Executes TWO separate motions: the first link-building cycle via `/web-backlinks` (earned placements — adopting P1.S5's `_backlink-gap.md` + the surfaces in `${CLAUDE_PLUGIN_ROOT}/skills/founder/references/web-post-launch.md`), AND register-once identity presence via `/web-listings` (directories, registries, review sites, entity items). **Both, always.** The dividing test: needs an ask → `/web-backlinks`; self-serve form → `/web-listings`. Graduated link items live in the `/web-backlinks` playbook; listings state lives in `queues/` by default, or on your task board if you keep one (a `Listing` row type). Never merge the two counts — listings are citation surfaces, never referring domains.
 
 ---
 
-## Executed-links table (earned — `/founder-pipeline:web-backlinks`)
+## Executed-links table (earned — `/web-backlinks`)
 
-| Target | Type (awesome-list PR / listicle placement / podcast / roster / outreach) | Status (`LIVE \| SUBMITTED \| QUEUED \| SKIPPED(reason)` — nothing else) | URL / evidence | → page strengthened (money page, or homepage + recorded reason; /founder-pipeline:ai-seo prioritization cited) |
+| Target | Type (awesome-list PR / listicle placement / podcast / roster / outreach) | Status (`LIVE \| SUBMITTED \| QUEUED \| SKIPPED(reason)` — nothing else) | URL / evidence | → page strengthened (money page, or homepage + recorded reason; /ai-seo prioritization cited) |
 |---|---|---|---|---|
 | | | | | |
 
-## Executed-listings table (register-once — `/founder-pipeline:web-listings`)
+## Executed-listings table (register-once — `/web-listings`)
 
 Counted separately from links, on purpose. A run that produced zero queue rows did not happen.
 
@@ -39,7 +39,7 @@ Counted separately from links, on purpose. A run that produced zero queue rows d
 | Money pages linked from every P5.S1 blog post | [yes/no] |
 | Properties on a hosted site builder with no editing API → editor checklists queued | [manual-queue rows: ...] |
 
-## Entity-SEO status (owned by `/founder-pipeline:web-listings` — entity category, Wikidata = DIR-0001)
+## Entity-SEO status (owned by `/web-listings` — entity category, Wikidata = DIR-0001)
 
 | Item | Status | Evidence / queue row |
 |---|---|---|
@@ -71,7 +71,7 @@ Counted separately from links, on purpose. A run that produced zero queue rows d
 
 ## Validation loop
 
-- [ ] `/founder-pipeline:critical` run — findings: [...] — **CRITICAL SCORE: [X]/10** — advisory; the gate is the def-of-success PASS/FAIL checklist
+- [ ] `/critical` run — findings: [...] — **CRITICAL SCORE: [X]/10** — advisory; the gate is the def-of-success PASS/FAIL checklist
 - [ ] Def-of-success (from the stage file): [each criterion — met/unmet]
 - [ ] Improvement loops run (if gate failed): [N — what changed each round]
 - [ ] Revised — what changed: [...]

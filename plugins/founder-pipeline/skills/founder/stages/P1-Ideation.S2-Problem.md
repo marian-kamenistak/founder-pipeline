@@ -16,12 +16,12 @@
 5. What would have to be true about the world for this stream to NOT work?
 6. Money proximity — who pays TODAY to avoid or patch this pain? Name the behavior, tool spend, or budget line. No current spend and no budget owner means the pain may be real but unfunded.
 
-**Skills:** `/founder-pipeline:brainstorm` if the user wants to think through the why-now angle. (Alternatives research belongs to P1.S5 — don't `/founder-pipeline:scout` them here.)
+**Skills:** `/brainstorm` if the user wants to think through the why-now angle. (Alternatives research belongs to P1.S5 — don't `/scout` them here.)
 
 **Write to** `P1-Ideation.S2-Problem.md`. Every market-shift claim gets `[source: ...]` or `[assumption — validation: ...]`.
 
 **Def-of-success — ALL must pass before owner sign-off (fail → improvement loop per SKILL.md, never advance):**
-- `/founder-pipeline:critical` run recorded; the score is advisory (target ≥ 8/10) — the gate is the PASS/FAIL criteria below, not the number.
+- `/critical` run recorded; the score is advisory (target ≥ 8/10) — the gate is the PASS/FAIL criteria below, not the number.
 - Pain statement ≤ 25 words, zero jargon — the ICP would say it back verbatim.
 - Pain statement traceable to a quoted line or named asset in the intake digest (`INTAKE.md`).
 - ≥ 1 cited market shift with a dated, checkable source — `[source: <title>, <date>, <url>]`; the critical pass verifies the source exists before PASS.
@@ -31,7 +31,7 @@
 
 **Gate out (mandatory — see SKILL.md house rules):**
 1. Draft `P1-Ideation.S2-Problem.md`.
-2. Invoke `/founder-pipeline:critical` on the draft — attack the "why now" claim, the evidence, and the "why isn't this solved" reasoning hardest.
+2. Invoke `/critical` on the draft — attack the "why now" claim, the evidence, and the "why isn't this solved" reasoning hardest.
 3. Revise; note what changed.
 4. Present the draft + the critical findings + the changes to the owner. **Wait for their explicit approval. Never auto-advance.**
 

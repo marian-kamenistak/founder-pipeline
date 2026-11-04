@@ -34,13 +34,13 @@
 
 ## Market sizing (napkin)
 
-[SAM and SOM each need ≥1 real cited source (registry/directory count, DataForSEO volume, /founder-pipeline:scout output file path). `[assumption]` is permitted for TAM only. The SOM ≥ 10× sanity ratio computes ONLY on a cited SOM — an assumption-tagged SOM fails the ratio automatically.]
+[SAM and SOM each need ≥1 real cited source (registry/directory count, DataForSEO volume, /scout output file path). `[assumption]` is permitted for TAM only. The SOM ≥ 10× sanity ratio computes ONLY on a cited SOM — an assumption-tagged SOM fails the ratio automatically.]
 
 | Layer | Value | Source |
 |---|---|---|
 | TAM | {currency}[X] | `[source: ...]` or `[assumption — validation: ...]` (assumption permitted here only) |
-| SAM | {currency}[Y] | `[source: <registry/directory count / DataForSEO volume / /founder-pipeline:scout output file path>]` |
-| SOM (year 1) | {currency}[Z] | `[source: <registry/directory count / DataForSEO volume / /founder-pipeline:scout output file path>]` |
+| SAM | {currency}[Y] | `[source: <registry/directory count / DataForSEO volume / /scout output file path>]` |
+| SOM (year 1) | {currency}[Z] | `[source: <registry/directory count / DataForSEO volume / /scout output file path>]` |
 
 ## Why this segment first
 
@@ -79,7 +79,7 @@
 
 ## Validation loop
 
-- [ ] `/founder-pipeline:critical` run — findings: [...] — **CRITICAL SCORE: [X]/10** — advisory; the gate is the def-of-success PASS/FAIL checklist
+- [ ] `/critical` run — findings: [...] — **CRITICAL SCORE: [X]/10** — advisory; the gate is the def-of-success PASS/FAIL checklist
 - [ ] Def-of-success (from the stage file): [each criterion — met/unmet]
 - [ ] Improvement loops run (if gate failed): [N — what changed each round]
 - [ ] Revised — what changed: [...]

@@ -97,7 +97,7 @@ This stage earns its keep always. Format is a derived decision — get it right 
 - OG title / description: [...]
 - URL path: [...]
 
-## Page copy (section by section, every field via `/founder-pipeline:brand-voice`)
+## Page copy (section by section, every field via `/brand-voice`)
 
 ### Hero
 [...]
@@ -136,7 +136,7 @@ This stage earns its keep always. Format is a derived decision — get it right 
 
 ## Validation loop
 
-- [ ] `/founder-pipeline:critical` run — findings: [...] — **CRITICAL SCORE: [X]/10** — advisory; the gate is the def-of-success PASS/FAIL checklist
+- [ ] `/critical` run — findings: [...] — **CRITICAL SCORE: [X]/10** — advisory; the gate is the def-of-success PASS/FAIL checklist
 - [ ] Def-of-success (from the stage file): [each criterion — met/unmet]
 - [ ] Improvement loops run (if gate failed): [N — what changed each round]
 - [ ] Revised — what changed: [...]

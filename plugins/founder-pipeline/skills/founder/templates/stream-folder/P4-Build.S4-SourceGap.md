@@ -4,7 +4,7 @@
 **Step:** P4.S4-SourceGap (P4-Build)
 **Last updated:** [date]
 
-> Reads the SHIPPED HTML of the top 3 competitors (landing page + best blog post each) and diffs it against our live pages. Raw HTML only — markdown extraction loses `<head>` and JSON-LD, which is the whole point. High + Moderate gaps get fixed on the live site in this step. Generalizable findings are written back into `/founder-pipeline:seo-audit` + `/founder-pipeline:ai-seo`.
+> Reads the SHIPPED HTML of the top 3 competitors (landing page + best blog post each) and diffs it against our live pages. Raw HTML only — markdown extraction loses `<head>` and JSON-LD, which is the whole point. High + Moderate gaps get fixed on the live site in this step. Generalizable findings are written back into `/seo-audit` + `/ai-seo`.
 
 ---
 
@@ -91,7 +91,7 @@ Notes on `@graph` nesting shape, `sameAs` arrays, and `Article`/`BlogPosting` fi
 
 ## Gap table — every row gets a verdict
 
-> `Reject` is a first-class verdict and must be used where it applies. Two mandatory rejections: schema the stream cannot truthfully populate (no invented `AggregateRating` / `reviewCount` / credentials — see `${CLAUDE_PLUGIN_ROOT}/skills/seo-audit/references/review-stars-rich-snippets.md`), and anything contradicting `P1-Ideation.S6-Offer.md`. Reader-facing words route back through P4.S2 + `/founder-pipeline:brand-voice` — this step ships structure, not copy.
+> `Reject` is a first-class verdict and must be used where it applies. Two mandatory rejections: schema the stream cannot truthfully populate (no invented `AggregateRating` / `reviewCount` / credentials — see `${CLAUDE_PLUGIN_ROOT}/skills/seo-audit/references/review-stars-rich-snippets.md`), and anything contradicting `P1-Ideation.S6-Offer.md`. Reader-facing words route back through P4.S2 + `/brand-voice` — this step ships structure, not copy.
 
 | Layer | Gap | Competitors shipping it | Our page | Severity | Verdict + one-line reason | Status |
 |---|---|---|---|---|---|---|
@@ -106,7 +106,7 @@ Notes on `@graph` nesting shape, `sameAs` arrays, and `Article`/`BlogPosting` fi
 - Per-row outcome: [fixed N / carried M / rejected Z]
 - Redeployed: [yes — URL + time]
 - Adopted `@type` → real data source: [`@type` = source, one per adopted schema — zero untruthful markup]
-- Reader-facing words changed outside P4.S2 + `/founder-pipeline:brand-voice`: [must be none]
+- Reader-facing words changed outside P4.S2 + `/brand-voice`: [must be none]
 
 ## Re-verification (artifact, not claim)
 
@@ -118,14 +118,14 @@ Notes on `@graph` nesting shape, `sameAs` arrays, and `Article`/`BlogPosting` fi
 
 Only generalizable patterns — page type + territory + implied action. A stream-specific fact stays in THIS file. Plugin skill files are read-only for installers, so the lines go into your own learnings store (a `## Learnings` section in your agent's learnings file, one heading per skill) — never edited into the shipped skill.
 
-- Learnings for `/founder-pipeline:seo-audit`: "[exact line written]"
-- Learnings for `/founder-pipeline:ai-seo`: "[exact line written]"
+- Learnings for `/seo-audit`: "[exact line written]"
+- Learnings for `/ai-seo`: "[exact line written]"
 
 ---
 
 ## Validation loop
 
-- [ ] `/founder-pipeline:critical` run — findings: [...] — **CRITICAL SCORE: [X]/10** — advisory; the gate is the def-of-success PASS/FAIL checklist
+- [ ] `/critical` run — findings: [...] — **CRITICAL SCORE: [X]/10** — advisory; the gate is the def-of-success PASS/FAIL checklist
 - [ ] Def-of-success (from the stage file): [each criterion — met/unmet]
 - [ ] Improvement loops run (if gate failed): [N — what changed each round]
 - [ ] Revised — what changed: [...]

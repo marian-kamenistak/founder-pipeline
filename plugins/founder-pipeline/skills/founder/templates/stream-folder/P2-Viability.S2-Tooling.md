@@ -16,7 +16,7 @@ like, and record the reason in `brief.md`.
 |---|---|---|---|---|---|
 | Delivery — scheduling | a hosted booking tool (e.g. Cal.com) | | | | |
 | Delivery — docs/community | | | | | |
-| Web build | a static-site framework on an edge host, via `/founder-pipeline:web-site-creator` | | | | |
+| Web build | a static-site framework on an edge host, via `/web-site-creator` | | | | |
 | Deck build | HTML→PDF via system Chrome (see P4.S5) | | | | |
 | Analytics | a product-analytics tool (e.g. PostHog) | | | | |
 | CRM / pipeline | your CRM (e.g. Attio) | | | | |
@@ -55,7 +55,7 @@ Your configured brand kit for this stream exists (logo, palette, type, tone): [y
 
 ## Validation loop
 
-- [ ] `/founder-pipeline:critical` run — findings: [...] — **CRITICAL SCORE: [X]/10** — advisory; the gate is the def-of-success PASS/FAIL checklist
+- [ ] `/critical` run — findings: [...] — **CRITICAL SCORE: [X]/10** — advisory; the gate is the def-of-success PASS/FAIL checklist
 - [ ] Def-of-success (from the stage file): [each criterion — met/unmet]
 - [ ] Improvement loops run (if gate failed): [N — what changed each round]
 - [ ] Revised — what changed: [...]

@@ -337,10 +337,10 @@ Pull questions as needed. Don't ask all of them — pick the 2–3 that move the
 
 ## P5.S1 — Launch (extended)
 
-- Which launch items are genuinely shippable by the agent NOW (posts via `/founder-pipeline:blog-launch`; MCP-registry and skill-directory submissions, if the stream ships either — no skill ships for those here, so do them inline: assemble the listing metadata, submit to each registry, record the listing URL; indexation via `/founder-pipeline:web-indexation`) — and which truly require the owner's identity (community posts, account sign-ups, syndication approvals)?
+- Which launch items are genuinely shippable by the agent NOW (posts via `/blog-launch`; MCP-registry and skill-directory submissions, if the stream ships either — no skill ships for those here, so do them inline: assemble the listing metadata, submit to each registry, record the listing URL; indexation via `/web-indexation`) — and which truly require the owner's identity (community posts, account sign-ups, syndication approvals)?
 - For every item marked DONE: what's the verifiable evidence — URL returning 200, registry listing, event in your analytics tool? "Written" is not "live".
 - Does the MCP/skill item answer a real recurring question the ICP asks an AI — or is it a toy that should be a recorded SKIP?
-- Is the day-0 baseline snapshot captured ONCE here (P6.S2 owns recurring reads) — and are indexation requests going through `/founder-pipeline:web-indexation`'s submission queue, never one-off manual "request indexing" clicks in a webmaster console (that quota is per account, and burning it starves every other property you own)?
+- Is the day-0 baseline snapshot captured ONCE here (P6.S2 owns recurring reads) — and are indexation requests going through `/web-indexation`'s submission queue, never one-off manual "request indexing" clicks in a webmaster console (that quota is per account, and burning it starves every other property you own)?
 - What's the first-signal metric per launched item, and when will it be read?
 
 ---

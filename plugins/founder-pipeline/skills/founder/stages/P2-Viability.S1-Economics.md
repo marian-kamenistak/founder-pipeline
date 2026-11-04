@@ -20,12 +20,12 @@
 
 **Where the model lives:** a spreadsheet, so the scenarios recalculate instead of being retyped. Degradation ladder: a connected spreadsheet tool (via its MCP connector, if you have one) → a file in whatever cloud drive you use → markdown-only tables in this file plus a flag saying the scenarios are hand-computed. The md file always carries the verdict numbers and a link to wherever the live model sits.
 
-**Skills:** `/founder-pipeline:plan` for milestone sequencing.
+**Skills:** `/plan` for milestone sequencing.
 
 **Write to** `P2-Viability.S1-Economics.md`. Time-budget block + roadmap table + money tables (upfront / run-rate / forecast / unit economics / scenarios), every cell sourced or flagged; profit-per-founder-hour verdict block at the top.
 
 **Def-of-success — ALL must pass before owner sign-off (fail → improvement loop per SKILL.md, never advance):**
-- `/founder-pipeline:critical` run recorded; the score is advisory — the gate is the criteria below.
+- `/critical` run recorded; the score is advisory — the gate is the criteria below.
 - **Zero negative slack:** summed milestone effort per week ≤ the stated weekly budget. **Not everything on the owner:** overflow is carried by a named person, tool, or automation — "the owner works more" is not a resource plan.
 - Delivery capacity (from P1.S6) fits inside delivery hours; Ship/Pilot/Public/Scale all dated, every milestone owned with a binary done criterion.
 - **Positive RoI:** 12-month profit > 0 at 100%, AND the 50% scenario at worst break-even-adjacent with a named floor decision.
@@ -35,7 +35,7 @@
 
 **Gate out (mandatory — see SKILL.md house rules):**
 1. Draft `P2-Viability.S1-Economics.md`.
-2. Invoke `/founder-pipeline:critical` — attack both halves: does the milestone list fit the hour budget or is this a 60-hour week in a 10-hour costume? And every number: where did it come from, which single assumption carries the forecast?
+2. Invoke `/critical` — attack both halves: does the milestone list fit the hour budget or is this a 60-hour week in a 10-hour costume? And every number: where did it come from, which single assumption carries the forecast?
 3. Revise; note what changed.
 4. Present to the owner. **Wait for their explicit approval. Never auto-advance.**
 

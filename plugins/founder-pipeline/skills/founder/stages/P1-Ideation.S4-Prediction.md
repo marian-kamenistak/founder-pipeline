@@ -4,7 +4,7 @@
 
 **Earns its keep** in every run where the niche, keywords, or content angles are not yet locked by external evidence — i.e. nearly always. This is the cheapest moment to change the idea: a niche verdict here costs one prediction run; the same discovery at P4.S1 costs a rebuilt keyword contract, at P5.S1 a re-launched content set. **Performative when** the stream's demand question is already answered by a fresh (<90 days) prediction ledger or an equivalent evidence pack — cite it, record the skip in `brief.md`, and carry its verdict forward instead.
 
-**What this step does:** runs **`/founder-pipeline:prediction` in hypothesis mode** on the draft idea, so P1.S5–S7 (competition scoping, offer, name) and later P4.S1 (keyword contract) are steered by demand data instead of taste.
+**What this step does:** runs **`/prediction` in hypothesis mode** on the draft idea, so P1.S5–S7 (competition scoping, offer, name) and later P4.S1 (keyword contract) are steered by demand data instead of taste.
 
 ## Steps
 
@@ -16,12 +16,12 @@
    - Verdict reframes it (most common) → update P1.S2/P1.S3 via the loop-back rule before advancing.
    - Verdict kills it (Pick below money floor at conservative end, or all angles DEAD) → this is a P1.S1-grade kill conversation NOW, not at P2.S4 after five more steps of work.
 
-**Skills:** `/founder-pipeline:prediction` (the step IS this skill); `/founder-pipeline:critical` on the interpretation (not the run — the run has its own gates).
+**Skills:** `/prediction` (the step IS this skill); `/critical` on the interpretation (not the run — the run has its own gates).
 
 **Write to** `P1-Ideation.S4-Prediction.md`: the Pick recorded as a **dated falsifiable prediction** — probability, metric, grading date, ledger row ID (P5.S4's cadence must cite that row ID) — plus its two carrying numbers, DEAD/NEAR-MISS summary, Reframe decisions taken (what changed in P1.S2/P1.S3 and why), carry-forward keyword table location, and the outcome of the confrontation checkpoint.
 
 **Def-of-success — ALL must pass before owner sign-off (fail → improvement loop per SKILL.md, never advance):**
-- `/founder-pipeline:critical` run recorded on the interpretation; the score is advisory — the gate is the criteria below.
+- `/critical` run recorded on the interpretation; the score is advisory — the gate is the criteria below.
 - A completed prediction hypothesis run exists in `predictions/` (ledger + niche verdict), with its own gates passed — no hand-rolled substitute.
 - The Pick clears the pre-registered money floor at the conservative end, OR the owner has explicitly accepted a "content angle, not a stream" verdict, OR the kill conversation happened and is recorded.
 - Every Reframe finding is either applied to P1.S2/P1.S3 (loop-back done) or explicitly rejected by the owner with a reason.
@@ -30,7 +30,7 @@
 
 **Gate out (mandatory — see SKILL.md house rules):**
 1. Draft `P1-Ideation.S4-Prediction.md`.
-2. Invoke `/founder-pipeline:critical` — attack the interpretation hardest: is the Pick carried by evidence or by the owner's preference wearing the data as decoration? Was a NEAR-MISS quietly promoted?
+2. Invoke `/critical` — attack the interpretation hardest: is the Pick carried by evidence or by the owner's preference wearing the data as decoration? Was a NEAR-MISS quietly promoted?
 3. Revise; note what changed.
 4. Present to the owner. **Wait for their explicit approval. Never auto-advance.**
 

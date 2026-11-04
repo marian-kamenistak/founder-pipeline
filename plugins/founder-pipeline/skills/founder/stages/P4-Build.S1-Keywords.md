@@ -8,16 +8,16 @@
 
 ---
 
-## The method lives in `/founder-pipeline:web-keyword`
+## The method lives in `/web-keyword`
 
-**Run `/founder-pipeline:web-keyword` in Contract mode (Mode A) for this step.** That skill owns the
+**Run `/web-keyword` in Contract mode (Mode A) for this step.** That skill owns the
 keyword contract method end to end — concept seeding, candidate drafting, the localization table, the
 live-SERP gate, the no-orphans map, the AI-search question set, and the glossary handoff. It is
 the same method this step used to carry inline, extracted so it can also serve existing sites.
 
 Do not re-derive it here. Two copies of a keyword contract drift, and the drift is expensive.
 
-What `/founder-pipeline:web-keyword` covers, so you know what you're getting:
+What `/web-keyword` covers, so you know what you're getting:
 `references/localization.md` (pick the term, don't translate it — candidate drafting, territory
 spelling traps, the `[low-volume — brand/AI-search play]` tag), `references/dataforseo-recipes.md`
 (endpoints, location table, batching, cost discipline), and `references/audit-mode.md` (not used at
@@ -50,7 +50,7 @@ timeline and staff against traffic that arrives eighteen months later.
 
 The contract is SEEDED from P1.S4's carry-forward keyword table (`P1-Ideation.S4-Prediction.md`
 names its location) — cite that file; its terms arrive already priced. Feed it to
-`/founder-pipeline:web-keyword` as the seed set, along with:
+`/web-keyword` as the seed set, along with:
 
 - cited pains from `P1-Ideation.S2-Problem.md` + P1.S4's discourse evidence
 - `P1-Ideation.S5-Competition.md` category language
@@ -72,7 +72,7 @@ implicit:
   search volume is largest in the abstract.
 
 Anything beyond those two is a later decision, not this step's. Pass the locked list to
-`/founder-pipeline:web-keyword`; it handles the per-territory candidate comparison.
+`/web-keyword`; it handles the per-territory candidate comparison.
 
 **The non-English trap this exists to catch (worked example: a Czech home market).** Search demand
 in a smaller-language market rarely maps onto the English term you started from. Three failure modes
@@ -99,17 +99,17 @@ say so in the file rather than leaving the reader to guess whether the check ran
 
 This step owns the PRE-BUILD baseline (own domain if it exists, plus each P1.S5 competitor). P5.S1
 owns the post-launch day-0 snapshot; P6.S2 owns the recurring reads. Make sure
-`/founder-pipeline:web-keyword`'s rankings output gets recorded here as the baseline, not just read
+`/web-keyword`'s rankings output gets recorded here as the baseline, not just read
 and discarded.
 
 ---
 
-**Skills:** `/founder-pipeline:web-keyword` (the method — run this first); `/founder-pipeline:scout` (territory competitor list if P1.S5 needs extending); `/founder-pipeline:seo-audit` only if the stream already has a live site to audit — for a net-new stream that runs at P4.S3, not here. **Page translation is NOT this step's job and no translation skill ships in this plugin:** once terms are locked, the actual page translation happens at P4.S2/S3 by a translator (human or model) working *from* `TRANSLATION-GLOSSARY.md` — voice-preserving, term-for-term against the locked glossary, never re-deciding a term it finds inconvenient. If you have your own translation skill, hand it the glossary as a hard constraint.
+**Skills:** `/web-keyword` (the method — run this first); `/scout` (territory competitor list if P1.S5 needs extending); `/seo-audit` only if the stream already has a live site to audit — for a net-new stream that runs at P4.S3, not here. **Page translation is NOT this step's job and no translation skill ships in this plugin:** once terms are locked, the actual page translation happens at P4.S2/S3 by a translator (human or model) working *from* `TRANSLATION-GLOSSARY.md` — voice-preserving, term-for-term against the locked glossary, never re-deciding a term it finds inconvenient. If you have your own translation skill, hand it the glossary as a hard constraint.
 
-**Write to** `P4-Build.S1-Keywords.md` (+ step folder `P4-Build.S1-Keywords/` when the fan-out produces per-cluster SERP/trends notes worth keeping — one file per keyword cluster, INDEX in the step md). Use `/founder-pipeline:web-keyword`'s output format: **localization table first** (one row per concept, the home-market language as the anchor column, one locked-term column pair per additional territory), then the **main keyword table** (Keyword | Language | Volume | Difficulty | Trend | Intent | SERP check | Target page | Verdict | Source), then the AI-search question list per language, the intent-to-page map, the pre-build rankings baseline, and the keyword gap notes. Raw provider JSON lands in the step folder so re-runs read from disk instead of re-paying. This file is the **keyword contract** — P4.S2 copy and P4.S3 meta/headings must trace to it, P6.S2 KPIs track it in your search console(s), and the locked localization table is mirrored into `TRANSLATION-GLOSSARY.md` for whoever translates the pages.
+**Write to** `P4-Build.S1-Keywords.md` (+ step folder `P4-Build.S1-Keywords/` when the fan-out produces per-cluster SERP/trends notes worth keeping — one file per keyword cluster, INDEX in the step md). Use `/web-keyword`'s output format: **localization table first** (one row per concept, the home-market language as the anchor column, one locked-term column pair per additional territory), then the **main keyword table** (Keyword | Language | Volume | Difficulty | Trend | Intent | SERP check | Target page | Verdict | Source), then the AI-search question list per language, the intent-to-page map, the pre-build rankings baseline, and the keyword gap notes. Raw provider JSON lands in the step folder so re-runs read from disk instead of re-paying. This file is the **keyword contract** — P4.S2 copy and P4.S3 meta/headings must trace to it, P6.S2 KPIs track it in your search console(s), and the locked localization table is mirrored into `TRANSLATION-GLOSSARY.md` for whoever translates the pages.
 
 **Def-of-success — ALL must pass before Owner sign-off (fail → improvement loop per SKILL.md, never advance):**
-- `/founder-pipeline:critical` run recorded; the score is advisory (target ≥ 8/10) — the gate is the PASS/FAIL criteria below, not the number.
+- `/critical` run recorded; the score is advisory (target ≥ 8/10) — the gate is the PASS/FAIL criteria below, not the number.
 - 3–7 primary keywords, each with volume+difficulty tagged `[source: <keyword-data provider>, <date>]` (or the explicit unavailability flag) — zero bare guesses, zero scraped estimates presented as data. Max 1 primary keyword may carry the unavailability flag; each flagged keyword creates a `queues/manual-queue.md` row "re-price against a real data source" (dated) at contract lock time — a contract with 2+ unpriced primaries does not lock.
 - P1.S4's carry-forward table cited as the seed (its terms not re-priced); only NEW terms carry fresh provider calls.
 - Home market and primary export market both named explicitly in the file — no implicit locale.
@@ -126,7 +126,7 @@ and discarded.
 
 **Gate out (mandatory — see SKILL.md house rules):**
 1. Draft `P4-Build.S1-Keywords.md`.
-2. Invoke `/founder-pipeline:critical` on the draft — attack volume wishful-thinking, intent mismatches, and any keyword chosen because it flatters the offer rather than matching how the ICP searches.
+2. Invoke `/critical` on the draft — attack volume wishful-thinking, intent mismatches, and any keyword chosen because it flatters the offer rather than matching how the ICP searches.
 3. Revise; note what changed.
 4. Present the draft + the critical findings + the changes to the owner. **Wait for their explicit approval. Never auto-advance.**
 

@@ -116,13 +116,13 @@ This stage earns its keep always. This is the gate that separates streams that s
 - [ ] Pivot pre-commitment recorded (one named pivot, one named evidence trigger)
 - [ ] Kill criteria pre-committed
 - [ ] Minimum evidence gate set
-- [ ] TWO `/founder-pipeline:critical` passes run (profit-refutation + focus-refutation)
+- [ ] TWO `/critical` passes run (profit-refutation + focus-refutation)
 - [ ] Ready to synthesize brief
 
 ## Validation loop
 
-- [ ] `/founder-pipeline:critical` profit-refutation pass — PASS/FAIL: [...] — findings: [...] — **CRITICAL SCORE: [X]/10** — advisory; the gate is the def-of-success PASS/FAIL checklist
-- [ ] `/founder-pipeline:critical` focus-refutation pass — PASS/FAIL: [...] — findings: [...] — **CRITICAL SCORE: [X]/10** — advisory; both passes must pass
+- [ ] `/critical` profit-refutation pass — PASS/FAIL: [...] — findings: [...] — **CRITICAL SCORE: [X]/10** — advisory; the gate is the def-of-success PASS/FAIL checklist
+- [ ] `/critical` focus-refutation pass — PASS/FAIL: [...] — findings: [...] — **CRITICAL SCORE: [X]/10** — advisory; both passes must pass
 - [ ] Def-of-success (from the stage file): [each criterion — met/unmet]
 - [ ] Improvement loops run (if gate failed): [N — what changed each round]
 - [ ] Revised — what changed: [...]

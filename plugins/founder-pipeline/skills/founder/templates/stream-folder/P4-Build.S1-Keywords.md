@@ -53,7 +53,7 @@
 
 ## Validation loop
 
-- [ ] `/founder-pipeline:critical` run — findings: [...] — **CRITICAL SCORE: [X]/10** — advisory; the gate is the def-of-success PASS/FAIL checklist
+- [ ] `/critical` run — findings: [...] — **CRITICAL SCORE: [X]/10** — advisory; the gate is the def-of-success PASS/FAIL checklist
 - [ ] Def-of-success (from the stage file): [each criterion — met/unmet]
 - [ ] Localization table complete for every target territory; locked terms mirrored into `TRANSLATION-GLOSSARY.md`: [done / N/A — EN-only stream]
 - [ ] Improvement loops run (if gate failed): [N — what changed each round]

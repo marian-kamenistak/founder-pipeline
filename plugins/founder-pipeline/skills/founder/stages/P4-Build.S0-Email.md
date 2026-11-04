@@ -74,7 +74,7 @@ Record this stream's domain as a dated P6.S3 90-day-plan item; do not block P4 o
 
 **Gate out (mandatory — see SKILL.md house rules):**
 1. Draft `P4-Build.S0-Email.md`.
-2. Invoke `/founder-pipeline:critical` on the draft — attack anything recorded as "done" that wasn't verified live (a saved console setting is not the same as a resolving DNS record), and any SPF/DMARC value that wasn't actually tested with a real sent message.
+2. Invoke `/critical` on the draft — attack anything recorded as "done" that wasn't verified live (a saved console setting is not the same as a resolving DNS record), and any SPF/DMARC value that wasn't actually tested with a real sent message.
 3. Revise; note what changed.
 4. Present the draft + the critical findings + the changes to the owner. **Wait for their explicit approval. Never auto-advance.**
 

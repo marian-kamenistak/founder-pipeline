@@ -35,7 +35,7 @@ One row per step, P3.S1 through P5.S2 — a 0-hit row still lists the files chec
 
 - [ ] Every row in all three queues carries four fields: `added: YYYY-MM-DD | owner | status | artifact/evidence path` (manual-queue rows additionally: `- [ ] added YYYY-MM-DD | action (est. min) | ready artifact: <path> | unblocks: <outcome>`)
 - [ ] No duplicate items across queues (single-owner rule)
-- [ ] backlink-queue holds only not-yet-adopted candidates (graduated items live in the /founder-pipeline:web-backlinks playbook)
+- [ ] backlink-queue holds only not-yet-adopted candidates (graduated items live in the /web-backlinks playbook)
 - [ ] ≥14-day-old items flagged for do / delegate / kill
 
 ---
@@ -52,7 +52,7 @@ One row per step, P3.S1 through P5.S2 — a 0-hit row still lists the files chec
 
 ## Validation loop
 
-- [ ] `/founder-pipeline:critical` run — findings: [...] — **CRITICAL SCORE: [X]/10** — advisory; the gate is the def-of-success PASS/FAIL checklist
+- [ ] `/critical` run — findings: [...] — **CRITICAL SCORE: [X]/10** — advisory; the gate is the def-of-success PASS/FAIL checklist
 - [ ] Def-of-success (from the stage file): [each criterion — met/unmet]
 - [ ] Improvement loops run (if gate failed): [N — what changed each round]
 - [ ] Revised — what changed: [...]

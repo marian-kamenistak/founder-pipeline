@@ -4,7 +4,7 @@
 **Step:** P1.S4-Prediction (P1-Ideation)
 **Last updated:** [date]
 
-> The run itself lives in `predictions/` (ledger + snapshot + niche verdict, created by `/founder-pipeline:prediction` in hypothesis mode). This file carries the interpretation and the decisions taken — reference the run's artifacts, never copy them.
+> The run itself lives in `predictions/` (ledger + snapshot + niche verdict, created by `/prediction` in hypothesis mode). This file carries the interpretation and the decisions taken — reference the run's artifacts, never copy them.
 
 ---
 
@@ -55,7 +55,7 @@
 
 ## Validation loop
 
-- [ ] `/founder-pipeline:critical` run — findings: [...] — **CRITICAL SCORE: [X]/10** — advisory; the gate is the def-of-success PASS/FAIL checklist
+- [ ] `/critical` run — findings: [...] — **CRITICAL SCORE: [X]/10** — advisory; the gate is the def-of-success PASS/FAIL checklist
 - [ ] Def-of-success (from the stage file): [each criterion — met/unmet]
 - [ ] Improvement loops run (if gate failed): [N — what changed each round]
 - [ ] Revised — what changed: [...]

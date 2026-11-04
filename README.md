@@ -102,18 +102,35 @@ Open Claude Code in whatever folder you want your work saved in, and type:
 It will start asking you questions. Answer them honestly — it's checking your answers against real
 data, so a flattering answer just gets caught two steps later.
 
+### Only want the founder skill, or already have your own critic?
+
+The founder skill runs on its own. Copy one folder and it uses whatever you already have installed,
+falling back to built-in instructions for anything you don't:
+
+```bash
+git clone https://github.com/marian-kamenistak/founder-pipeline.git
+cp -r founder-pipeline/plugins/founder-pipeline/skills/founder ~/.claude/skills/founder
+```
+
+Then type `/founder`. Its first step writes a `CAPABILITIES.md` into your idea's folder, listing
+what it found and the one missing connection that costs you the most evidence.
+
+**Connecting tools** (search data, CRM, analytics, mail, task board) is optional and takes one command
+each: **[plugins/founder-pipeline/skills/founder/INSTALL.md](plugins/founder-pipeline/skills/founder/INSTALL.md)**.
+
 ---
 
 ## Updating it later
 
 ```bash
-claude plugin update founder-pipeline
+claude plugin marketplace update founder-pipeline
+claude plugin update founder-pipeline@founder-pipeline
 ```
 
 ## Removing it
 
 ```bash
-claude plugin uninstall founder-pipeline
+claude plugin uninstall founder-pipeline@founder-pipeline
 ```
 
 Nothing you've written is deleted. Your idea folders are yours and stay where they are.
@@ -211,8 +228,30 @@ skip cleanly. The gates and kill steps never skip.
 **What if I disagree with it?**
 You can override any failed check. It records that you did, and why. It's a pipeline, not a boss.
 
+**Do I need all the other skills and tools?**
+No. Version 0.2 made every one of them optional. Each step uses a bundled skill if it's there, then
+your own skill with the same name, then a fallback card that ships inside the founder skill. Missing
+search data is the one gap you'll feel: those checks show as `BLOCKED` rather than being filled with
+a guess. See [plugins/founder-pipeline/skills/founder/INSTALL.md](plugins/founder-pipeline/skills/founder/INSTALL.md).
+
 **Will it just tell me my idea is great?**
 No. It's specifically built not to. If that's what you want, ask a normal chatbot.
+
+---
+
+## What changed
+
+**0.2.0 (2026-11-04)**
+- The founder skill runs standalone. Every skill and tool it mentions is optional, resolved at run
+  time, with one fallback card per item in `references/capabilities.md`.
+- Step 1 opens with a capability preflight that writes `CAPABILITIES.md`.
+- New [plugins/founder-pipeline/skills/founder/INSTALL.md](plugins/founder-pipeline/skills/founder/INSTALL.md): three ways to install, one command per tool, and the
+  model tiers mapped to current Claude models.
+- Ported two months of fixes from the source pipeline: an asset audit for ideas that productize
+  something you already run, a promise backtest in the offer step, a sanitization check before
+  launch, and search-data calls rewritten for the REST API.
+
+**0.1.0 (2026-08-30)** — first public release.
 
 ---
 

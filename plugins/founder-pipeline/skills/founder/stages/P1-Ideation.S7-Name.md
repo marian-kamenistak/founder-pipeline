@@ -17,7 +17,7 @@
 4. One-line description for cold context (LinkedIn bio length).
 5. One-paragraph description for warm context (cold email open).
 
-**Skills:** `/founder-pipeline:brainstorm` for candidate generation; `/founder-pipeline:brand-voice` for the tagline and descriptions (they're external-facing copy); a domain-registration-status check across the shortlist (a WHOIS lookup from whatever data provider you configured — DataForSEO's `domain_analytics_whois_overview` is the worked example — or a registrar's own lookup); `WebSearch` for trademark / brand collisions.
+**Skills:** `/brainstorm` for candidate generation; `/brand-voice` for the tagline and descriptions (they're external-facing copy); a domain-registration-status check across the shortlist (a WHOIS lookup from whatever data provider you configured — DataForSEO's `/v3/domain_analytics/whois/overview/live` is the worked example — or a registrar's own lookup); `WebSearch` for trademark / brand collisions.
 
 **Language note:** check every candidate in every language of the markets declared at P1.S1 — pronunciation, connotations, and how it reads inside a sentence in that language, not just standing alone on a logo. (Worked example: a Czech home market means checking that the name declines readably in Czech and carries no unintended meaning.)
 
@@ -32,7 +32,7 @@ Action items into the roadmap: (1) proper clearance search (a lawyer, or the off
 **Write to** `P1-Ideation.S7-Name.md`. Include all 3 candidates + pros/cons, mark the pick, drop the loser rationale. Record per-candidate WHOIS status (available/registered + evidence line) and the collision sweep log for ALL candidates — queries run, dates, result (clean/hit) — not only when a name is blocked.
 
 **Def-of-success — ALL must pass before owner sign-off (fail → improvement loop per SKILL.md, never advance):**
-- `/founder-pipeline:critical` run recorded; the score is advisory (target ≥ 8/10) — the gate is the PASS/FAIL criteria below, not the number.
+- `/critical` run recorded; the score is advisory (target ≥ 8/10) — the gate is the PASS/FAIL criteria below, not the number.
 - 3 candidates each with rationale + signal + cost.
 - Picked name passes "ICP gets it without explanation" — gut-checked with 2 real ICPs; skipping the gut-check requires the owner's explicit recorded override (PROGRESS.md note), never a model-written "why skipped".
 - WHOIS status recorded PER candidate in the output file (available/registered + evidence line); the picked name's primary domain is available or owned BEFORE lock — otherwise rename per the trademark-authority rule.
@@ -43,7 +43,7 @@ Action items into the roadmap: (1) proper clearance search (a lawyer, or the off
 
 **Gate out (mandatory — see SKILL.md house rules):**
 1. Draft `P1-Ideation.S7-Name.md`.
-2. Invoke `/founder-pipeline:critical` on the draft — does the picked name actually signal the P1.S5 positioning, or just sound good? What does it cost?
+2. Invoke `/critical` on the draft — does the picked name actually signal the P1.S5 positioning, or just sound good? What does it cost?
 3. Revise; note what changed.
 4. Present the draft + the critical findings + the changes to the owner. **Wait for their explicit approval. Never auto-advance.**
 

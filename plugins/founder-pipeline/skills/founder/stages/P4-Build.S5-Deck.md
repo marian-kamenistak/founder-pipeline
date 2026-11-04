@@ -7,7 +7,7 @@
 **The job of this deck (do not forget it):** the PDF is bait, not the destination. Its one goal is to get the reader to open a page. Details live on the web; the deck teases and links. Short beats complete. Every offering slide and every CTA is a live clickable link into the site built in P4.S3.
 
 **Hard gates:**
-- **P4.S3 web is live and approved.** The deck sources its copy, prices, links, and photos from the shipped site — never invents its own. New connective copy (cover framer, section labels, CTA) routes through `/founder-pipeline:brand-voice` first (for a regulated-industry audience, take that skill's channel-flex override toward the more conservative register).
+- **P4.S3 web is live and approved.** The deck sources its copy, prices, links, and photos from the shipped site — never invents its own. New connective copy (cover framer, section labels, CTA) routes through `/brand-voice` first (for a regulated-industry audience, take that skill's channel-flex override toward the more conservative register).
 - **Reuse the site's real design tokens + real photography.** Brand-exact or it undercuts the site. Real event/product/people photos are the proof the thing exists — use many; no stock filler.
 
 ## Default build — HTML → PDF via headless Chrome. Always.
@@ -76,18 +76,18 @@ Brand-exact colours and fonts are the floor, not the result. These are the moves
 **Write to** `P4-Build.S5-Deck.md`: build log — generator location, live deck URL, slide count + link count, footer-link diff, offering-URL diff (site data file vs PDF URI list), rebuild command, open placeholders.
 
 **Def-of-success — ALL must pass before Owner sign-off (fail → improvement loop per SKILL.md, never advance):**
-- `/founder-pipeline:critical` run recorded on the rendered deck; score advisory (target ≥ 8/10) — the gate is the criteria below.
+- `/critical` run recorded on the rendered deck; score advisory (target ≥ 8/10) — the gate is the criteria below.
 - Brand-exact: colors, fonts, and photo treatment match the P4.S3 site 1:1.
 - Backgrounds follow the design recipe: full-bleed photos carry a dark text-side scrim (heading never on the bright side), wide banners render as bands not cover-crops, no image is used twice, and the cover has no off-brand artifact.
 - Every offering slide + every CTA is a live clickable link into the site; the sorted URI list from the PDF contains every offering URL from the site's data file (diff against the offering manifest; any missing URL = FAIL).
-- All copy traces to the approved site copy or a `/founder-pipeline:brand-voice`-passed new line — zero deck-invented claims, and honesty guardrails (unproven scores/logos labeled) preserved from source.
+- All copy traces to the approved site copy or a `/brand-voice`-passed new line — zero deck-invented claims, and honesty guardrails (unproven scores/logos labeled) preserved from source.
 - Deck live at `<site>/deck` returning `200` + `application/pdf` inline; footer link shipped and resolving.
 - Short enough to bait, not replace, the site — reviewer can name each slide's single job.
-- ICP click test: `/founder-pipeline:critical`, roleplaying the P1.S3 persona, names the specific slide it would click and why; no named click = FAIL.
+- ICP click test: `/critical`, roleplaying the P1.S3 persona, names the specific slide it would click and why; no named click = FAIL.
 
 **Gate out (mandatory — see SKILL.md house rules):**
 1. Deck rendered + deployed + footer-linked; link count and live headers verified. Re-read the site's data files at verification time and diff prices/URLs against the rendered deck — any mismatch = re-render before presenting. Add a `queues/manual-queue.md` row for a 90-day drift re-check (deck prices/URLs vs site data).
-2. Invoke `/founder-pipeline:critical` on the deck — does it pull the reader to the site or try to be the site? Does any slide overpromise vs the live page? Would the P1.S3 ICP click at least one offering?
+2. Invoke `/critical` on the deck — does it pull the reader to the site or try to be the site? Does any slide overpromise vs the live page? Would the P1.S3 ICP click at least one offering?
 3. Fix; note what changed.
 4. Present the live deck URL + link/headers proof + critical findings to the owner. **Wait for their explicit approval. Never auto-advance.**
 

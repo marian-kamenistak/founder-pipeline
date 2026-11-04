@@ -8,11 +8,11 @@
 
 ## Hard rule
 
-This stage **must** invoke `/founder-pipeline:pricing`. That skill runs the 10-criterion scorecard and won't ship below 95/100. If `/founder-pipeline:pricing` isn't available, fall back to an inline mini-scorecard — score the tier sheet against the 10 /founder-pipeline:pricing criteria by name — and flag this file `FALLBACK — /founder-pipeline:pricing unavailable, scorecard is inline approximation`. The FALLBACK flag is a downstream block: on flag creation add a `queues/manual-queue.md` row "Re-run /founder-pipeline:pricing on <stream>" (dated); P2.S4 verifies no open FALLBACK flag before the PROFIT VERDICT (or the owner's dated override recorded).
+This stage **must** invoke `/pricing`. That skill runs the 10-criterion scorecard and won't ship below 95/100. If `/pricing` isn't available, fall back to an inline mini-scorecard — score the tier sheet against the 10 /pricing criteria by name — and flag this file `FALLBACK — /pricing unavailable, scorecard is inline approximation`. The FALLBACK flag is a downstream block: on flag creation add a `queues/manual-queue.md` row "Re-run /pricing on <stream>" (dated); P2.S4 verifies no open FALLBACK flag before the PROFIT VERDICT (or the owner's dated override recorded).
 
-- [ ] `/founder-pipeline:pricing` skill invoked and scored ≥95/100
-- [ ] Fallback: inline mini-scorecard used — file flagged `FALLBACK — /founder-pipeline:pricing unavailable, scorecard is inline approximation`
-- [ ] Fallback only: `queues/manual-queue.md` row "Re-run /founder-pipeline:pricing on <stream>" added — dated [YYYY-MM-DD]
+- [ ] `/pricing` skill invoked and scored ≥95/100
+- [ ] Fallback: inline mini-scorecard used — file flagged `FALLBACK — /pricing unavailable, scorecard is inline approximation`
+- [ ] Fallback only: `queues/manual-queue.md` row "Re-run /pricing on <stream>" added — dated [YYYY-MM-DD]
 
 ## Value metric
 
@@ -88,7 +88,7 @@ This stage earns its keep always. Pricing is the highest-leverage decision in th
 
 ## Validation loop
 
-- [ ] `/founder-pipeline:critical` run — findings: [...] — **CRITICAL SCORE: [X]/10** — advisory; the gate is the def-of-success PASS/FAIL checklist
+- [ ] `/critical` run — findings: [...] — **CRITICAL SCORE: [X]/10** — advisory; the gate is the def-of-success PASS/FAIL checklist
 - [ ] Def-of-success (from the stage file): [each criterion — met/unmet]
 - [ ] Improvement loops run (if gate failed): [N — what changed each round]
 - [ ] Revised — what changed: [...]

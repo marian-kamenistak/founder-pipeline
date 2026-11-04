@@ -156,7 +156,7 @@ Plot the four curves; intersections = price floor and price ceiling.
 |---|---|
 | P1.S2 Problem | (none — direct narrative) |
 | P1.S3 ICP | (firmographic segmentation) |
-| P1.S4 Prediction | `/founder-pipeline:prediction` hypothesis run — demand data + niche verdict before design lock-in |
+| P1.S4 Prediction | `/prediction` hypothesis run — demand data + niche verdict before design lock-in |
 | P1.S5 Competition | **Dunford positioning** |
 | P1.S6 Offer | **Onliness statement** (Neumeier) + territory-relative uniqueness + **Value Proposition Canvas** (Strategyzer) |
 | P1.S7 Name | (creative, but post-evidence) |
@@ -168,12 +168,12 @@ Plot the four curves; intersections = price floor and price ceiling.
 | P4.S0 Email | (no framework — domain-alias provisioning on a hosted business-mail suite, direct DNS work) |
 | P4.S1 Keywords | Keyword contract: search intent + Google Trends + territory SERP gap |
 | P4.S2 Copy | (format derived from the clients motion; copy written around the keyword contract) |
-| P4.S3 Web | The house stack declared at P1.S1, via `/founder-pipeline:web-site-creator` |
+| P4.S3 Web | The house stack declared at P1.S1, via `/web-site-creator` |
 | P4.S4 SourceGap | Competitor shipped-HTML teardown (raw HTML + JSON-LD diff) |
-| P5.S1 Launch | (execution fan-out — `/founder-pipeline:blog-launch`, `/founder-pipeline:web-indexation`, plus inline registry/directory submissions and analytics-activation checks where no skill ships) |
-| P5.S2 Links | (`/founder-pipeline:web-backlinks` execution + internal-links pass) |
+| P5.S1 Launch | (execution fan-out — `/blog-launch`, `/web-indexation`, plus inline registry/directory submissions and analytics-activation checks where no skill ships) |
+| P5.S2 Links | (`/web-backlinks` execution + internal-links pass) |
 | P5.S3 Queues | (the three-queue mechanism) |
-| P5.S4 Prediction cadence | (`/founder-pipeline:prediction` recurring runs wired) |
+| P5.S4 Prediction cadence | (`/prediction` recurring runs wired) |
 | P6.S1 GTM | **Strategic Narrative** (Raskin), channels locked from P3.S1 replies + P5.S1-P5.S2 activation data |
 | P6.S2 KPIs | (vanity-check applied to everything) |
 | P6.S3 Execute | **Lean Canvas** + Raskin narrative + pricing card |

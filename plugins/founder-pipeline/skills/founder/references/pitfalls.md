@@ -57,6 +57,16 @@ Money in the examples below is written `{currency}` — substitute the currency 
 **Why it fails:** n=1 is anecdote, not evidence. That one prospect may be an outlier (over- or under-payer), or may simply have been being polite.
 **Fix:** multiple independent evidence points — several named-account reactions, anchor benchmarks, prediction indicators — before any pricing hypothesis locks. 10+ for Van Westendorp.
 
+### Metric-definition drift in published numbers
+**Symptom:** "120+ attendees per event" in the data registry, the deck and the offer. The figure is real, but it counts approved registrations; the median actually in the room was far lower.
+**Why it fails:** the number is true under one definition and false under the one the reader assumes. Once it becomes a guarantee in an offer, the first delivery breaks it.
+**Fix:** every published metric names its definition (registered / approved / attended; booked / held). Every guarantee is backtested against history ("held in N of M") before it enters copy — P1.S6 owns the check.
+
+### Productizing internal assets without an audit
+**Symptom:** "We already run this, let's just publish/sell it."
+**Why it fails:** internal tooling carries real names, IDs and PII in committed files, is single-tenant (hardcoded people, one account), has no analytics, and is load-bearing for live operations.
+**Fix:** P1.S1 `ASSET-AUDIT.md` (inventory, publishability, measured numbers, sanitization grep, freeze windows); P5.S1 runs the grep before every publication.
+
 ---
 
 ## Strategy pitfalls

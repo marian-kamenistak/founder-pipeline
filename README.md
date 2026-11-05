@@ -9,6 +9,8 @@ personally sign it off.
 
 It is allowed to tell you the idea is bad. Three of the steps can kill it outright. That's the point.
 
+**How it works, step by step, with the model behind every substep:** [How to Use Claude Code to Kill or Launch a Business Idea](https://www.marian.coach/blog/how-to-validate-a-business-idea-before-building/)
+
 ---
 
 ## Read this first, in plain English

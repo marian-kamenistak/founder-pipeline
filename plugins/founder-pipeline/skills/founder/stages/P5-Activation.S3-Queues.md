@@ -2,11 +2,13 @@
 
 **Phase: P5-Activation**
 
+**Routing:** fan-out (one agent per step file/folder, synthesis plain on main thread) · sweep CHEAP · gate critic at the step tier
+
 **Earns its keep** whenever the stream has a live web surface or any launched asset — the moment work stops being "build" and becomes "keep shipping into the world," it needs a tracked queue or the follow-through rots. **Performative** only for deck-only streams with zero ongoing distribution motion — record the skip in `brief.md` (skips still get the owner's sign-off).
 
 **Why this step exists:** launches produce three streams of ongoing work — actions only the owner can perform, backlink acquisition, and media/content publishing — and every one of them historically died in "drafted, awaiting" limbo because no artifact tracked it. Activation converts launch outputs into tracked, owned tasks BEFORE Adoption (P6.S1–S3) starts burning the calendar.
 
-**Where tasks live.** The shipped default is the stream's own `queues/` folder — three files, created from `${CLAUDE_PLUGIN_ROOT}/skills/founder/templates/stream-folder/queues/` on first use:
+**Where tasks live.** The shipped default is the stream's own `queues/` folder — three files, created from `templates/stream-folder/queues/` on first use:
 
 | File | Holds |
 |---|---|

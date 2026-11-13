@@ -2,11 +2,15 @@
 
 **Phase: P1-Ideation**
 
+**Routing:** plain, fan-out /scout only if the market is unfamiliar · draft MID, scout fan-out CHEAP · gate critic at the step tier
+
 **Earns its keep when** the problem is novel, contested, or shifting (AI-era engineering hiring, post-FTX consumer trust). When the user has a felt sense but can't articulate the shift.
 
 **Becomes performative when** the problem is obvious and the user already has 50+ customers paying for an inferior alternative. Skip to ICP.
 
 **Start from the intake:** read the intake digest (folder path recorded in `brief.md`, digest `INTAKE.md` inside it) and the raw assets it points to first, and pre-draft answers from the user's own words — then ask only what the assets don't answer.
+
+**Grill pass first** (`references/grilling.md`): map this step's decisions and what depends on what, look up every fact in the intake, `brief.md` and approved step files instead of asking, then ask only the open decisions, each with a recommended answer. Play the answers back and get a yes before drafting.
 
 **Ask one at a time:**
 1. Customer pain in one sentence — no jargon, no business-speak.

@@ -2,6 +2,8 @@
 
 **Phase: P1-Ideation**
 
+**Routing:** fan-out (one agent per competitor, then adversarial verification of each weakness) · scouts CHEAP, verify PEAK · gate critic at the step tier
+
 **Earns its keep when** the market has incumbents or substitutes the user must position against. Almost always.
 
 **Becomes performative when** the user is genuinely first-mover in a brand-new category (rare — verify by listing alternatives anyway).
@@ -14,6 +16,8 @@ Use April Dunford's positioning frame:
 3. **Enabled value** — what does that uniqueness allow the customer to do that alternatives don't?
 4. **Who-cares segment** — who values this enabled benefit the most?
 5. **Market category** — what frame of reference do you want the buyer to use to evaluate you?
+
+**Grill pass first** (`references/grilling.md`): map this step's decisions and what depends on what, look up every fact in the intake, `brief.md` and approved step files instead of asking, then ask only the open decisions, each with a recommended answer. Play the answers back and get a yes before drafting.
 
 **Ask one at a time:**
 1. Name 3 competitive alternatives — seed from P1.S2's raw list, including "do nothing" and "internal build".

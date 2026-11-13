@@ -15,8 +15,10 @@ connect them.
 
 ### A. The whole plugin (recommended)
 
-You get the founder skill plus 21 specialist skills it calls when they are present (critic, prediction,
-pricing, offers, voice, SEO, launch…).
+You get the founder skill plus 22 specialist skills it calls when they are present (critic, prediction,
+pricing, offers, voice, SEO, launch…), and the parts a skill folder cannot carry: four subagents (gate
+critic, claim refuter, completeness critic, evidence scout), two workflows (`gather-verify`,
+`judge-panel`) and one hook that asks you before any step is marked `approved`.
 
 ```bash
 claude plugin marketplace add marian-kamenistak/founder-pipeline
@@ -24,8 +26,8 @@ claude plugin install founder-pipeline@founder-pipeline
 claude plugin list            # founder-pipeline should be listed and enabled
 ```
 
-Start it with `/founder-pipeline:founder`, or `/founder-pipeline:founder <idea> smoke` for the 48-hour
-smoke test.
+Start it with `/founder-pipeline:founder <your idea in one sentence>`. For the 48-hour smoke test, the
+recommended first run, type `/founder-pipeline:founder <idea> smoke`.
 
 ### B. Only the founder skill
 
@@ -33,10 +35,12 @@ Use this if you already have your own critic, voice or SEO skills, or want the s
 
 ```bash
 git clone https://github.com/marian-kamenistak/founder-pipeline.git
+mkdir -p ~/.claude/skills
 cp -r founder-pipeline/plugins/founder-pipeline/skills/founder ~/.claude/skills/founder
 ```
 
-Start it with `/founder`. Each skill call in the pipeline resolves in this order: a bundled skill, then
+Start it with `/founder`. This install has no subagents, workflows or hook; the skill runs the same
+roles as generic subagents and the gates do not change. Each skill call in the pipeline resolves in this order: a bundled skill, then
 any skill of yours with the same name, then the inline fallback card in
 `references/capabilities.md`. Your own `/critical` or voice skill is picked up automatically.
 
@@ -71,6 +75,11 @@ its preflight. It updates `CAPABILITIES.md` and lists the `BLOCKED` criteria it 
 | **Gmail, Google Calendar, Google Sheets** | P3.S1 messages staged as drafts, P1.S6/P2.S1 real calendar capacity, P2.S1 live scenario model | Connect them as connectors in your claude.ai settings. Claude Code picks them up when you're signed in with the same account. |
 | **Cloudflare** (DNS, deploys) | P4.S0 mail DNS records, P4.S3 deploy | `npm i -g wrangler && wrangler login`. Optional: Cloudflare's own Claude Code plugin. |
 
+Prefer a file to five commands? Copy [`examples/mcp.json`](https://github.com/marian-kamenistak/founder-pipeline/blob/main/examples/mcp.json)
+into your project as `.mcp.json`, delete the servers you don't use, and export the two environment
+variables it names. The plugin does not ship an `.mcp.json` of its own on purpose: a bundled server
+would start for every user, including the ones with no account for it.
+
 **If you connect only one thing, connect DataForSEO.** It is the one tool whose absence marks the most
 criteria `BLOCKED`, because nothing else gives the early steps measured demand. The skill never makes up
 a search volume to fill the gap.
@@ -83,20 +92,28 @@ API with your credentials, then `BLOCKED` with a backfill row in `queues/manual-
 
 ## 3. Models
 
-The skill names **tiers**, never model names, so it doesn't go stale when new models ship. Each step
-and subagent runs at one of four tiers (full map in `references/engine-routing.md`). As of
-November 2026, the Claude mapping is:
+The skill's own files name **tiers**, never models, so they don't go stale when a model ships. This
+page is the one place that maps tiers to model names. Each stage file states its tiers on its
+`Routing:` line (full map in `references/engine-routing.md`). As of November 2026, the Claude mapping
+is:
 
 | Tier | Used for | Claude model (Nov 2026) |
 |---|---|---|
-| **PEAK** | the main loop, both kill passes, every final verify and refutation critic, prediction synthesis, every customer-facing word | Fable 5.1 |
+| **PEAK** | the main loop, both kill passes, every final verify and refutation critic, prediction synthesis, every customer-facing word | Fable 5.2 |
 | **HIGH** | critical passes on money gates (P1.S6, P2.S1), pricing judgment, the persuasion pass | Opus 5.5 |
 | **MID** | drafting over provided context, routine judges, launch subagents, the deck build | Sonnet 5.5 |
 | **CHEAP** | research gathering fan-outs: sizing, competitor scouts, enrichment, SERP checks, queue sweeps | Haiku 5.5 |
 
-On a smaller plan you can run everything at MID, except for one rule: **critics and customer-facing copy
-never drop below HIGH.** A weak critic approves things it should reject, and that costs more than the
-tokens you saved.
+With the full plugin the tiers are enforced by the agent definitions, not by a prompt: the evidence
+scout is pinned to the small model (`model: haiku`), and the three critics inherit the model your
+session runs on (`model: inherit`), so they are always as strong as the main loop. The aliases survive
+model releases; no file names a dated model ID.
+
+On a smaller plan, PEAK means the best model you have. You can run MID and CHEAP work on something
+cheaper. Two things never move: **the main loop does not drop below HIGH, and critics, refuters and
+customer-facing copy run on your best model.** A weak critic approves things it should reject, and
+that costs more than the tokens you saved. On Claude Pro the top-tier model is billed in credits;
+see [TOOLING-AND-COSTS.md](https://github.com/marian-kamenistak/founder-pipeline/blob/main/docs/TOOLING-AND-COSTS.md).
 
 ---
 
@@ -104,7 +121,7 @@ tokens you saved.
 
 ```bash
 mkdir -p ~/ideas && cd ~/ideas && claude
-> /founder-pipeline:founder        # or /founder for install B
+> /founder-pipeline:founder a paid onboarding checklist for small agencies smoke     # /founder … for install B
 ```
 
 The first step asks for a parent folder and an idea slug, then runs the capability preflight. You should
@@ -121,3 +138,14 @@ claude plugin uninstall founder-pipeline@founder-pipeline
 
 For install B, pull the repo again and re-copy the folder. Your idea folders are yours and are never
 touched by an update.
+
+## What the plugin adds to a session
+
+- **Context.** The 23 skill descriptions are the only part that is always loaded: 9,820 characters,
+  about 2,455 tokens (estimate at 4 characters per token; measured by `scripts/check_skills.py --report`).
+  Everything else loads when a skill runs, one stage file at a time.
+- **One hook.** A `PreToolUse` hook on `Write` and `Edit` looks only at files named `PROGRESS.md` that
+  carry the pipeline's column header. When an edit adds an `approved` row it asks you to confirm. It never
+  blocks, and on any error it lets the edit through. Source: `hooks/approval-guard.mjs`. It needs Node.js
+  on the `PATH`; without Node it does nothing and the rule rests on the skill's own instruction.
+- **Nothing else runs in the background.** No MCP server, no monitor, no telemetry.

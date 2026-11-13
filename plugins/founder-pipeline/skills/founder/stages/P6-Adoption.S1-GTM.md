@@ -2,6 +2,8 @@
 
 **Phase: P6-Adoption**
 
+**Routing:** plain (may run ∥ with P6.S2) · draft MID · gate critic at the step tier
+
 **Earns its keep** always — most streams die in GTM, not product.
 
 **Input first:** channels get locked here from OBSERVED data, not theory — and by the time GTM runs, TWO real datasets exist (this fixes the old circular dependency where GTM had to guess before anything shipped): (1) the live pipeline in `P3-Clients.S1-Outreach.md` — reply rates, which paths-in worked, what objections and buying questions came up; (2) the activation metrics from P5.S1–S2 — post reads, registry traffic, magnet captures, link placements. Read both before answering anything. If the data is too thin to support a channel claim, that's a `[assumption — validation: ...]` tag, not a fact. Weigh the evidence with the words-vs-actions rubric (`references/signals-and-scoring.md`): a channel claim backed only by polite words ("they loved it") is an `[assumption]`; only demonstrated action (call scores ≥7/12, intros made, budget discussed) counts as conversation data.

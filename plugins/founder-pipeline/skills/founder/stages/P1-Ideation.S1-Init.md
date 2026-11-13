@@ -2,6 +2,8 @@
 
 **Phase: P1-Ideation**
 
+**Routing:** plain (two kill-framings as parallel subagents) · intake digests CHEAP, kill passes PEAK · gate critic PEAK
+
 **Capability preflight — run FIRST, before the focus guard and before any question.** This skill runs on Claude Code alone; everything else is optional and is resolved once, here. Follow the preflight in `references/capabilities.md`: list the skills and MCP tools available in this session, resolve each row (skills: `bundled` / `own:<name>` / `fallback`; tools: `connected` / `REST` / `missing`), and write the result into the stream folder as `CAPABILITIES.md` from `templates/stream-folder/CAPABILITIES.md` as soon as the folder exists (hold it in memory until question 1 confirms the path). Tell the owner in three lines max what is connected, what runs on fallback, and the ONE missing item that costs the most evidence, with the matching `INSTALL.md` (in this skill folder) section. Never block on it: a missing capability changes how later steps work, never whether their gates run.
 
 **Focus guard — run BEFORE anything else.** Scan each candidate parent directory for any other stream that is mid-pipeline: a `PROGRESS.md` with any row still `in progress` / `awaiting approval` / `pending` after an approved one (i.e. an unfinished pipeline), last touched < 90 days ago. For legacy streams without a `PROGRESS.md`, fall back to the old `*_in_progress.md` scan or an unfinished numeric pipeline. If one exists, STOP and force the decision: **finish it, park it (write a dated re-entry note into its `brief.md`), or kill it.** Focus is the scarcest resource a solo operator has — this skill never opens a second front silently.
@@ -39,7 +41,7 @@ Then:
 - Write `CAPABILITIES.md` (from the preflight above) into the stream folder.
 - Create `PROGRESS.md` in the stream folder from `templates/stream-folder/PROGRESS.md` — all 25 step rows start `pending`; flip P1.S1's own row as it runs.
 - Initialize `brief.md` with the slug, working name, one-sentence description, time horizon, type, date, the chosen parent path (so resume-mode can find it), and the `## House stack` block from question 8.
-- **Project health check** — invoke `/health` on the project the stream lives in (the nearest project root with a `CLAUDE.md`, or the parent brand folder). Apply its safe auto-fixes (missing Golden Rule line, broken file references, orphaned memory entries); surface anything needing the owner's call. If the project has NO `CLAUDE.md` yet, create a minimal one (Golden Rule near the top + pointer to the stream folder and intake folder) so every future session loads the right context. The pipeline writes 25+ files into this project — it starts from a healthy root, not on top of rot.
+- **Project health check** — invoke `/health` on the project the stream lives in (the nearest project root with a `CLAUDE.md`, or the parent brand folder) in report mode. Show the owner what it found and what it would fix (broken file references, orphaned memory entries, a missing instructions file) and apply only what they say yes to. If the project has no `CLAUDE.md`, offer to create a minimal one (a pointer to the stream folder and the intake folder) and create it only on a yes; the pipeline runs without it. The pipeline writes 25+ files into this project, so it should start from a healthy root, but it never edits the owner's project configuration unasked.
 
 ## Ideation intake (hard gate — the idea must be described well enough before design starts)
 

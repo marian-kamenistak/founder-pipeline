@@ -1,5 +1,7 @@
 # Smoke-test track (48h to send, 7-day read) → `smoke.md`
 
+**Routing:** plain · tiers not stated · gate critic at the step tier
+
 For "should I even build X?" hunches. The full pipeline costs days of thinking — it must be earned by signal, not enthusiasm. This track produces a go/no-go from 10 real outreaches sent inside 48h and read at 7 days, with 5 questions up front.
 
 It is self-contained: nothing here depends on a prior step of the pipeline having run. Everything is written into the **stream folder** — one directory per idea, named after the idea, holding `smoke.md`, `accounts.md`, and the `queues/` folder.
@@ -11,7 +13,7 @@ It is self-contained: nothing here depends on a prior step of the pipeline havin
 4. 10 named accounts that match the ICP — read `accounts.md` in the stream folder if P1.S3 already produced it; else collect them now and WRITE them to `accounts.md` (it's the canonical list either way). Real companies, real names. Can't name 10? That's the first signal. For each account, note in one line who the buyer role is, why this company plausibly has the pain, and the reachable route in (a person, a form, a mutual connection) — a name with no route in is not an account.
 5. The outreach message — 3 sentences max, `/brand-voice` mandatory, asks for a 20-minute problem conversation (not a pitch). `P3-Clients.S1-Outreach.md` owns the outreach message across the pipeline; if you have already run P3.S1, reuse its template verbatim. If you have not, write the message here to that shape and P3.S1 adopts it later.
 
-**Day 1–2 — send all 10.** Real sends, not drafts. LinkedIn DM, email, or warm intro — whatever reaches that ICP fastest. Log every send in a send-log table in `smoke.md` — one row per account: datetime, channel, recipient handle/URL — filled at send time, not reconstructed later. A row without that evidence counts as a draft. **Upon the 10th send:** append a dated day-7 read item to `queues/manual-queue.md` (per SKILL.md's queue rule — create `queues/` from `${CLAUDE_PLUGIN_ROOT}/skills/founder/templates/stream-folder/queues/` on first use), read date computed from the first send's logged timestamp. Outcome recording is blocked until that row exists — a 7-day read nobody scheduled never happens.
+**Day 1–2 — send all 10.** Real sends, not drafts. LinkedIn DM, email, or warm intro — whatever reaches that ICP fastest. Log every send in a send-log table in `smoke.md` — one row per account: datetime, channel, recipient handle/URL — filled at send time, not reconstructed later. A row without that evidence counts as a draft. **Upon the 10th send:** append a dated day-7 read item to `queues/manual-queue.md` (per SKILL.md's queue rule — create `queues/` from `templates/stream-folder/queues/` on first use), read date computed from the first send's logged timestamp. Outcome recording is blocked until that row exists — a 7-day read nobody scheduled never happens.
 
 **"Conversation booked" =** a calendar entry with date and attendee recorded in `smoke.md`. A verbal "sure, sometime next week" is interest, not a booking — unrecorded bookings don't count toward the 3+ threshold.
 

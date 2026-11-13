@@ -2,6 +2,8 @@
 
 **Phase: P2-Viability**
 
+**Routing:** plain · draft MID · gate critic HIGH
+
 **Earns its keep** always. Hours and money are one model — profit per founder-hour is the number the whole pipeline gates on, and it needs both sides in one place. This step prices the stream in hours AND in money before P2.S3–S4 stress-test it. (P2.S2 tooling may draft in parallel; its costs feed back into this model before this gate closes.)
 
 **Currency:** every money cell in this file uses the stream's currency, declared once at P1.S1 and recorded in `brief.md`. This file writes `{currency}` wherever the symbol goes; substitute the declared one. Mixed-currency inputs (a tool priced in USD, a client paying in EUR) are converted at a stated rate with the rate cited in the cell.

@@ -2,7 +2,9 @@
 
 This file answers three questions for every one of the 25 steps: **which skills to invoke**, **what to do when a routed capability is not installed**, and **which execution mode to run the step in**. Stage files govern the *what* of each step; this file governs the *how*. On conflict, the stricter gate wins.
 
-**Engine routing is mandatory, not advisory.** The step sequence is always serial and human-gated, but INSIDE a step the execution mode differs, and picking the wrong one wastes either tokens or evidence quality.
+**Every stage file carries its own `Routing:` line** (mode, tier per role, gate-critic tier), so a normal step never needs this file. Read it when you design a fan-out or panel the line does not cover, when a routed capability is missing, or when you change the pipeline. The modes are not optional: the step sequence is always serial and human-gated, but inside a step the wrong mode wastes either tokens or evidence quality.
+
+**The roles ship as components in the full plugin:** `founder-pipeline:evidence-scout` (gathering, pinned to the small model), `founder-pipeline:claim-refuter` and `founder-pipeline:completeness-critic` (verification, session model), `founder-pipeline:gate-critic` (the per-step gate), and two workflows, `/founder-pipeline:gather-verify` and `/founder-pipeline:judge-panel`. Tiers are enforced by those agent definitions, not by this prose. Founder-only installs run the same roles from `references/capabilities.md`.
 
 **Legend.** **plain** = single-threaded main loop · **fan-out** = parallel research subagents (or a deterministic workflow runner for large sweeps): multi-modal gathering plus adversarial verification of what comes back · **judge panel** = N independent takes scored by parallel judges, synthesise from the winner · **delegated** = one subagent runs a whole sub-pipeline on its own context and returns only its conclusion. Fan-out and judge panels multiply *thoroughness*, never *judgment* — they gather and stress-test evidence; the owner's gate decisions stay human.
 
@@ -49,7 +51,7 @@ A missing optional dependency is **never** a reason to skip a gate. It is a reas
 
 ## Orchestration + model routing
 
-**Orchestration decision (fixed):** the pipeline runs in the **main conversation, sequentially, with your top-tier model as the main loop** — never below the HIGH rung. The main loop IS the orchestrator: no swarm or workflow engine drives the step sequence itself, because the steps are serial and gate-dependent, and parallel orchestration either bypasses a gate or blocks on an unapproved assumption. INSIDE a step, fan-outs run as background subagents per the table above. Reach for a deterministic workflow runner only when a single step's fan-out exceeds roughly 6 parallel agents with deterministic control flow (P3.S1 enrichment at 20+ accounts, P4.S1 SERP sweeps at 10+ clusters).
+**Orchestration decision (fixed):** the pipeline runs in the **main conversation, sequentially, with your top-tier model as the main loop** — never below the HIGH rung. The main loop IS the orchestrator: no swarm or workflow engine drives the step sequence itself, because the steps are serial and gate-dependent, and parallel orchestration either bypasses a gate or blocks on an unapproved assumption. INSIDE a step, fan-outs run as background subagents per the table above. Reach for a workflow (`/founder-pipeline:gather-verify`, or one you write for the step) only when a single step's fan-out exceeds roughly 6 parallel agents with deterministic control flow (P3.S1 enrichment at 20+ accounts, P4.S1 SERP sweeps at 10+ clusters), and only after the owner agrees to the agent count.
 
 **What "orchestrate" means here** — the serial gate-sequence is fixed; the research and verification *within* a step is where you go wide:
 

@@ -2,6 +2,8 @@
 
 **Phase: P2-Viability**
 
+**Routing:** plain + optional judge panel (3 buyer-persona agents) · scorecard arithmetic MID, pricing judgment HIGH · gate critic PEAK
+
 **Earns its keep** always. Pricing is the highest-leverage decision in the whole stream.
 
 **Hard rule — execution order is load-bearing. Do these in sequence, do not improvise:**

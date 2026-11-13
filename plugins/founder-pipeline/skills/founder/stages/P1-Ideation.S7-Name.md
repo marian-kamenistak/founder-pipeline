@@ -2,6 +2,8 @@
 
 **Phase: P1-Ideation** (closes the phase)
 
+**Routing:** judge panel + fan-out (parallel domain/trademark collision agents) · sweeps CHEAP, name judge panel PEAK · gate critic at the step tier
+
 **Earns its keep when** the offer needs to land in a crowded category, or when the name signals the positioning.
 
 **Becomes performative when** an obvious natural-language name exists ("Platform Team AI Workshop"). Use it and move on.
@@ -9,6 +11,8 @@
 **Hard rule:** This step cannot run before P1.S2–S6 (including P1.S4) are complete and approved. Naming before problem-understanding locks thinking around the label. The skill blocks this.
 
 **Mandatory naming input:** P1.S4's Reframe findings (`P1-Ideation.S4-Prediction.md` — demand hiding under different phrasing). Every candidate is checked against the phrasings the market actually uses; a name that fights the reframed demand language loses.
+
+**Grill pass first** (`references/grilling.md`): map this step's decisions and what depends on what, look up every fact in the intake, `brief.md` and approved step files instead of asking, then ask only the open decisions, each with a recommended answer. Play the answers back and get a yes before drafting.
 
 **Ask one at a time:**
 1. Three name candidates — for each: one-line rationale + what it signals + what it costs (e.g., narrow vs broad).

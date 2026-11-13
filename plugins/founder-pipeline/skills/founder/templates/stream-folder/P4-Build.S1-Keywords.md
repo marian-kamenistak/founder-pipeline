@@ -10,7 +10,7 @@
 
 ## Localization table
 
-> One row per concept, EN as the default/anchor column, one locked-term column pair per non-EN target territory (location table in `${CLAUDE_PLUGIN_ROOT}/skills/founder/references/dataforseo-playbook.md`). Each locked term beat ≥2 candidate phrasings on real search-volume/trend data — literal translation is a candidate, not the default winner (Job 2b). Locked terms get mirrored into `TRANSLATION-GLOSSARY.md`, which whoever translates the pages works from: hand it to your translator, or to the agent doing the translation pass, and require every locked term to survive verbatim.
+> One row per concept, EN as the default/anchor column, one locked-term column pair per non-EN target territory (location table in `references/dataforseo-playbook.md`). Each locked term beat ≥2 candidate phrasings on real search-volume/trend data — literal translation is a candidate, not the default winner (Job 2b). Locked terms get mirrored into `TRANSLATION-GLOSSARY.md`, which whoever translates the pages works from: hand it to your translator, or to the agent doing the translation pass, and require every locked term to survive verbatim.
 
 | Concept (EN canonical) | EN term [vol, source] | `<Territory>` term — locked [vol, source] | Rejected `<Territory>` candidates + volumes [source] |
 |---|---|---|---|

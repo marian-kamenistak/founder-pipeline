@@ -2,6 +2,8 @@
 
 **Phase: P4-Build** (opens the phase)
 
+**Routing:** plain (owner-run console work, not delegable) · tiers not stated · gate critic at the step tier
+
 **Numbering note (deliberate exception):** every other step in this skill is S1+, no letter suffixes, no S0 — see SKILL.md's "Step IDs" section. This step breaks that convention on purpose: it must run before P4.S1-Keywords (which seeds `TRANSLATION-GLOSSARY.md` and the keyword contract that copy/web trace to) and before P4.S3-Web (whose contact-page copy and transactional sending domain both assume real inboxes already exist), but inserting it as a genuine S1 and shifting Keywords→S2, Copy→S3, Web→S4, SourceGap→S5, Deck→S6 would renumber every cross-reference to those steps across the skill AND retroactively invalidate any in-flight stream that already has an approved P4.S2/S3 under the old numbers. Breaking a live stream's history is worse than one odd step number. Do not "fix" this by renumbering later without checking every active `PROGRESS.md` first.
 
 **Earns its keep when** the stream needs a real inbox people can reply to — which is every stream with a public web presence or outreach motion. Sequenced here because email needs the domain (locked at P1.S7-Name) and a DNS zone you control, and because P4.S2-Copy's contact/footer copy and P4.S3-Web's transactional-sending setup both assume the addresses already exist.

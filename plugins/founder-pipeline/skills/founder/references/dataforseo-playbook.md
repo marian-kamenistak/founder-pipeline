@@ -65,7 +65,7 @@ Run each market's keyword set as a SEPARATE call — volumes and SERPs differ co
 | 2. Volume + CPC (exact) | `/v3/keywords_data/google_ads/search_volume/live` (batch up to 1000 keywords/call) | Google Ads volumes — the canonical numbers |
 | 3. Difficulty (batch) | `/v3/dataforseo_labs/google/bulk_keyword_difficulty/live` | 0-100 difficulty per keyword, one call for the whole set |
 | 4. Intent | `/v3/dataforseo_labs/google/search_intent/live` | informational / commercial / transactional / navigational per keyword — feeds the intent-to-page map |
-| 5. Trends | Google Trends explore (`/v3/keywords_data/google_trends/explore/live`, territory-filtered) — call parameters in `${CLAUDE_PLUGIN_ROOT}/skills/web-keyword/references/dataforseo-recipes.md` → Trends; direction per the rule below this table | rising/flat/declining/sparse — replaces manual WebFetch of Google Trends |
+| 5. Trends | Google Trends explore (`/v3/keywords_data/google_trends/explore/live`, territory-filtered) — call parameters in the bundled `web-keyword` skill's `references/dataforseo-recipes.md` (full plugin install only) → Trends; direction per the rule below this table | rising/flat/declining/sparse — replaces manual WebFetch of Google Trends |
 | 6. What competitors rank for | `/v3/dataforseo_labs/google/ranked_keywords/live` (per competitor domain) | their keyword portfolio with positions and volumes |
 | 7. Keyword gap | `/v3/dataforseo_labs/google/domain_intersection/live` (own domain vs each competitor) | keywords they rank for and you don't (and vice versa) — the uncontested-territory finder |
 | 8. AI-search volume | `/v3/ai_optimization/ai_keyword_data/keywords_search_volume/live` | how often the phrasings are asked to LLMs — validates the AI-search question list |

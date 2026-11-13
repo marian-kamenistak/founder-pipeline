@@ -2,6 +2,8 @@
 
 **Phase: P4-Build** (second step — P4.S0-Email opens the phase; this step no longer needs its own DNS/domain prerequisite since P1.S7 + P4.S0 already cover it)
 
+**Routing:** fan-out (parallel SERP agents per keyword cluster + AI-search probes) · SERP/trend checks CHEAP, stage judge MID · gate critic at the step tier
+
 **Earns its keep when** any content or web asset is planned — which is almost always. Keywords are defined HERE, before a single line of copy exists: the copy step (P4.S2) writes copy *around* this keyword map, and the web step (P4.S3) implements it in meta, headings, and structure. Never the other way round.
 
 **Becomes performative when** the stream is 100% warm-outbound with zero web surface and zero content engine — then record a one-line skip in `brief.md` (skipping P4.S1–S4) and move to P5.S1 (whose own skip rules handle a no-asset stream).

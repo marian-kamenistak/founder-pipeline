@@ -1,8 +1,8 @@
 ---
 name: lead-magnets
-description: When the user wants to create, plan, or optimize a lead magnet for email capture or lead generation. Also use when the user mentions "lead magnet," "gated content," "content upgrade," "downloadable," "ebook," "cheat sheet," "checklist," "template download," "opt-in," "freebie," "PDF download," "resource library," "content offer," "email capture content," "Notion template," "spreadsheet template," or "what should I give away for emails." Use this for planning what to create and how to distribute it — the magnet itself, the gate, the landing page, the distribution and the measurement. For the psychology behind why an exchange converts, see /founder-pipeline:marketing-psychology. For writing the copy, see /founder-pipeline:brand-voice and /founder-pipeline:humanize. For building the capture page, see /founder-pipeline:web-site-creator.
+description: "Use when the user wants to create, plan or improve a lead magnet for email capture: \"lead magnet\", \"gated content\", \"content upgrade\", \"ebook\", \"checklist\", \"cheat sheet\", \"template download\", \"freebie\", \"opt-in\", \"what should I give away for emails\". Covers the magnet, the gate, the landing page, distribution and measurement. For the psychology see `/founder-pipeline:marketing-psychology`, for the copy `/founder-pipeline:brand-voice`, for the capture page `/founder-pipeline:web-site-creator`."
 metadata:
-  version: 2.0.0
+  version: "2.0.0"
 ---
 
 # Lead Magnets

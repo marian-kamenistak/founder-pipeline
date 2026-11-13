@@ -4,7 +4,7 @@ Four research agents in parallel, then a main-loop synthesis. Recipes + budgets:
 
 ## W1 — launch via the Workflow tool
 
-Run one workflow: `parallel(R1, R2, R3, R4)`, each an agent with `model: 'sonnet'`, `effort: 'medium'`, and a JSON output schema. Each agent prompt includes: the brief (paste `brief.md`), the site profile's territory defaults, the recipe from the research playbook, and the instruction to save raw API responses under `research/`.
+With the owner's yes, run one workflow: `parallel(R1, R2, R3, R4)`, each an agent at the MID tier (your default general-purpose model), `effort: 'medium'`, and a JSON output schema. When the four questions are plain evidence gathering, `/founder-pipeline:gather-verify` runs the same shape with a skeptic and a completeness critic behind it. Without the Workflow tool, dispatch the four as parallel subagents. Each agent prompt includes: the brief (paste `brief.md`), the site profile's territory defaults, the recipe from the research playbook, and the instruction to save raw API responses under `research/`.
 
 | Agent | Question it answers | Recipe |
 |---|---|---|

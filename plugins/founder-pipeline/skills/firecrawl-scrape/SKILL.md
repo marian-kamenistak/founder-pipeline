@@ -1,7 +1,6 @@
 ---
 name: firecrawl-scrape
-description: |
-  Extract clean markdown from any URL, including JavaScript-rendered SPAs. Use this skill whenever the user provides a URL and wants its content, says "scrape", "grab", "fetch", "pull", "get the page", "extract from this URL", or "read this webpage". Handles JS-rendered pages, multiple concurrent URLs, and returns LLM-optimized markdown. Use this instead of WebFetch for any webpage content extraction.
+description: "Use when the user gives a URL and wants its content: \"scrape\", \"grab\", \"fetch\", \"pull\", \"get the page\", \"extract from this URL\", \"read this webpage\". Returns clean LLM-ready markdown from any page, including JavaScript-rendered SPAs and several URLs at once. Needs the Firecrawl CLI. Prefer it over a plain web fetch for page content."
 allowed-tools:
   - Bash(firecrawl *)
   - Bash(npx firecrawl *)

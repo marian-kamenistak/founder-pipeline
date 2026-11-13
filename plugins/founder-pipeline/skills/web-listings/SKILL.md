@@ -1,6 +1,6 @@
 ---
 name: web-listings
-description: Use when you want to know where to register a product, service, or company — external registries, directories, dictionaries, institutions, startup platforms (Product Hunt, BetaList...), review sites, and vertical or home-market catalogs — or to actually submit and track those listings. Triggers: "where should I list this", "get us on Product Hunt", "register the business", "directory listings", "should we be on Crunchbase/Wikidata", "local business catalogs", "listings audit", "/founder-pipeline:web-listings". Covers register-once profile/identity listings (Mode B) for every property in your registry. NOT for per-URL search-engine submission (IndexNow/GSC — use /founder-pipeline:web-indexation), earned editorial links or outreach campaigns (use /founder-pipeline:web-backlinks), or launch-day campaign strategy (this skill only ensures the profile exists).
+description: "Use when deciding where to register a product, service or company, or to submit and track those listings: directories, registries, startup platforms (Product Hunt, BetaList), review sites, vertical and home-market catalogs; \"where should I list this\", \"get us on Product Hunt\", \"directory listings\", \"listings audit\". NOT for per-URL search-engine submission (`/founder-pipeline:web-indexation`) or earned editorial links and outreach (`/founder-pipeline:web-backlinks`)."
 ---
 
 # Listings — register-once profile & directory presence

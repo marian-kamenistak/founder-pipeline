@@ -1,9 +1,9 @@
 ---
 name: scout
-description: Deep market/landscape research. Use when the user needs to map a segment — VCs, partners, companies, competitors, or any structured market intelligence. Asks segmentation questions first, then researches systematically.
-user_invocable: true
+description: "Use when the user needs a market or landscape mapped: investors, partners, companies, competitors, media, or any structured market intelligence. Asks segmentation questions first, then researches systematically with sources."
+user-invocable: true
 allowed-tools: Read, Glob, Grep, WebFetch, WebSearch, Agent, Bash
-argument-hint: [topic, e.g. "seed VCs investing in my home market", "media partners for tech events"]
+argument-hint: "[topic, e.g. \"seed VCs investing in my home market\", \"media partners for tech events\"]"
 ---
 
 # Research

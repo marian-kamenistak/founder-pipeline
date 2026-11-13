@@ -1,12 +1,12 @@
 ---
-name: "seo-audit"
-description: Audit, review or diagnose SEO on a site you did not necessarily build. Use when the user says "SEO audit", "technical SEO", "why am I not ranking", "SEO issues", "on-page SEO", "meta tags review", "SEO health check", or asks whether a page is ready to launch. NOT for building a new site (use `founder-pipeline:web-site-creator`), NOT for writing or rewriting the page copy itself (use `founder-pipeline:blog-launch`), NOT for getting pages indexed (use `founder-pipeline:web-indexation`), NOT for the ongoing measurement of whether AI engines actually cite you, and NOT for a place-in-the-query local ranking problem.
+name: seo-audit
+description: "Use when auditing or diagnosing SEO on a site: \"SEO audit\", \"technical SEO\", \"why am I not ranking\", \"on-page SEO\", \"meta tags review\", \"SEO health check\", or whether a page is ready to launch. NOT for building a site (`/founder-pipeline:web-site-creator`), writing page copy (`/founder-pipeline:blog-launch`), getting pages indexed (`/founder-pipeline:web-indexation`), ongoing AI-citation measurement, or local place-in-the-query ranking."
 license: MIT
 metadata:
-  version: 2.0.0
-  author: Alireza Rezvani (v1.0)
-  category: marketing
-  updated: 2026-08-22
+  version: "2.0.0"
+  author: "Alireza Rezvani (v1.0)"
+  category: "marketing"
+  updated: "2026-08-22"
 ---
 
 # SEO Audit
@@ -21,26 +21,7 @@ no `${CLAUDE_PLUGIN_ROOT}` prefix it lives inside this skill.
 
 ## Delegation
 
-This skill owns diagnosis. Everything else has an owner, and reaching past these boundaries forks
-a source of truth.
-
-| Concern | Owner |
-|---|---|
-| Building a new site, and its build-time SEO rules | `/founder-pipeline:web-site-creator` (`phases/5-seo.md` is the canonical build rule set) |
-| Building or rewriting one page | `/founder-pipeline:web-site-creator` (its page phases), or whatever page builder you use |
-| Structured data spec and the standing schema decision | `${CLAUDE_PLUGIN_ROOT}/skills/web-site-creator/references/metadata.md` §8.4 |
-| Site architecture, internal-link topology, URL design | `${CLAUDE_PLUGIN_ROOT}/skills/web-site-creator/references/seo.md` |
-| Keyword research, SERP features, PAA and fan-out harvesting | `/founder-pipeline:web-keyword` |
-| Writing the content the audit says is missing | `/founder-pipeline:blog-launch` (posts) · `/founder-pipeline:web-site-creator` (pages) |
-| De-AI pass on any copy this audit causes to be rewritten | `/founder-pipeline:humanize`, then `/founder-pipeline:brand-voice` |
-| Getting a fixed page recrawled | `/founder-pipeline:web-indexation` — never click Request Indexing in GSC |
-| Whether ChatGPT / Perplexity actually cite us | Not shipped here. Stand up the ongoing measurement loop yourself: a fixed prompt set per engine, re-run on a fixed cadence, every run stored, with a ledger of which fixes shipped and whether the citation rate moved. Do not fold it into this audit |
-| Advisory rewrite of one page for AI citation | `/founder-pipeline:ai-seo` |
-| `llms.txt` / `llms-full.txt` | `/founder-pipeline:ai-seo-llms-builder` |
-| Place-in-the-query, map pack, business profile, service×city | Not shipped here. Local search is its own discipline: `LocalBusiness` schema, name/address/phone consistency across directories, a claimed and complete business profile, and one page per service×city that is genuinely distinct. Grade a location page here only on the generic on-page layer |
-| Crawler allowlist, robots.txt policy | `/founder-pipeline:ai-seo` carries the AI-crawler tier list; the site's own robots.txt policy is yours to own |
-| Rank, volume, backlink and competitor data | A rank/backlink data provider MCP or API (this skill's worked example is DataForSEO's `dfs-mcp`, an optional dependency you install separately) |
-| Business context, ICP, offer, voice | `brand_context/` in the active workspace |
+Read `references/delegation-table.md` before you start any fix, rewrite, keyword, indexation, schema, local-search or citation-measurement work the audit surfaces: it maps each concern to the skill or source that owns it. This skill owns diagnosis only.
 
 ## Modes
 
@@ -223,18 +204,7 @@ description unique **across the site**, no broken links, 301s in place for anyth
 
 ## Myths this skill does not chase
 
-Stated once so no audit re-litigates them, and so a client asking "shouldn't we add more words"
-gets the same answer twice.
-
-| Myth | What this skill does |
-|---|---|
-| Longer content ranks better | No word-count target, ever. Word count is reported as context and survives only as the 150-word thin-content Gate floor |
-| Outbound links leak authority | Outbound links to named sources are a **positive**. The old `link_ratio` penalty was deleted from the checker on 2026-08-22 |
-| Schema drives rankings or AI citations | Schema is reported, never scored. It ships for Google rich results and entity resolution. See `${CLAUDE_PLUGIN_ROOT}/skills/web-site-creator/references/metadata.md` §8.4 for the standing decision on which types ship |
-| Google penalises AI-written content | Google penalises thin and unhelpful content. Authorship method is not the axis. Run `/founder-pipeline:humanize` because AI-smooth copy reads badly, not because of a penalty |
-| The model that wrote it is a ranking factor | It is not |
-| URL slug word order matters | It does not. Consistency across the site does |
-| Keyword density is a target | Answer clarity is. Density is a symptom, not a lever |
+Read `references/myths.md` when a client or finding raises word count, outbound links, schema, AI-written content, slug order or keyword density.
 
 ## Output format
 
@@ -259,25 +229,7 @@ study, ~80k titles]" is not.
 
 ## Tools
 
-**A rank/backlink data provider** — real data over estimates, always. **State the plan cost before
-any paid call.** The worked example below is DataForSEO's MCP server (`dfs-mcp`), an **optional
-dependency you install separately**; any provider exposing equivalent endpoints substitutes, and
-the tool names change with it.
-
-- `on_page_instant_pages` — live on-page crawl per URL. Use instead of reading raw HTML.
-- `on_page_lighthouse` — Lighthouse from DataForSEO infra; cross-checks local runs.
-- `serp_organic_live_advanced` — actual positions and SERP features per priority keyword.
-  Validates "why am I not ranking" against reality.
-- `dataforseo_labs_google_ranked_keywords` — the full ranking portfolio. Open every site audit with it.
-- `dataforseo_labs_google_domain_intersection` — me-vs-competitor keyword overlap.
-- `backlinks_summary` + `backlinks_referring_domains` — authority context.
-
-Every metric carries `[source: <provider> <tool>, <date>]`. If the MCP is down, fall back to the
-provider's REST API using credentials from your environment before falling back to estimates.
-Never present an estimate as a measurement.
-
-**Free** — Google Search Console, PageSpeed Insights, Bing Webmaster Tools (its AI Performance tab
-is the only free view of Copilot grounding queries), Rich Results Test, Schema Validator.
+Read `references/tools.md` when you need real rank, SERP, on-page or backlink data (state the plan cost before any paid call) or the free tool list.
 
 ## References
 
@@ -319,33 +271,7 @@ Surface these without being asked:
 
 ## Related skills
 
-- **`/founder-pipeline:web-site-creator`** — WHEN: the audit concludes the site needs rebuilding,
-  or a page must be built or rewritten, or you need the canonical build rules (`phases/5-seo.md`),
-  schema spec (`references/metadata.md`) or architecture rules (`references/seo.md`).
-  WHEN NOT: for grading an existing page — that is this skill, and never as the fix for a technical
-  or indexation problem.
-- **`/founder-pipeline:web-keyword`** — WHEN: the audit reveals keyword gaps, cannibalisation, or
-  that the page is targeting the wrong term. Owns SERP-feature, PAA and fan-out research.
-  WHEN NOT: when the problem is purely technical.
-- **`/founder-pipeline:ai-seo`** — WHEN: the ask is to be cited by ChatGPT, Perplexity or AI
-  Overviews rather than ranked. Run both; they are complementary. WHEN NOT: for crawl or
-  indexation problems.
-- **`/founder-pipeline:web-indexation`** — WHEN: anything this audit caused to change needs
-  recrawling. WHEN NOT: to diagnose why an already-indexed page ranks badly — that starts here.
-- **`/founder-pipeline:humanize`** → **`/founder-pipeline:brand-voice`** — WHEN: any copy this
-  audit causes to be rewritten goes out. Mandatory, in that order.
-- **`/founder-pipeline:blog-launch`** — WHEN: the finding is a content gap that needs a post rather
-  than a page fix.
-
-Two adjacent jobs this plugin does **not** ship, so do them yourself rather than folding them into
-an audit:
-
-- **Ongoing AI-citation measurement** — a fixed prompt set per engine, re-run on a fixed cadence,
-  every run stored, with a ledger of shipped fixes and whether the citation rate moved. This skill
-  gives a one-off diagnosis, never a trend.
-- **Local search** — `LocalBusiness` schema, NAP consistency across directories, service×city
-  validation and the business profile. Triggered by a place in the query or a complaint about the
-  map pack, never by a national ranking problem that happens to involve a business with an address.
+Read `references/related-skills.md` when deciding which skill takes over after the audit (web-site-creator, web-keyword, ai-seo, web-indexation, humanize, blog-launch) and for the two adjacent jobs not shipped here.
 
 ## Learnings
 
@@ -371,19 +297,7 @@ you audit; the seed below is not the whole record once the pipeline has run a fe
 
 ### Entries
 
-- 2026-08-22 · any page · all — **A high score and a failed Launch Gate are independent, and the
-  common case.** The checker's own demo page scores 100 and fails the Gate on thin content. Action:
-  never report the score without the Gate line beside it, and never let a client trade one for the
-  other.
-- 2026-08-22 · homepage / dashboard blocks · all — **live-data widgets served the literal string
-  "Loading…" to GPTBot and Googlebot.** Two separate sites, same bug, one logged here
-  and one in `/founder-pipeline:ai-seo`. Action: on any page with a counter, chart or "live" block,
-  run `crawler_fetch` before grading anything else — the widget must server-render its real value
-  and let JS *replace* it, never the reverse.
-- 2026-08-22 · service pages · all — **the offer shape fails before the SEO does.** Two services
-  combined on one page defeats the one-primary-keyword model no matter how clean the metadata is.
-  Action: run the Money Page checklist before the on-page layer on any commercial site, and lead
-  the report with it when it fails.
+Read `references/learnings-entries.md` before auditing (the dated seed entries) and when adding a new entry, to match the shape of the existing ones.
 
 ## Output artifacts
 

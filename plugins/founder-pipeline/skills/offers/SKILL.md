@@ -1,8 +1,8 @@
 ---
 name: offers
-description: "When the user wants to design, construct, or improve an offer — the thing they actually sell — including value framing, bonus stacking, guarantee design, scarcity/urgency, naming, and payment structure. Also use when the user mentions 'offer,' 'offer design,' 'build an offer,' 'grand slam offer,' 'irresistible offer,' 'value stack,' 'bonus stack,' 'guarantee,' 'risk reversal,' 'money-back guarantee,' 'scarcity,' 'urgency,' 'high-ticket offer,' 'productize a service,' 'naming an offer,' 'payment plan,' 'down-sell,' 'upsell offer,' or 'why isn't my offer converting.' Best for services, agencies, courses, coaching, info products, high-ticket B2B, and direct-response. If you run pure self-serve SaaS, run /founder-pipeline:pricing first — tiers and packaging do more work there. For the price level itself (tiers, freemium, value metric), also /founder-pipeline:pricing. Sales-page copy, the launch moment and sales collateral are downstream of this skill and are written from its output."
+description: "Use when the user wants to design or improve an offer, the thing they actually sell: value framing, bonus stack, guarantee and risk reversal, scarcity, naming, payment structure, \"productize a service\", \"high-ticket offer\", \"why isn't my offer converting\". Best for services, coaching, courses, agencies and high-ticket B2B. For pure self-serve SaaS, or the price level and tiers, run `/founder-pipeline:pricing` first."
 metadata:
-  version: 1.0.0
+  version: "1.0.0"
 ---
 
 # Offer Design

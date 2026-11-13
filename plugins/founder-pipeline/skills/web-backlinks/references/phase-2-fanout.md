@@ -1,0 +1,16 @@
+# Phase 2 agent brief and family table
+
+This file belongs to the `web-backlinks` skill.
+
+Each agent receives: the domain, brand class, property context per Phase 1.5 (resolved paths — no bare filenames), competitor INDEX, backlink-gap table, **the exclusion list from the Migrated-state table (sent/in-flight, parked, dead — do not re-propose)**, and its family brief from `${CLAUDE_PLUGIN_ROOT}/skills/web-backlinks/references/platform-matrix.md`. Toolset: Read, WebSearch, WebFetch or `/founder-pipeline:firecrawl-scrape` — NO paid rank-data calls inside fan-out agents; if a family needs one (e.g. a content-mention search for unlinked mentions), the orchestrator runs it under the cost gate and passes results in. Internal spreadsheets (e.g. speaker lists) are permitted contact sources; emails from them must be confirmed against the CFP or mail thread they came from, not the live site.
+
+Families 2-6 return the scored table (`target | contact route | effort S/M/L | impact H/M/L (+DR if known) | cost | risk | evidence URL`). Family 1 (directory play) returns a design doc instead: niche, listing schema, submission + verification mechanics (Law 4 compliant), seed list, invite template. Merge, dedupe (also against Migrated state), write to `<property>/backlinks/opportunities.md`.
+
+| Family | One-line brief |
+|---|---|
+| Directory play | Link-magnet directory on the property domain; listing free, verification = identity, link-back optional invite. Build → `/founder-pipeline:web-site-creator`. **A directory OF OTHERS is the play; a ranked "best X" list with you on it is not** — 69% of self-promotional listicle citations ended up recommending a competitor (see the AI-citation layer above). |
+| Partners & exchanges | Adjacent players worth ONE-WAY plays first; reciprocal only within Law 4 caps. |
+| Platform placements | **Earned** placements needing a pitch: awesome-lists, speaker DBs, podcast guest slots, roster pages that require an ask. Register-once identity/profile listings — coach directories, event-listing self-serve forms, business/startup registries — are owned by **`/founder-pipeline:web-listings`**, not this family; don't re-propose a target that skill already tracks. **Portfolio rule (still applies wherever this family DOES apply): on any registry/directory that hosts multiple orgs or products, list EVERY owned property in your registry, not just the one that triggered the run.** Each stays a separate entity pointing to its own domain. These are identity listings, not swaps, so the anti-PBN "own domains never appear in each other's directories" rule does not apply to third-party registries. |
+| Digital PR & citations | Unlinked-mention reclamation (do FIRST), wrong/dead-link fixes, journalist pipelines, regional media pitches, broken-link building. **Score mentions separately from links** — an unconverted mention is still a win (r=0.664 vs 0.218 for backlinks). Also hunt EARNED placement on third-party "best X" listicles: 63% of AI citations point at listicles, 80.9% of them third-party. |
+| Linkbait assets | Original data (survey), citation-engineered stat pages, free tools. Highest ceiling, slowest fuse. |
+| Non-standard | Badge embeds (nofollow — brand/traffic/AI-surface value), awards, .edu lectures, testimonials (owner-approved), newsletter swaps. |

@@ -4,6 +4,8 @@ Load `references/rating-rubric.md` (the verbatim judge prompt + anchors live the
 
 ## W2 — judge panel via the Workflow tool
 
+Start it on the owner's yes; without the Workflow tool, dispatch the same four as parallel subagents.
+
 `parallel(judge1, judge2, judge3, linkcheck)`:
 
 - **3 blind judges** — fresh contexts, **session model**, `effort: 'medium'`, identical prompt from the rubric file + the full post text. No access to the writer's context, the brief's history, or each other. JSON schema output: `{ simplicity: 0-10, value: 0-10, flags: [{quote, problem}] }`.

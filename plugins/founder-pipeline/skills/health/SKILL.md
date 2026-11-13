@@ -1,9 +1,9 @@
 ---
 name: health
-description: Audit and fix Claude project health — harness/config (settings, hooks, MCP, auto-update), CLAUDE.md size and consistency, duplicates, broken references, memory hygiene. Use when the user says /health, /doctor, run health check, audit CLAUDE.md, check/fix/improve/update CLAUDE.md, CLAUDE.md maintenance, project memory optimization, or context bloat. Runs on a single project, or scans every project under a directory the user names. Invoked by `/founder-pipeline:founder` at P1.S1 as the project-compliance gate before the pipeline writes anything.
-user_invocable: true
+description: "Use when the user says /health, /doctor, \"health check\", \"audit CLAUDE.md\", \"fix CLAUDE.md\", \"context bloat\", or wants a Claude project's setup audited: settings, hooks, MCP, CLAUDE.md size and consistency, duplicates, broken references, memory hygiene. Works on one project or every project under a named directory. `/founder-pipeline:founder` calls it at P1.S1 before the pipeline writes anything."
+user-invocable: true
 allowed-tools: Read, Glob, Grep, Edit, Write, Bash, Agent
-argument-hint: [project path, or a parent directory to scan; empty = current project (cwd)]
+argument-hint: "[project path, or a parent directory to scan; empty = current project (cwd)]"
 ---
 
 # Claude Project Health Check

@@ -1,9 +1,8 @@
 ---
 name: brand-voice
-description: Your brand voice. Use when writing or rewriting any external-facing copy — email, LinkedIn or social post, deck section, proposal, cold outreach, landing page, tagline, workshop title. Auto-trigger on "write/draft/rewrite", "in my voice", "sound like me", "make this human", "less AI", "spicier", "more contrarian". Also captures the voice profile in the first place, from the owner's own writing. Language-agnostic.
-disable-model-invocation: false
+description: "Use when writing or rewriting any external-facing copy in the owner's voice: email, social post, deck section, proposal, cold outreach, landing page, tagline, workshop title; or on \"in my voice\", \"sound like me\", \"make this human\", \"less AI\", \"spicier\". Also captures the voice profile from the owner's own writing (`capture`). Language-agnostic; runs `/founder-pipeline:humanize` as its base layer."
 allowed-tools: Read, Grep, Glob, Write
-argument-hint: [what to write, paste to rewrite, or "capture" to build the voice profile]
+argument-hint: "[what to write, paste to rewrite, or \"capture\" to build the voice profile]"
 ---
 
 # Brand Voice

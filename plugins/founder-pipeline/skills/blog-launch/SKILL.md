@@ -1,6 +1,6 @@
 ---
 name: blog-launch
-description: Produce a blog post end-to-end for one of your sites: brief → keyword/SERP/backlink research → skeleton → contrarian personal draft → rating gate (8/10 or it doesn't ship) → images from the gallery → localized mirror → inbound internal links → deploy → syndicate to Medium/Substack/Hackernoon → per-post backlinks → announce (social, communities, newsletter). Use when the user says "write a blog post", "new article", "blog pipeline", "publish a post", "draft an essay for the blog", or names a topic they want on the blog. NOT for standalone social posts, landing pages (/founder-pipeline:web-site-creator), or newsletters.
+description: "Use when the user wants a blog post produced end to end for one of their sites: \"write a blog post\", \"new article\", \"blog pipeline\", \"publish a post\", or a named topic for the blog. Covers brief, keyword and SERP research, draft, an 8/10 rating gate, images, localized mirror, internal links, deploy, syndication, backlinks and announcement. NOT for standalone social posts, newsletters or landing pages (`/founder-pipeline:web-site-creator`)."
 ---
 
 # Blog Post — full production pipeline

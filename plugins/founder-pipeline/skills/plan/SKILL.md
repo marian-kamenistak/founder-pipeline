@@ -1,8 +1,8 @@
 ---
 name: plan
-description: Create a structured plan before non-trivial work. Use when the user asks to plan a project, initiative, event, engagement, or any multi-step effort.
+description: "Use when the user asks to plan a project, initiative, event, engagement or any multi-step effort before non-trivial work. Produces a structured plan with owners, milestones and binary done-criteria."
 allowed-tools: Read, Glob, Grep
-argument-hint: [what to plan]
+argument-hint: "[what to plan]"
 ---
 
 # Plan

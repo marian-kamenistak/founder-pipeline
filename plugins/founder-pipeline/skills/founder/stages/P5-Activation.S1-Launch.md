@@ -2,7 +2,7 @@
 
 **Phase: P5-Activation**
 
-**Routing:** fan-out (one subagent per launch item) · launch items MID, blog drafts PEAK · gate critic at the step tier
+**Routing:** fan-out (one subagent per launch item) · launch items MID, blog drafts PEAK · gate critic on the session model
 
 **Earns its keep** in every stream with a web surface or content motion — this is the step that was structurally missing: the pipeline used to end at "built and queued", and distribution work died in owner-gated queues. Launch is EXECUTION — assets published, servers registered, posts live — not planning. **Performative when** the stream is deck-only with no web/content motion — record the skip in `brief.md`.
 

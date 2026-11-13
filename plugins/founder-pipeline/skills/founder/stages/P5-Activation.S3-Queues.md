@@ -2,7 +2,7 @@
 
 **Phase: P5-Activation**
 
-**Routing:** fan-out (one agent per step file/folder, synthesis plain on main thread) · sweep CHEAP · gate critic at the step tier
+**Routing:** fan-out (one agent per step file/folder, synthesis plain on main thread) · sweep CHEAP · gate critic on the session model
 
 **Earns its keep** whenever the stream has a live web surface or any launched asset — the moment work stops being "build" and becomes "keep shipping into the world," it needs a tracked queue or the follow-through rots. **Performative** only for deck-only streams with zero ongoing distribution motion — record the skip in `brief.md` (skips still get the owner's sign-off).
 

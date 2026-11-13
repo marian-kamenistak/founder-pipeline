@@ -2,7 +2,7 @@
 
 **Phase: P4-Build** (closes the phase)
 
-**Routing:** plain · build MID, ICP click test and new copy PEAK · gate critic at the step tier
+**Routing:** plain · build MID, ICP click test and new copy PEAK · gate critic on the session model
 
 **Earns its keep when** P4.S3 shipped a web surface with more than one offering to showcase (a catalog: workshops, products, tiers, services) — the deck is the thing the owner emails a warm lead to pull them onto the site. **Skip entirely** (one line in `brief.md` saying why) when: the stream is deck-only already, has a single offer with nothing to page through, or has no client-send motion (pure self-serve). A deck for a one-SKU self-serve product is performative — skip it.
 

@@ -2,7 +2,7 @@
 
 **Phase: P1-Ideation**
 
-**Routing:** delegated (one subagent runs the whole prediction pipeline) · data gathering CHEAP, synthesis + verdict PEAK · gate critic at the step tier
+**Routing:** delegated (one subagent runs the whole prediction pipeline) · data gathering CHEAP, synthesis + verdict PEAK · gate critic on the session model
 
 **Earns its keep** in every run where the niche, keywords, or content angles are not yet locked by external evidence — i.e. nearly always. This is the cheapest moment to change the idea: a niche verdict here costs one prediction run; the same discovery at P4.S1 costs a rebuilt keyword contract, at P5.S1 a re-launched content set. **Performative when** the stream's demand question is already answered by a fresh (<90 days) prediction ledger or an equivalent evidence pack — cite it, record the skip in `brief.md`, and carry its verdict forward instead.
 

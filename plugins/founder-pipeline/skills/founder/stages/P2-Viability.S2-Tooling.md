@@ -2,7 +2,7 @@
 
 **Phase: P2-Viability**
 
-**Routing:** plain (drafts ∥ with P2.S1) · draft MID, stage judge MID · gate critic at the step tier
+**Routing:** plain (drafts ∥ with P2.S1) · draft MID, stage judge MID · gate critic on the session model
 
 **∥ note:** this step may draft in parallel with P2.S1 (economics) — its costs feed back into P2.S1's model before P2.S1's gate closes — but it gates separately, with its own `/critical` pass and its own owner sign-off.
 

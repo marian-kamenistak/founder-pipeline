@@ -2,7 +2,7 @@
 
 **Phase: P1-Ideation**
 
-**Routing:** plain, fan-out /scout only if the market is unfamiliar · draft MID, scout fan-out CHEAP · gate critic at the step tier
+**Routing:** plain, fan-out /scout only if the market is unfamiliar · draft MID, scout fan-out CHEAP · gate critic on the session model
 
 **Earns its keep when** the problem is novel, contested, or shifting (AI-era engineering hiring, post-FTX consumer trust). When the user has a felt sense but can't articulate the shift.
 

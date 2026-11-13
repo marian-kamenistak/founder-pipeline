@@ -2,7 +2,7 @@
 
 **Phase: P4-Build**
 
-**Routing:** fan-out + delegated (one agent per competitor, then one fix subagent) · research CHEAP, fix MID · gate critic at the step tier
+**Routing:** fan-out + delegated (one agent per competitor, then one fix subagent) · research CHEAP, fix MID · gate critic on the session model
 
 **Earns its keep when** P4.S3 shipped a live web surface. The site just passed its own hardening pass — but hardening checks the site against a *checklist*. This step checks it against the *competitors who actually rank*, by reading their shipped HTML. Checklists tell you what's broken; rivals' source tells you what's missing. **Skip entirely** (one line in `brief.md`) only when P4.S3 was skipped — no site, nothing to diff. That skip is common and legitimate: a stream with no web surface has nothing to compare.
 

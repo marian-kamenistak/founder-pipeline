@@ -2,7 +2,7 @@
 
 **Phase: P1-Ideation**
 
-**Routing:** plain (two kill-framings as parallel subagents) · intake digests CHEAP, kill passes PEAK · gate critic PEAK
+**Routing:** plain · intake digests CHEAP · gate critic PEAK, one fresh-context pass with the focus-refutation framing
 
 **Capability preflight — run FIRST, before the focus guard and before any question.** This skill runs on Claude Code alone; everything else is optional and is resolved once, here. Follow the preflight in `references/capabilities.md`: list the skills and MCP tools available in this session, resolve each row (skills: `bundled` / `own:<name>` / `fallback`; tools: `connected` / `REST` / `missing`), and write the result into the stream folder as `CAPABILITIES.md` from `templates/stream-folder/CAPABILITIES.md` as soon as the folder exists (hold it in memory until question 1 confirms the path). Tell the owner in three lines max what is connected, what runs on fallback, and the ONE missing item that costs the most evidence, with the matching `INSTALL.md` (in this skill folder) section. Never block on it: a missing capability changes how later steps work, never whether their gates run.
 

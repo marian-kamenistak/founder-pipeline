@@ -6,8 +6,9 @@ breaks an install, so this does:
 
   frontmatter   strict YAML, known keys only, name == folder, string types
   description   <= 1024 chars each (agentskills.io spec), and a total budget for the listing
+                (skill and agent descriptions together, since both are always loaded)
   body          <= 500 lines and <= 20,000 chars (about 5,000 tokens at 4 chars per token)
-  references    every file a skill points at exists; every /founder-pipeline:<name> and
+  references    every file a skill points at exists AND ships (a gitignored file does not); every /founder-pipeline:<name> and
                 founder-pipeline:<agent> resolves to something that ships
   standalone    the founder skill folder works when copied alone (no plugin-root paths)
   components    agents, workflows and hooks are well formed
@@ -22,13 +23,14 @@ from __future__ import annotations
 import json
 import pathlib
 import re
+import subprocess
 import sys
 
 import yaml
 
 PLUGIN = "founder-pipeline"
 MAX_DESC = 1024            # agentskills.io/specification
-MAX_TOTAL_DESC = 10_500    # this repo's budget for the always-loaded skill listing
+MAX_TOTAL_DESC = 11_500    # this repo's budget for the always-loaded listing: skills + agents
 MAX_BODY_LINES = 500       # code.claude.com/docs/en/skills
 MAX_BODY_CHARS = 20_000    # ~5,000 tokens, the spec's recommended ceiling
 CHARS_PER_TOKEN = 4        # estimate, used only for the report
@@ -48,6 +50,20 @@ LOCAL_REF_RE = re.compile(r"`((?:references|stages|steps|phases|templates|script
 SITE_REPO_FILES = {"scripts/gen-lastmod.mjs", "scripts/gen-agent-markdown.mjs"}
 SLASH_REF_RE = re.compile(rf"/{PLUGIN}:([a-z0-9-]+)")
 AGENT_REF_RE = re.compile(rf"(?<![/\w]){PLUGIN}:([a-z0-9-]+)")
+
+
+def shipped_files(root: pathlib.Path):
+    """Files git will ship: tracked, plus untracked files that are not ignored.
+
+    None outside a git checkout. An ignored file exists on the author's disk and nowhere else,
+    so a reference to it is dangling for every user.
+    """
+    try:
+        out = subprocess.run(["git", "-C", str(root), "ls-files", "-co", "--exclude-standard", "-z"],
+                             capture_output=True, text=True, check=True).stdout
+    except (OSError, subprocess.CalledProcessError):
+        return None
+    return {(root / f).resolve() for f in out.split("\0") if f}
 
 
 def split_frontmatter(text: str):
@@ -98,8 +114,9 @@ def check_skill(skill_dir: pathlib.Path) -> tuple[list[str], dict]:
     return errors, stats
 
 
-def check_local_refs(skill_dir: pathlib.Path) -> list[str]:
+def check_local_refs(skill_dir: pathlib.Path, shipped=None) -> list[str]:
     errors = []
+    ships = lambda f: f.exists() and (shipped is None or f.resolve() in shipped)
     for md in sorted(skill_dir.rglob("*.md")):
         for ref in sorted(set(LOCAL_REF_RE.findall(md.read_text()))):
             if any(c in ref for c in "<>*{}") or ref in SITE_REPO_FILES:
@@ -107,8 +124,9 @@ def check_local_refs(skill_dir: pathlib.Path) -> list[str]:
             # A reference resolves from the skill root, from the file's own folder, or, when the
             # sentence names another bundled skill, from that sibling skill's root.
             homes = [skill_dir, md.parent] + [d for d in skill_dir.parent.iterdir() if d.is_dir()]
-            if not any((h / ref).exists() for h in homes):
-                errors.append(f"{md}: points at `{ref}`, which does not exist")
+            if not any(ships(h / ref) for h in homes):
+                why = "exists here but is gitignored, so it does not ship" if any((h / ref).exists() for h in homes) else "does not exist"
+                errors.append(f"{md}: points at `{ref}`, which {why}")
     return errors
 
 
@@ -207,16 +225,24 @@ def run(root: pathlib.Path, report: bool = False) -> int:
     plugin_dir = root / "plugins" / PLUGIN
     errors: list[str] = []
     stats = []
+    shipped = shipped_files(root)
     for skill_dir in sorted(p for p in (plugin_dir / "skills").iterdir() if p.is_dir()):
         if not (skill_dir / "SKILL.md").exists():
             errors.append(f"{skill_dir}: no SKILL.md")
             continue
         e, s = check_skill(skill_dir)
-        errors += e + check_local_refs(skill_dir)
+        errors += e + check_local_refs(skill_dir, shipped)
         stats.append(s)
     total_desc = sum(s["desc"] for s in stats)
-    if total_desc > MAX_TOTAL_DESC:
-        errors.append(f"skill listing: descriptions total {total_desc} chars, budget {MAX_TOTAL_DESC}")
+    agent_desc = 0
+    for a in sorted((plugin_dir / "agents").glob("*.md")) if (plugin_dir / "agents").exists() else []:
+        try:
+            agent_desc += len(str(split_frontmatter(a.read_text())[0].get("description", "")))
+        except (ValueError, yaml.YAMLError, AttributeError):
+            pass  # reported by check_components
+    if total_desc + agent_desc > MAX_TOTAL_DESC:
+        errors.append(f"always-loaded listing: skill descriptions {total_desc} + agent descriptions {agent_desc} "
+                      f"chars, budget {MAX_TOTAL_DESC}")
     errors += check_cross_refs(plugin_dir) + check_standalone(plugin_dir)
     errors += check_components(plugin_dir) + check_release(root, plugin_dir)
 
@@ -226,7 +252,9 @@ def run(root: pathlib.Path, report: bool = False) -> int:
         for s in stats:
             print(f"| `{s['name']}` | {s['desc']} | {s['body_chars']:,} | {s['body_chars'] // CHARS_PER_TOKEN:,} |")
         print(f"| **Total, {len(stats)} skills** | **{total_desc:,}** | | |")
-        print(f"\nAlways-loaded listing: {total_desc:,} chars, about {total_desc // CHARS_PER_TOKEN:,} tokens "
+        listing = total_desc + agent_desc
+        print(f"\nAlways-loaded listing: {total_desc:,} chars of skill descriptions + {agent_desc:,} of agent "
+              f"descriptions = {listing:,} chars, about {listing // CHARS_PER_TOKEN:,} tokens "
               f"(estimate at {CHARS_PER_TOKEN} chars per token; budget {MAX_TOTAL_DESC:,}).")
     for e in errors:
         print(f"ERROR {e}".replace(str(root) + "/", ""))

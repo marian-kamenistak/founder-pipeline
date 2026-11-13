@@ -2,7 +2,7 @@
 
 **Phase: P6-Adoption**
 
-**Routing:** plain (may run ∥ with P6.S1) · draft MID, stage judge MID · gate critic at the step tier
+**Routing:** plain (may run ∥ with P6.S1) · draft MID, stage judge MID · gate critic on the session model
 
 **Earns its keep** always.
 

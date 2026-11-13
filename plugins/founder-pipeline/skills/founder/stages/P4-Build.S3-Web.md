@@ -2,7 +2,7 @@
 
 **Phase: P4-Build**
 
-**Routing:** delegated (one background build subagent) · tiers not stated · gate critic at the step tier
+**Routing:** delegated (one background build subagent) · tiers not stated · gate critic on the session model
 
 **Earns its keep when** the format decision in P4.S2 includes a web surface. **Skip entirely** (with one line in `brief.md` saying why) when the stream is deck-only or app-only. A stream that sells entirely through warm outreach and has no page to send anyone to skips this step and P4.S4 with it — that is a normal outcome, not a shortfall.
 

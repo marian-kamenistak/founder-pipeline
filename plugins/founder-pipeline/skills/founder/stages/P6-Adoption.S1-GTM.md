@@ -2,7 +2,7 @@
 
 **Phase: P6-Adoption**
 
-**Routing:** plain (may run ∥ with P6.S2) · draft MID · gate critic at the step tier
+**Routing:** plain (may run ∥ with P6.S2) · draft MID · gate critic on the session model
 
 **Earns its keep** always — most streams die in GTM, not product.
 

@@ -2,7 +2,7 @@
 
 **Phase: P6-Adoption** (closes the phase and the pipeline)
 
-**Routing:** plain · draft MID · gate critic at the step tier
+**Routing:** plain · draft MID · gate critic on the session model
 
 **Earns its keep** always — this is the one-pager the user actually re-reads weekly.
 

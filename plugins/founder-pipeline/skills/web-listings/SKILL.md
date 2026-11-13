@@ -77,7 +77,7 @@ For the target property: read its site JSON-LD `sameAs`, check `references/entit
 
 ## Phase 2 — Select
 
-Filter `config/targets.json` by `applies_to` — a list of brand classes — matched against the property's `brand_class` from `config/properties.json`, then apply the localize gate to any row whose `territory` is a language you don't publish in. A row with `applies_to: []` is unassigned: judge fit from its `notes` and record the decision by editing `applies_to`. Brand-class weighting, mirroring `web-backlinks/references/platform-matrix.md`:
+Do not read `config/targets.json` whole: it is about 39,000 tokens. List the rows you need with `python3 "${CLAUDE_SKILL_DIR}/scripts/select_targets.py" --class <brand_class> [--territory <t> ...] [--priority <n>]`, and open one row with `--id <ID>` when you need its notes (`--unassigned` lists rows with `applies_to: []`). The filter is `applies_to` — a list of brand classes — matched against the property's `brand_class` from `config/properties.json`, then apply the localize gate to any row whose `territory` is a language you don't publish in. A row with `applies_to: []` is unassigned: judge fit from its `notes` and record the decision by editing `applies_to`. Brand-class weighting, mirroring `web-backlinks/references/platform-matrix.md`:
 
 | Brand class | Go-deep categories |
 |---|---|

@@ -2,7 +2,7 @@
 
 **Phase: P1-Ideation**
 
-**Routing:** fan-out (by segment, channel, competitor's customers; agents blind to each other) · gather CHEAP, verify PEAK · gate critic at the step tier
+**Routing:** fan-out (by segment, channel, competitor's customers; agents blind to each other) · gather CHEAP, verify PEAK · gate critic on the session model
 
 **Earns its keep when** segmentation is non-obvious (CTO vs VP Eng vs Eng Director have different jobs), or geography matters (CEE willingness-to-pay ≠ US).
 

@@ -11,7 +11,7 @@ For "kick it off, review the result later." Invoked explicitly with the `overnig
 These four override any instinct to pause, hedge, or defer. They never override the run limits or the hard limits below. The hard limits below still stand — never fabricate evidence, never send outreach, and the two P1.S1 preconditions (a non-empty intake folder and a supplied profit bar) legitimately halt the run before it starts. "Blocked is not an option" and "do not stop until done" apply once the run is past P1.S1.
 
 **What replaces the owner's per-step approval:**
-1. Def-of-success verdicts come from a **fresh-context `/critical` subagent** per step, spawned with only the draft and the criteria — never the chat history, so it cannot inherit this session's sympathy. Its GATE line decides.
+1. Def-of-success verdicts come from the **`founder-pipeline:gate-critic` agent** per step (a fresh-context `/critical` subagent in a founder-only install), given only the draft and the criteria, never the chat history, so it cannot inherit this session's sympathy. Its GATE line decides. A row whose gate passed this way is **provisional**: later steps may build on it, each file built on a provisional row says so in its first line, and this is the one exception to the rule that nothing builds on an unapproved artifact.
 2. The improvement loop runs up to **3 rounds per step** with full skill and subagent fan-out. If the gate still fails, the step is marked `BLOCKED` in the file, the reason is logged, and the run CONTINUES to whatever downstream steps do not depend on it — it never fakes a pass to keep moving.
 3. Every auto-advanced step is left at `awaiting approval` in `PROGRESS.md`, with its CRITICAL score, def-of-success result and one-line Note filled in. **Only the owner's review approval flips a row to `approved`.** `PROGRESS.md` itself is what shows which conclusions are still provisional.
 
@@ -48,4 +48,5 @@ prior evidence: <files or version-control history to inherit>
 - **Pre-grant the permissions the run needs** through your agent's allowlist or project settings before starting: a single interactive permission prompt stalls the entire run until someone answers it. Grant the specific tools the pipeline uses; do not disable the permission system wholesale.
 - **Launch in the default permission mode, with an allowlist.** The plugin's approval hook can only hold a row at `awaiting approval` when a prompt cannot be answered. In `acceptEdits` or `bypassPermissions` mode the prompt is accepted automatically and the rule rests on this file alone.
 - **Keep the machine awake** for the duration — an unattended run dies with the session when the host sleeps.
+- **Review in order.** The owner approves rows top to bottom. Rejecting one re-opens that step and every later step built on it.
 - **The run is resumable.** If it dies mid-pipeline, re-invoking resumes from the `PROGRESS.md` row marked `in progress` or `awaiting approval`.

@@ -141,6 +141,7 @@ claude plugin update founder-pipeline@founder-pipeline
 
 ```bash
 claude plugin uninstall founder-pipeline@founder-pipeline
+claude plugin marketplace remove founder-pipeline     # optional: also forget the marketplace
 ```
 
 Nothing you've written is deleted. Your idea folders are yours and stay where they are.
@@ -149,7 +150,7 @@ Nothing you've written is deleted. Your idea folders are yours and stay where th
 
 ## What it costs to run
 
-**Short answer: about $27–37 a month on a Claude Pro plan, plus the top-tier model, which Pro bills separately.**
+**Short answer: about $27–37 a month for the whole pipeline on a Claude Pro plan, plus the top-tier model, which Pro bills separately.** The first two phases, the ones that decide whether to build at all, need the Claude plan alone.
 
 The pipeline keeps its main loop, its critics and every customer-facing word on your top-tier model. On Claude Pro, that model is paid in credits from the first token and does not count toward your plan limits. The $27–37 does not include those credits, and the cost breakdown has no figure for them. On Max, up to half the weekly limit covers the top-tier model.
 
@@ -163,6 +164,8 @@ Seven of the thirteen tools involved are free at the scale one person works at. 
 
 You do **not** need to buy everything before you start. Phases 1 and 2, the half that decides whether to build at all, run on a Claude plan. Add one pay-as-you-go API with a $50 deposit, which covers roughly 200 to 260 research runs, and those phases get measured search demand instead of blocked checks.
 
+The $27–37 includes the domain and the email you only need from phase 4. Prices were checked on 2026-08-27; check the vendor's page before you budget.
+
 Full breakdown, with every price sourced and dated: **[docs/TOOLING-AND-COSTS.md](docs/TOOLING-AND-COSTS.md)**
 
 ---
@@ -171,7 +174,7 @@ Full breakdown, with every price sourced and dated: **[docs/TOOLING-AND-COSTS.md
 
 **Required:**
 
-- Claude Code, and a Claude Pro plan or higher. On Pro, budget separately for the top-tier model (see above).
+- Claude Code, and a Claude Pro plan or higher. On Pro, budget separately for the top-tier model (see above). Keep Claude Code current with `claude update`; this release was tested on 2.1.322.
 - A folder to work in
 - About an hour where nobody will interrupt you, for the first session
 
@@ -188,6 +191,9 @@ Full breakdown, with every price sourced and dated: **[docs/TOOLING-AND-COSTS.md
   [Resend](https://resend.com/): all have free tiers that are enough
 
 **Optional, and it works fine without them:**
+
+- Node.js on your `PATH`, for the hook that asks before a step is marked approved. Without it the hook stays silent.
+- Python 3, for three helper scripts in the SEO and listings skills. The skills fall back to doing the same checks by hand.
 
 - The [PostHog](https://posthog.com/docs/ai/claude-code) and Notion plugins for Claude Code, if you
   want analytics and task tracking wired in automatically
@@ -255,7 +261,7 @@ No. It's specifically built not to. If that's what you want, ask a normal chatbo
 - A hook that asks you before any step is marked `approved`.
 - The ideation questions follow a grill pass: facts are looked up, only decisions are asked, each with a recommended answer.
 - An eval suite, a linter with its own tests, and CI on every push.
-- 37% less always-loaded context, and the founder skill's main file is 48% smaller.
+- 29% less always-loaded context, even with four new agent descriptions in it, and the founder skill's main file is 48% smaller.
 - Unattended mode now deploys to a preview URL unless you ask for production, and has a time limit and a stop file.
 
 Full history: [CHANGELOG.md](CHANGELOG.md).

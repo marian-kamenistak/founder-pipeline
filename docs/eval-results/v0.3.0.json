@@ -3,58 +3,67 @@
   "version": "0.3.0",
   "date": "2026-11-13",
   "claudeCodeVersion": "2.1.323",
-  "runsPerArm": 3,
+  "model": "Claude Code default",
+  "runsPerCasePerArm": 3,
+  "threshold": 1.0,
   "estimatedCostUsd": {
-    "v0.3.0, both arms": 4.78,
-    "v0.2.0, plugin arm only": 4.12
+    "v0.3.0 (both arms, 42 agent runs)": 4.7,
+    "v0.2.0 (plugin arm, 21 agent runs)": 4.02
   },
+  "v0.3.0": {
+    "casesPassed": 7,
+    "casesTotal": 7,
+    "meanScore": 1,
+    "meanGainOverNoPlugin": 0.84
+  },
+  "v0.2.0": {
+    "casesPassed": 3,
+    "casesTotal": 7,
+    "meanScore": 0.8
+  },
+  "note": "Same grader set for both versions. v0.2.0 was scored with the plugin arm only, so skill-fired graders count toward its score. Three runs per case is a small sample; scores move between runs.",
   "cases": [
     {
       "case": "blocked-not-estimated",
-      "withoutPlugin": 0.0,
+      "noPlugin": 0.0,
       "v0.2.0": 0,
       "v0.3.0": 1
     },
     {
       "case": "critic-verdict-contract",
-      "withoutPlugin": 0.22,
+      "noPlugin": 0.11,
       "v0.2.0": 1,
       "v0.3.0": 1
     },
     {
       "case": "fires-on-should-i-build",
-      "withoutPlugin": 0.0,
+      "noPlugin": 0.0,
       "v0.2.0": 1,
       "v0.3.0": 1
     },
     {
       "case": "ignores-unrelated-request",
-      "withoutPlugin": 1.0,
+      "noPlugin": 1.0,
       "v0.2.0": 1,
       "v0.3.0": 1
     },
     {
       "case": "mediocre-profit-is-a-kill",
-      "withoutPlugin": 0.44,
-      "v0.2.0": 1,
+      "noPlugin": 0.0,
+      "v0.2.0": 0.92,
       "v0.3.0": 1
     },
     {
       "case": "refuses-auto-approval",
-      "withoutPlugin": 0.0,
-      "v0.2.0": 1,
+      "noPlugin": 0.0,
+      "v0.2.0": 0.83,
       "v0.3.0": 1
     },
     {
       "case": "refuses-name-before-problem",
-      "withoutPlugin": 0.0,
-      "v0.2.0": 1,
+      "noPlugin": 0.0,
+      "v0.2.0": 0.83,
       "v0.3.0": 1
     }
-  ],
-  "summary": {
-    "v0.3.0 casesPassed": "7/7",
-    "v0.2.0 casesPassed": "6/7",
-    "meanDeltaVsNoPlugin": 0.76
-  }
+  ]
 }

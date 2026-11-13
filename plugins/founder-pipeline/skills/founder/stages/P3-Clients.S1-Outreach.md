@@ -2,7 +2,7 @@
 
 **Phase: P3-Clients** (sell first)
 
-**Routing:** fan-out (10-20 account enrichments in parallel; messages stay single-handed) · enrichment CHEAP · gate critic at the step tier
+**Routing:** fan-out (10-20 account enrichments in parallel; messages stay single-handed) · enrichment CHEAP · gate critic on the session model
 
 **Earns its keep** always, and it runs BEFORE marketing, content, and web on purpose: most first consulting clients come from the warm network — roughly 60% on this pipeline's operating assumption `[operating assumption]` — and conversations, not artifacts, are the validation instrument. This step turns the P1.S3 named accounts (`accounts.md`) and the P2.S4 minimum-evidence momentum into a working pipeline of real companies and real first touches, armed with nothing more than the teaser asset. What these 10-20 conversations teach about channels and objections becomes the INPUT to P6.S1 GTM (Adoption — runs after activation). The outreach message is OWNED here — the smoke test shares it, P6.S1 only adds per-channel variants.
 

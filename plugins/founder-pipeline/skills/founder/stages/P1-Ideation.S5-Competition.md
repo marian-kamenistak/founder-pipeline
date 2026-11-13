@@ -2,7 +2,7 @@
 
 **Phase: P1-Ideation**
 
-**Routing:** fan-out (one agent per competitor, then adversarial verification of each weakness) · scouts CHEAP, verify PEAK · gate critic at the step tier
+**Routing:** fan-out (one agent per competitor, then adversarial verification of each weakness) · scouts CHEAP, verify PEAK · gate critic on the session model
 
 **Earns its keep when** the market has incumbents or substitutes the user must position against. Almost always.
 

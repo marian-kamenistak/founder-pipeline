@@ -93,7 +93,7 @@ class Budgets(Fixture):
         self.assertError("lines, limit 500")
 
     def test_listing_budget_is_enforced_across_skills(self):
-        for i in range(11):
+        for i in range(12):
             self.skill(f"s{i}", f'---\nname: s{i}\ndescription: "{"y" * 1000}"\n---\nbody\n')
         self.assertEqual(cs.run(self.root), 1)
 
@@ -108,6 +108,25 @@ class References(Fixture):
         (d / "references").mkdir()
         (d / "references" / "ok.md").write_text("ok")
         self.assertEqual(self.errors(), [])
+
+    def test_gitignored_reference_exists_locally_but_does_not_ship(self):
+        """The 0.2.0 bug: AUDIT-*.md in .gitignore swallowed references/audit-mode.md."""
+        import subprocess
+        d = self.skill("demo", GOOD_SKILL + "Read `references/audit-mode.md` when auditing.\n")
+        (d / "references").mkdir()
+        (d / "references" / "audit-mode.md").write_text("exists on the author's disk")
+        (self.root / ".gitignore").write_text("audit-*.md\n")
+        subprocess.run(["git", "init", "-q", str(self.root)], check=True)
+        self.assertEqual(cs.check_local_refs(d), [], "without git context the file looks fine")
+        errs = cs.check_local_refs(d, cs.shipped_files(self.root))
+        self.assertTrue(any("gitignored, so it does not ship" in e for e in errs), errs)
+
+    def test_agent_descriptions_count_toward_the_listing_budget(self):
+        (self.plugin / "agents").mkdir()
+        big = "Use " + "x" * (cs.MAX_TOTAL_DESC + 10)
+        (self.plugin / "agents" / "scout.md").write_text(GOOD_AGENT.replace(
+            "Narrow research worker. Use one per item with a single question.", big))
+        self.assertEqual(cs.run(self.root), 1)
 
     def test_reference_to_a_skill_that_does_not_ship(self):
         self.skill("demo", GOOD_SKILL + f"Then run `/{cs.PLUGIN}:ghost`.\n")

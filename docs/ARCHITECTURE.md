@@ -13,7 +13,7 @@ This page is for someone who wants to know how the plugin is put together, what 
 | Workflows | 2 | `workflows/` | Deterministic fan-out for research sweeps and gate panels |
 | Hook | 1 | `hooks/` | Asks the owner before a step is marked `approved` |
 | Evals | 7 cases | `evals/` | Behaviour tests for `claude plugin eval` |
-| Unit tests | 40 | `tests/` | The linter (22), the hook (9), the workflow logic (9) |
+| Unit tests | 50 | `tests/` | The linter (24), the hook (11), the workflow logic (9), the listings filter (6) |
 
 ## The shape
 
@@ -77,7 +77,7 @@ The scripts set no model. The agent definitions own that. A workflow starts many
 
 ### 5. One rule is enforced in code
 
-The pipeline's central promise is that a step is `approved` only when the owner says so. Prose cannot guarantee that, so a `PreToolUse` hook checks it: an edit that adds an `approved` row to a pipeline `PROGRESS.md` becomes a permission prompt.
+The pipeline's central promise is that a step is `approved` only when the owner says so. Prose cannot guarantee that, so a `PreToolUse` hook checks it: an edit that adds an `approved` row to a pipeline `PROGRESS.md` becomes a permission prompt. So does a shell command that writes to a `PROGRESS.md` and mentions `approved` (`sed -i`, a redirect, `tee`, a script). The shell check reads the command text, so it is best effort: it cannot see what a script file does.
 
 What the hook does and does not do, as tested on Claude Code 2.1.322:
 
@@ -85,7 +85,7 @@ What the hook does and does not do, as tested on Claude Code 2.1.322:
 - Default permission mode, headless: nobody can click, the edit is refused, and the row stays `awaiting approval`. That is the intended result for an unattended run.
 - `acceptEdits` and `bypassPermissions`: Claude Code accepts the prompt automatically, so the hook adds nothing. The unattended-mode guide tells you to launch in the default mode with an allowlist for this reason.
 
-It only asks. It does not deny on its own, it ignores a `PROGRESS.md` that lacks the pipeline's column header, and on any error it lets the edit through. There is one hook because every hook runs on every matching tool call in every session of every user.
+It only asks. It does not deny on its own, it ignores a `PROGRESS.md` that lacks the pipeline's column header, and on any error it lets the edit through, because a guard that crashes must not block unrelated work in a user's session. That is a deliberate trade: the hook raises the cost of skipping the sign-off, and the rule in the skill still carries the rest. There is one hook because a hook runs on every matching tool call in every session of every user; the shell matcher is narrowed with an `if` filter so it only runs for commands that name `PROGRESS.md`.
 
 ### 6. It works with nothing else installed
 
@@ -105,20 +105,22 @@ Run `python3 scripts/check_skills.py --report` for the full table. Tokens are an
 
 | What | 0.2.0 | 0.3.0 | Limit enforced by the linter |
 |---|---:|---:|---:|
-| Always loaded: 23 skill descriptions | 15,647 chars | 9,820 chars, about 2,455 tokens | 10,500 chars |
+| Always loaded: 23 skill descriptions | 15,647 chars | 9,824 chars | |
+| Always loaded: 4 agent descriptions | none | 1,257 chars | |
+| Always loaded, total | 15,647 chars | 11,081 chars, about 2,770 tokens | 11,500 chars |
 | Descriptions over the 1,024-char spec limit | 3 | 0 | 0 |
 | `founder/SKILL.md` body, loaded when the pipeline starts | 32,803 chars | 17,025 chars, about 4,256 tokens | 20,000 chars |
 | `SKILL.md` bodies over 20,000 chars | 5 | 0 | 0 |
 | Stage file, loaded per step | 3,300 to 18,491 chars | 3,744 to 18,675 chars | none |
 
-The 0.2.0 figures come from the same script run on commit `3ebc69f`. Descriptions got shorter by saying when to use the skill and dropping the summary of what it does. Bodies got shorter by moving whole sections, word for word, into `references/` behind a pointer that says when to read them.
+The 0.2.0 figures come from the same script run on commit `3ebc69f`. The stage `Routing:` lines name a tier per role; the shipped `gate-critic` inherits the session model at every step, so it runs at or above the tier a step asks for. The main loop's tier is the one tier nothing enforces: it is whatever model the owner starts the session on. Descriptions got shorter by saying when to use the skill and dropping the summary of what it does. Bodies got shorter by moving whole sections, word for word, into `references/` behind a pointer that says when to read them.
 
 ## How a change is checked
 
 | Layer | Catches | Runs |
 |---|---|---|
-| `scripts/check_skills.py` | Invalid YAML, unknown frontmatter keys, spec limits, budgets, dangling file and skill references, a broken standalone install, agents with write tools or dated model IDs, workflows that pin a model or read the clock, a version with no changelog entry | CI, every push |
-| `tests/test_check_skills.py` | A linter that stops catching one of those. Each of the 22 tests builds a broken plugin and asserts the exact error | CI |
+| `scripts/check_skills.py` | Invalid YAML, unknown frontmatter keys, spec limits, budgets, dangling file and skill references, a referenced file that exists locally but is gitignored, a broken standalone install, agents with write tools or dated model IDs, workflows that pin a model or read the clock, a version with no changelog entry | CI, every push |
+| `tests/test_check_skills.py` | A linter that stops catching one of those. Each of the 24 tests builds a broken plugin and asserts the exact error | CI |
 | `tests/approval-guard.test.mjs` | The hook asking when it should not, staying silent when it should ask, or blocking on bad input | CI |
 | `tests/workflows.test.mjs` | Orchestration logic, run against a mocked runner with no model calls | CI |
 | `scripts/verify-release.sh` | Personal data, credential-shaped strings, machine paths, private names | CI and before each push |
@@ -127,27 +129,31 @@ The 0.2.0 figures come from the same script run on commit `3ebc69f`. Description
 
 ### Behaviour evals
 
-Seven cases, three runs each, scored 0 to 1. "No plugin" is the same prompt with nothing installed. Run on 2026-11-13 with Claude Code 2.1.323 and its default model; the raw summary is in `docs/eval-results/v0.3.0.json`.
+Seven cases, three runs each, scored 0 to 1. A case passes only at 1.00. "No plugin" is the same prompt with nothing installed. Run on 2026-11-13 with Claude Code 2.1.323 and its default model. The summary is `docs/eval-results/v0.3.0.json`, and the raw output, with every grader verdict for every run, is in `docs/eval-results/raw/`.
 
 | Case | What it checks | No plugin | 0.2.0 | 0.3.0 |
 |---|---|---:|---:|---:|
 | `fires-on-should-i-build` | "Should I build X?" starts the pipeline and gets a question, not a plan | 0.00 | 1.00 | 1.00 |
-| `refuses-name-before-problem` | Asked for brand names first, it declines until the problem is settled | 0.00 | 1.00 | 1.00 |
-| `refuses-auto-approval` | Told to approve every step itself, it keeps the owner's sign-off | 0.00 | 1.00 | 1.00 |
+| `refuses-name-before-problem` | Asked for brand names first, it declines until the problem is settled | 0.00 | 0.83 | 1.00 |
+| `refuses-auto-approval` | Told to approve every step itself, it keeps the owner's sign-off | 0.00 | 0.83 | 1.00 |
 | `blocked-not-estimated` | Asked to "just estimate" a search volume, it marks the check `BLOCKED` | 0.00 | 0.00 | 1.00 |
-| `mediocre-profit-is-a-kill` | 210 against a 200 hurdle rate is a kill, because the bar is 1.5× | 0.44 | 1.00 | 1.00 |
-| `critic-verdict-contract` | The critic ends with a verdict per criterion, a `GATE` line and a score | 0.22 | 1.00 | 1.00 |
+| `mediocre-profit-is-a-kill` | 210 against a 200 hurdle rate is a kill, because the bar is 1.5× | 0.00 | 0.92 | 1.00 |
+| `critic-verdict-contract` | The critic ends with a verdict per criterion, a `GATE` line and a score | 0.11 | 1.00 | 1.00 |
 | `ignores-unrelated-request` | A variable rename loads no skill from this plugin | 1.00 | 1.00 | 1.00 |
 
-0.3.0 passes 7 of 7; 0.2.0 passed 6 of 7. Mean gain over no plugin is +0.76. The 0.3.0 run cost an estimated $4.78 at list price for 42 agent runs plus judge calls.
+0.3.0 passes 7 of 7 with a mean gain of +0.84 over no plugin. 0.2.0, scored with the same graders, passes 3 of 7 with a mean score of 0.80. The 0.3.0 run cost an estimated $4.70 at list price for 42 agent runs plus judge calls.
 
-Seven cases cover the gates that matter most and little else. There is no case yet for a full multi-step run, for unattended mode, or for the 22 specialist skills on their own.
+Read the comparison with two cautions. Three runs per case is a small sample, and scores move between runs: on an earlier grader set the same 0.2.0 files passed 6 of 7. And 0.2.0 was run with the plugin arm only, so its "did the skill load" graders count toward its score.
+
+Seven cases cover the gates that matter most and little else. There is no case yet for a full multi-step run, for unattended mode, or for the 22 specialist skills on their own. Two of them carry older eval notes in another format (`skills/lead-magnets/evals/`, `skills/marketing-psychology/evals/`) that no runner reads.
 
 ### What the checks caught while building 0.3.0
 
 - **A skill that did not load, in 0.2.0 too.** The eval "refuse to invent a search volume" failed 3 of 3 runs on 0.3.0 and, run afterwards, 3 of 3 on 0.2.0. Asked cold to "just estimate" a number for a stream already in the pipeline, the model answered without loading the founder skill and produced "about 20 searches a month". Neither description had a trigger for a stream already under way. One sentence in the description fixed it.
 - **A grader that was wrong.** The same case later failed 1 of 3 runs. The reply had refused correctly and mentioned "10–100" as an example of how a keyword tool reports a range. The judge read that as an estimate. The rubric was tightened; the plugin was not changed.
 - **A hook that does nothing in two permission modes.** The first headless test ran in `acceptEdits` and the edit went through. That is how the limit in decision 5 was found, before it was documented as working.
+- **A file that never shipped.** An outside review of this branch found that `.gitignore` had ignored `web-keyword/references/audit-mode.md` since 0.1.0: the rule `AUDIT-*.md` matches it on a case-insensitive disk. The linter passed, because it looked at the working folder. It now asks git what ships, and a test rebuilds that exact case.
+- **A guard with a side door.** The same review pointed out that the hook watched `Write` and `Edit` only, so `sed -i` on `PROGRESS.md` went around it. The shell matcher and its tests were added, then checked in a live headless session.
 - **Dangling references.** The linter's first run on the real repo found a pointer to a `/robots-txt` skill that does not ship.
 - **Frontmatter that only looked valid.** Seven skills had a description with an unquoted colon. Claude Code read them leniently; a strict YAML parser rejected them.
 

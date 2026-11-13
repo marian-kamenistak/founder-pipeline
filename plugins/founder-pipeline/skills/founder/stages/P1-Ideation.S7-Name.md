@@ -2,7 +2,7 @@
 
 **Phase: P1-Ideation** (closes the phase)
 
-**Routing:** judge panel + fan-out (parallel domain/trademark collision agents) · sweeps CHEAP, name judge panel PEAK · gate critic at the step tier
+**Routing:** judge panel + fan-out (parallel domain/trademark collision agents) · sweeps CHEAP, name judge panel PEAK · gate critic on the session model
 
 **Earns its keep when** the offer needs to land in a crowded category, or when the name signals the positioning.
 

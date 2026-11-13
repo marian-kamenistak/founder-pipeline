@@ -2,7 +2,7 @@
 
 **Phase: P2-Viability** (closes the phase)
 
-**Routing:** plain (two kill-passes as parallel subagents, opposing framings) · kill passes PEAK · gate critic PEAK
+**Routing:** judge panel (profit-refutation and focus-refutation, blind to each other; both must pass) · kill passes PEAK · gate critic PEAK
 
 **Earns its keep** always. This stage answers ONE question with evidence: **will this stream generate profit?** It is the difference between streams that ship and streams that die in a planning doc. Nothing downstream (content, web, marketing, client outreach at scale) runs until this stage produces a defensible YES or a provisional-yes with named experiments.
 

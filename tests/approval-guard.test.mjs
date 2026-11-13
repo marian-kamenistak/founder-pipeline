@@ -48,8 +48,30 @@ test('does not treat "awaiting approval" or prose mentioning approved as an appr
 
 test('ignores other files, other tools, and a PROGRESS.md that is not the pipeline format', () => {
   assert.equal(decide(edit('/s/brief.md', 'a', '| approved |'), () => pipelineFile('pending')), null)
-  assert.equal(decide({ tool_name: 'Bash', tool_input: { command: 'echo "| approved |" > PROGRESS.md' } }), null)
+  assert.equal(decide({ tool_name: 'Read', tool_input: { file_path: '/s/PROGRESS.md' } }), null)
   assert.equal(decide(write('/other/PROGRESS.md', '| task | approved |\n'), () => '| task | status |\n'), null)
+})
+
+const bash = command => ({ tool_name: 'Bash', tool_input: { command } })
+
+test('asks when a shell command writes an approved row', () => {
+  for (const cmd of [
+    "sed -i '' 's/awaiting approval/approved/' ideas/x/PROGRESS.md",
+    "sed -i 's/| awaiting approval |/| approved |/' PROGRESS.md",
+    'echo "| P1.S1 | Init | approved | 2026-11-13 | 8/10 | 6/6 | ok |" >> PROGRESS.md',
+    "python3 -c \"import re; open('PROGRESS.md','w').write('approved')\"",
+    "perl -pi -e 's/pending/approved/' PROGRESS.md",
+  ]) assert.ok(asks(decide(bash(cmd))), cmd)
+})
+
+test('stays silent for shell commands that only read, or write something else', () => {
+  for (const cmd of [
+    'grep -c approved PROGRESS.md',
+    'cat PROGRESS.md',
+    "sed -i '' 's/pending/in progress/' PROGRESS.md",
+    'echo approved > notes.md',
+    'git status',
+  ]) assert.equal(decide(bash(cmd)), null, cmd)
 })
 
 test('fails open: malformed stdin exits 0 with no output', () => {

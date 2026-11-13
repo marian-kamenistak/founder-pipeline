@@ -1,6 +1,6 @@
 # Smoke-test track (48h to send, 7-day read) → `smoke.md`
 
-**Routing:** plain · tiers not stated · gate critic at the step tier
+**Routing:** plain · tiers not stated · gate critic on the session model
 
 For "should I even build X?" hunches. The full pipeline costs days of thinking — it must be earned by signal, not enthusiasm. This track produces a go/no-go from 10 real outreaches sent inside 48h and read at 7 days, with 5 questions up front.
 

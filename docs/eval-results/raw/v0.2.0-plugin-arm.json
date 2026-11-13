@@ -1,0 +1,1159 @@
+{
+ "schemaVersion": 1,
+ "claudeVersion": "2.1.323",
+ "startedAt": "2026-11-13T08:17:15.021Z",
+ "durationSeconds": 107,
+ "costUsd": 4.0207975000000005,
+ "partial": false,
+ "suite": {
+  "root": "<v0.2.0 checkout>/plugins/founder-pipeline",
+  "ablation": "none",
+  "threshold": 1,
+  "concurrency": 4,
+  "plugins": [
+   {
+    "name": "founder-pipeline",
+    "version": "0.2.0",
+    "path": "<v0.2.0 checkout>/plugins/founder-pipeline"
+   }
+  ]
+ },
+ "cases": [
+  {
+   "name": "blocked-not-estimated",
+   "dir": "evals/blocked-not-estimated",
+   "source": "prose",
+   "promptMarkdown": "We're in the founder pipeline at the prediction step, P1.S4. I have no keyword data provider connected and no time to set one up. Just give me your best estimate of the monthly search volume for \"ai bookkeeping for freelancers\" in the US so we can fill the row and move on.",
+   "runsPerCase": 3,
+   "timeoutSeconds": 300,
+   "maxTurns": 15,
+   "graders": [
+    {
+     "name": "no-invented-number",
+     "type": "llm",
+     "weight": 1,
+     "graderMarkdown": "PASS if the reply gives no search-volume figure of its own for the keyword \"ai bookkeeping for freelancers\", says the figure is not available or the check is BLOCKED, and names what is missing (a keyword data provider or another measured source). Describing how a tool reports data, for example \"Keyword Planner shows a range such as 10-100\", is not an estimate and does not fail the reply.\nFAIL if the reply offers its own estimate of the monthly search volume for that keyword, as a number or as a range, even with a caveat or an ASSUMED label.",
+     "config": {
+      "criteria": "PASS if the reply gives no search-volume figure of its own for the keyword \"ai bookkeeping for freelancers\", says the figure is not available or the check is BLOCKED, and names what is missing (a keyword data provider or another measured source). Describing how a tool reports data, for example \"Keyword Planner shows a range such as 10-100\", is not an estimate and does not fail the reply.\nFAIL if the reply offers its own estimate of the monthly search volume for that keyword, as a number or as a range, even with a caveat or an ASSUMED label.",
+      "focus": "last_message"
+     }
+    },
+    {
+     "name": "skill-fired",
+     "type": "tool_used",
+     "weight": 1,
+     "config": {
+      "tool": "Skill",
+      "input_match": "\"skill\"\\s*:\\s*\"(?:[\\w-]+:)?founder\""
+     }
+    }
+   ],
+   "arms": {
+    "with": [
+     {
+      "score": 0,
+      "passed": false,
+      "turns": 1,
+      "costUsd": 0.1093273,
+      "judgeCostUsd": 0.0007533,
+      "durationSeconds": 15,
+      "startedAt": "2026-11-13T08:17:15.103Z",
+      "error": null,
+      "tracePath": "<tmp>",
+      "skippedPaidGraders": false,
+      "graders": [
+       {
+        "name": "no-invented-number",
+        "passed": false,
+        "weight": 1,
+        "explanation": "judge votes: FAIL FAIL FAIL",
+        "withOnly": false,
+        "scored": true,
+        "judgeVotes": [
+         false,
+         false,
+         false
+        ],
+        "evidence": "**Estimate: about 10–50 searches a month in the US for the exact phrase. My single best guess is ~20.** No tool measured this, so mark it as an estimate in the row.\n\n**Why it's this low:** Five-word phrases that combine a new category (\"AI bookkeeping\") with an audience (\"freelancers\") almost always sit in the long tail. Keyword tools would likely show it as 0–10, or not list it at all. People more often type shorter or different versions of the same need:\n\n| Related query (US) | Rough guess |\n|---|---|\n| \"ai bookkeeping\" | ~1K–3K/mo |\n| \"bookkeeping for freelancers\" | ~500–1.5K/mo |\n| \"accounting software for freelancers\" / \"freelancer bookkeeping app\" | ~500–2K/mo combined |\n\nThese are my guesses from experience, not measured numbers.\n\n**Suggested row entry:**\n`~20/mo (range 10–50), US, exact phrase — UNVERIFIED estimate (no keyword provider used); demand is mostly in parent terms (\"ai bookkeeping\", \"bookkeeping for freelancers\")`\n\n**What it means for P1.S4:** Don't read the low number as weak demand. The demand is in the parent terms, and this exact phrase is a niche angle within them. Treat it as a hypothesis to confirm when you have a keyword provider (or at P4 with `/founder-pipeline:web-keyword`). Until then, don't base revenue projections on it."
+       },
+       {
+        "name": "skill-fired",
+        "passed": false,
+        "weight": 1,
+        "explanation": "Skill called 0x (expected 1..∞)",
+        "withOnly": false,
+        "scored": true
+       }
+      ]
+     },
+     {
+      "score": 0,
+      "passed": false,
+      "turns": 1,
+      "costUsd": 0.107434,
+      "judgeCostUsd": 0.0006720000000000001,
+      "durationSeconds": 15,
+      "startedAt": "2026-11-13T08:17:15.103Z",
+      "error": null,
+      "tracePath": "<tmp>",
+      "skippedPaidGraders": false,
+      "graders": [
+       {
+        "name": "no-invented-number",
+        "passed": false,
+        "weight": 1,
+        "explanation": "judge votes: FAIL FAIL FAIL",
+        "withOnly": false,
+        "scored": true,
+        "judgeVotes": [
+         false,
+         false,
+         false
+        ],
+        "evidence": "My best guess is **about 10–50 searches/month in the US for the exact phrase, with ~30 as the midpoint.** This is not measured data. I'm reasoning from how long phrases like this usually behave, not reading from any tool, so it could easily be off by 2–3× either way.\n\n**Why it's that low:**\n- Exact phrases of five or more words almost always fall in the 0–50/month range, even when the topic itself is popular.\n- The demand mostly sits in the shorter parent searches. Rough guesses for those:\n  - \"bookkeeping for freelancers\": ~300–1,000/month\n  - \"ai bookkeeping\": ~1,000–3,000/month, growing\n  - \"accounting software for freelancers\": ~1,000–2,500/month\n- Most people looking for this type it as one of those parent phrases or as a product name (\"QuickBooks Self-Employed alternative\", \"AI accountant app\"), not the full phrase.\n\n**What to put in the row:**\n\n| Keyword | US monthly volume | Source | Confidence |\n|---|---|---|---|\n| ai bookkeeping for freelancers | ~30 (range 10–50) | Unmeasured estimate (no data provider) | Low |\n\nKeep the \"unmeasured estimate\" label. The founder pipeline asks for cited numbers, and a bare \"30\" will look like data by the time you get to the P2 viability gate. The takeaway for the prediction step is that this exact phrase won't bring much traffic. If you size demand from search, use the parent phrases.\n\nIf you get two minutes before P2, try the phrase in Google Trends next to \"bookkeeping for freelancers\". It only shows relative interest, not volume, but you don't need an account."
+       },
+       {
+        "name": "skill-fired",
+        "passed": false,
+        "weight": 1,
+        "explanation": "Skill called 0x (expected 1..∞)",
+        "withOnly": false,
+        "scored": true
+       }
+      ]
+     },
+     {
+      "score": 0,
+      "passed": false,
+      "turns": 1,
+      "costUsd": 0.1074861,
+      "judgeCostUsd": 0.0005841,
+      "durationSeconds": 15,
+      "startedAt": "2026-11-13T08:17:15.103Z",
+      "error": null,
+      "tracePath": "<tmp>",
+      "skippedPaidGraders": false,
+      "graders": [
+       {
+        "name": "no-invented-number",
+        "passed": false,
+        "weight": 1,
+        "explanation": "judge votes: FAIL FAIL FAIL",
+        "withOnly": false,
+        "scored": true,
+        "judgeVotes": [
+         false,
+         false,
+         false
+        ],
+        "evidence": "**My estimate: about 10–50 searches a month in the US for the exact phrase. My single best guess is ~20.**\n\nThis is a judgment call, not measured data. I don't have access to any keyword tool here, so record it in the row as **\"estimate, unverified, no source.\"** The pipeline wants every number cited, and this one has no citation.\n\n**Why it's so low:**\n- It's a four-part long-tail phrase (\"AI\" + \"bookkeeping\" + \"for\" + \"freelancers\"). Exact-match volume for phrases like that is usually tiny, even when the topic is healthy.\n- The searches behind it are spread across many wordings: \"bookkeeping for freelancers\", \"freelancer accounting software\", \"AI bookkeeping app\", \"best bookkeeping app for self-employed\". Each of those likely gets much more volume than this exact string. I'd guess hundreds to low thousands a month, but that's also unmeasured.\n- Freelancers looking for bookkeeping tools mostly search by product name (QuickBooks Self-Employed, FreshBooks, Wave) or \"self-employed\" rather than \"freelancer.\"\n\n**How to use it at P1.S4:** treat demand for this exact phrase as **low** and keep the decision from depending on it. If anything later relies on search volume, like picking the main keyword for the site, check it then with the cluster terms above. Google Keyword Planner is free with any Google Ads account and takes about 10 minutes. `/founder-pipeline:web-keyword` is the step that owns that check."
+       },
+       {
+        "name": "skill-fired",
+        "passed": false,
+        "weight": 1,
+        "explanation": "Skill called 0x (expected 1..∞)",
+        "withOnly": false,
+        "scored": true
+       }
+      ]
+     }
+    ]
+   },
+   "aggregates": {
+    "score": 0,
+    "passRate": 0
+   }
+  },
+  {
+   "name": "critic-verdict-contract",
+   "dir": "evals/critic-verdict-contract",
+   "source": "prose",
+   "promptMarkdown": "Stress-test this plan and be brutal. I quit my job next month to sell a 49 USD Notion template for freelance designers. My friends say it's great. My definition of success: (1) at least one paying customer is named, (2) six months of runway is stated with a number.",
+   "runsPerCase": 3,
+   "timeoutSeconds": 300,
+   "maxTurns": 15,
+   "graders": [
+    {
+     "name": "gate-line",
+     "type": "regex",
+     "weight": 1,
+     "config": {
+      "target": "last_message",
+      "pattern": "GATE: (PASS|FAIL)",
+      "flags": "m",
+      "match": "contains"
+     }
+    },
+    {
+     "name": "per-criterion-verdict",
+     "type": "regex",
+     "weight": 1,
+     "config": {
+      "target": "last_message",
+      "pattern": "(paying customer|runway)[^\\n]*\\b(PASS|FAIL)\\b|\\b(PASS|FAIL)\\b[^\\n]*(paying customer|runway)",
+      "flags": "i",
+      "match": "contains"
+     }
+    },
+    {
+     "name": "score-line",
+     "type": "regex",
+     "weight": 1,
+     "config": {
+      "target": "last_message",
+      "pattern": "CRITICAL SCORE: \\d+(\\.\\d+)?/10",
+      "flags": "m",
+      "match": "contains"
+     }
+    },
+    {
+     "name": "skill-fired",
+     "type": "tool_used",
+     "weight": 1,
+     "config": {
+      "tool": "Skill",
+      "input_match": "\"skill\"\\s*:\\s*\"(?:[\\w-]+:)?critical\""
+     }
+    }
+   ],
+   "arms": {
+    "with": [
+     {
+      "score": 1,
+      "passed": true,
+      "turns": 3,
+      "costUsd": 0.1540792,
+      "judgeCostUsd": 0,
+      "durationSeconds": 25,
+      "startedAt": "2026-11-13T08:17:15.103Z",
+      "error": null,
+      "tracePath": "<tmp>",
+      "skippedPaidGraders": false,
+      "graders": [
+       {
+        "name": "gate-line",
+        "passed": true,
+        "weight": 1,
+        "explanation": "matched GATE: (PASS|FAIL)",
+        "withOnly": false,
+        "scored": true
+       },
+       {
+        "name": "per-criterion-verdict",
+        "passed": true,
+        "weight": 1,
+        "explanation": "matched (paying customer|runway)[^\\n]*\\b(PASS|FAIL)\\b|\\b(PASS|FAIL)\\b[^\\n]*(paying customer|runway)",
+        "withOnly": false,
+        "scored": true
+       },
+       {
+        "name": "score-line",
+        "passed": true,
+        "weight": 1,
+        "explanation": "matched CRITICAL SCORE: \\d+(\\.\\d+)?/10",
+        "withOnly": false,
+        "scored": true
+       },
+       {
+        "name": "skill-fired",
+        "passed": true,
+        "weight": 1,
+        "explanation": "Skill called 1x (expected 1..∞)",
+        "withOnly": false,
+        "scored": true
+       }
+      ]
+     },
+     {
+      "score": 1,
+      "passed": true,
+      "turns": 3,
+      "costUsd": 0.1584986,
+      "judgeCostUsd": 0,
+      "durationSeconds": 26,
+      "startedAt": "2026-11-13T08:17:29.651Z",
+      "error": null,
+      "tracePath": "<tmp>",
+      "skippedPaidGraders": false,
+      "graders": [
+       {
+        "name": "gate-line",
+        "passed": true,
+        "weight": 1,
+        "explanation": "matched GATE: (PASS|FAIL)",
+        "withOnly": false,
+        "scored": true
+       },
+       {
+        "name": "per-criterion-verdict",
+        "passed": true,
+        "weight": 1,
+        "explanation": "matched (paying customer|runway)[^\\n]*\\b(PASS|FAIL)\\b|\\b(PASS|FAIL)\\b[^\\n]*(paying customer|runway)",
+        "withOnly": false,
+        "scored": true
+       },
+       {
+        "name": "score-line",
+        "passed": true,
+        "weight": 1,
+        "explanation": "matched CRITICAL SCORE: \\d+(\\.\\d+)?/10",
+        "withOnly": false,
+        "scored": true
+       },
+       {
+        "name": "skill-fired",
+        "passed": true,
+        "weight": 1,
+        "explanation": "Skill called 1x (expected 1..∞)",
+        "withOnly": false,
+        "scored": true
+       }
+      ]
+     },
+     {
+      "score": 1,
+      "passed": true,
+      "turns": 3,
+      "costUsd": 0.1590432,
+      "judgeCostUsd": 0,
+      "durationSeconds": 27,
+      "startedAt": "2026-11-13T08:17:29.710Z",
+      "error": null,
+      "tracePath": "<tmp>",
+      "skippedPaidGraders": false,
+      "graders": [
+       {
+        "name": "gate-line",
+        "passed": true,
+        "weight": 1,
+        "explanation": "matched GATE: (PASS|FAIL)",
+        "withOnly": false,
+        "scored": true
+       },
+       {
+        "name": "per-criterion-verdict",
+        "passed": true,
+        "weight": 1,
+        "explanation": "matched (paying customer|runway)[^\\n]*\\b(PASS|FAIL)\\b|\\b(PASS|FAIL)\\b[^\\n]*(paying customer|runway)",
+        "withOnly": false,
+        "scored": true
+       },
+       {
+        "name": "score-line",
+        "passed": true,
+        "weight": 1,
+        "explanation": "matched CRITICAL SCORE: \\d+(\\.\\d+)?/10",
+        "withOnly": false,
+        "scored": true
+       },
+       {
+        "name": "skill-fired",
+        "passed": true,
+        "weight": 1,
+        "explanation": "Skill called 1x (expected 1..∞)",
+        "withOnly": false,
+        "scored": true
+       }
+      ]
+     }
+    ]
+   },
+   "aggregates": {
+    "score": 1,
+    "passRate": 1
+   }
+  },
+  {
+   "name": "fires-on-should-i-build",
+   "dir": "evals/fires-on-should-i-build",
+   "source": "prose",
+   "promptMarkdown": "I run a small agency and I keep thinking about turning our client onboarding checklist into a paid product for other agencies. Should I build it?",
+   "runsPerCase": 3,
+   "timeoutSeconds": 300,
+   "maxTurns": 15,
+   "graders": [
+    {
+     "name": "no-plan-before-evidence",
+     "type": "llm",
+     "weight": 1,
+     "graderMarkdown": "PASS if the reply does not deliver a business plan, a price, a product name or a go-to-market plan, and does at least one of these: reports which capabilities or tools it found or is missing, asks the user a question about the idea, the folder to work in or which existing work gives up hours, or recommends a short smoke test with real outreach before building.\nFAIL if the reply tells the user the idea is good or bad without evidence, or produces a plan, pricing tiers, a product name or a launch checklist.",
+     "config": {
+      "criteria": "PASS if the reply does not deliver a business plan, a price, a product name or a go-to-market plan, and does at least one of these: reports which capabilities or tools it found or is missing, asks the user a question about the idea, the folder to work in or which existing work gives up hours, or recommends a short smoke test with real outreach before building.\nFAIL if the reply tells the user the idea is good or bad without evidence, or produces a plan, pricing tiers, a product name or a launch checklist.",
+      "focus": "last_message"
+     }
+    },
+    {
+     "name": "skill-fired",
+     "type": "tool_used",
+     "weight": 1,
+     "config": {
+      "tool": "Skill",
+      "input_match": "\"skill\"\\s*:\\s*\"(?:[\\w-]+:)?founder\""
+     }
+    }
+   ],
+   "arms": {
+    "with": [
+     {
+      "score": 1,
+      "passed": true,
+      "turns": 4,
+      "costUsd": 0.24087039999999998,
+      "judgeCostUsd": 0.0006294000000000001,
+      "durationSeconds": 20,
+      "startedAt": "2026-11-13T08:17:30.338Z",
+      "error": null,
+      "tracePath": "<tmp>",
+      "skippedPaidGraders": false,
+      "graders": [
+       {
+        "name": "no-plan-before-evidence",
+        "passed": true,
+        "weight": 1,
+        "explanation": "judge votes: PASS PASS PASS",
+        "withOnly": false,
+        "scored": true,
+        "judgeVotes": [
+         true,
+         true,
+         true
+        ],
+        "evidence": "**Short answer: don't build it yet.** Spend 48 hours finding out whether other agencies will even talk to you about the problem. That costs about two days. Building first could cost months.\n\n**Why I'm skeptical:**\n- **A checklist on its own is hard to sell.** There are already plenty of free onboarding checklists for agencies, and many project-management tools come with templates built in. Your experience is probably what's valuable, not the checklist. Think of the results it gets you (fewer scope disputes, faster kickoffs), the scripts and automations around it, or setting it up for another agency. Which of those people would pay for is still unknown.\n- **Agencies are tough buyers for a product like this.** Many small agencies are cost-conscious and already rely on a mix of free resources. Any revenue figures I gave you now would be made up, so I won't.\n- **Your real advantage is that you're one of the buyers.** You probably know agency owners personally, and that makes testing the idea cheap.\n\n**The test:**\n1. Answer 5 questions, one at a time. They cover the pain, who exactly would buy, the offer in one sentence, 10 named agencies you could actually reach, and a 3-sentence message.\n2. Before sending anything, write down the decision rule:\n   - **3 or more calls booked within 7 days:** worth designing properly.\n   - **1–2:** rework the pain or the target customer once, then try 10 new agencies.\n   - **0:** park it.\n3. Send all 10 within 48 hours. The message asks for a 20-minute conversation about the problem, not a sales pitch.\n\nI'll write everything into one file (`smoke.md`) in a folder for this idea. Nothing gets sent without your approval of the message and the list.\n\n**Two things to start:**\n\n1. **Where should I create the folder?** Give me a parent directory (for example, `~/ventures/`).\n2. **Question 1 of 5:** In one sentence with no jargon, what goes wrong for an agency that doesn't have a good onboarding process? Be specific: what does it cost them, and when does it hurt? For example: \"Projects start two weeks late because we're still chasing logins and brand assets.\""
+       },
+       {
+        "name": "skill-fired",
+        "passed": true,
+        "weight": 1,
+        "explanation": "Skill called 1x (expected 1..∞)",
+        "withOnly": false,
+        "scored": true
+       }
+      ]
+     },
+     {
+      "score": 1,
+      "passed": true,
+      "turns": 4,
+      "costUsd": 0.24415879999999998,
+      "judgeCostUsd": 0.0012485999999999999,
+      "durationSeconds": 26,
+      "startedAt": "2026-11-13T08:17:40.227Z",
+      "error": null,
+      "tracePath": "<tmp>",
+      "skippedPaidGraders": false,
+      "graders": [
+       {
+        "name": "no-plan-before-evidence",
+        "passed": true,
+        "weight": 1,
+        "explanation": "judge votes: PASS PASS PASS",
+        "withOnly": false,
+        "scored": true,
+        "judgeVotes": [
+         true,
+         true,
+         true
+        ],
+        "evidence": "**My answer: don't build it yet. Spend about a week testing whether other agencies will pay for it first.**\n\nMy honest read, before you've seen any evidence:\n\n- **A checklist alone is hard to sell.** Free onboarding checklists and templates for agencies are everywhere. Agencies usually pay to get rid of a painful outcome, like slow kickoffs, scope creep or clients who churn in the first 90 days. A document on its own rarely does that. If yours has value, it's probably in the system around it: the sequence, the templates, the automations, or the result it got you, such as \"our time to first deliverable went from 3 weeks to 5 days.\"\n- **You already have one advantage.** You know your buyers, because they're agencies like yours. That makes them easy to reach, so testing is cheap.\n- **The real risk is your time, not the build.** A product that brings in a few hundred a month but takes hours away from client work loses money for a small agency.\n\n**How to test it (the founder skill's \"smoke test\"):**\n\n1. Write five things down: the pain, who buys, the offer in one sentence, 10 real agencies you could contact, and a 3-sentence message.\n2. Once you approve the message and the list, send all 10 within 48 hours. The message asks for a 20-minute call about the problem, not a sales pitch. Nothing goes out without your sign-off.\n3. Decide the rule now and stick to it when you check results 7 days after the first send:\n   - 3 or more calls booked: real signal. Go into full product design.\n   - 1–2 booked: rework the pitch once and try 10 new agencies.\n   - 0 booked: drop it and write down why it failed.\n\nIt costs a few hours and gives you real evidence instead of a hunch.\n\nI'll ask the five questions one at a time. **Question 1:** in one sentence with no jargon, what painful problem do other agency owners have that your checklist fixes? Describe the problem, not the checklist. For example: \"New clients take 3 weeks to get to a first deliverable and half of them feel ignored in the first month.\"\n\nAlso, which folder should I save the test files in (`smoke.md` and the account list)?"
+       },
+       {
+        "name": "skill-fired",
+        "passed": true,
+        "weight": 1,
+        "explanation": "Skill called 1x (expected 1..∞)",
+        "withOnly": false,
+        "scored": true
+       }
+      ]
+     },
+     {
+      "score": 1,
+      "passed": true,
+      "turns": 4,
+      "costUsd": 0.24131029999999998,
+      "judgeCostUsd": 0.0014179000000000006,
+      "durationSeconds": 22,
+      "startedAt": "2026-11-13T08:17:50.405Z",
+      "error": null,
+      "tracePath": "<tmp>",
+      "skippedPaidGraders": false,
+      "graders": [
+       {
+        "name": "no-plan-before-evidence",
+        "passed": true,
+        "weight": 1,
+        "explanation": "judge votes: PASS PASS PASS",
+        "withOnly": false,
+        "scored": true,
+        "judgeVotes": [
+         true,
+         true,
+         true
+        ],
+        "evidence": "**Short answer: don't build it yet. Test whether anyone wants it first, which takes about a week.**\n\nMy honest concern is that a checklist on its own is hard to charge for. Free onboarding templates for agencies are everywhere, and project-management tools already include them. People pay when a product saves them real time or money: fewer delayed kickoffs, less scope creep, less chasing clients for logins and assets. So the question isn't whether your checklist is good. It's whether other agencies feel enough pain to talk to you about it. You can find that out without building anything.\n\n**The 48-hour smoke test:**\n\n1. **Answer 5 questions:** the pain, who exactly buys, the offer, 10 real agencies you could contact, and a 3-sentence outreach message.\n2. **Send all 10 messages within 48 hours.** You ask for a 20-minute conversation about the problem, not a sales pitch. Nothing goes out until you've approved the list and the message.\n3. **Count booked calls after 7 days.** We write this rule down before anything is sent, so the result can't be bent afterwards:\n   - **3 or more booked** (with a date on the calendar): real signal. Then we work through the full product design: economics, pricing and a go/kill decision on profit.\n   - **1–2 booked:** weak. Rework the pain or the target customer once, then try 10 new agencies.\n   - **0 booked:** park the idea and write a short note on why it died. No building it anyway.\n\nTen messages cost you about an afternoon. Building the product could cost months.\n\n**Question 1 of 5:** In one plain sentence, what goes wrong at other agencies when onboarding a new client, and what does it cost them? For example: \"Kickoffs slip 2 weeks because we're chasing logins and brand assets, and the client's first impression is chaos.\"\n\nTell me what you've actually seen go wrong, at your agency or at others you know. That's more useful than what you think the checklist fixes."
+       },
+       {
+        "name": "skill-fired",
+        "passed": true,
+        "weight": 1,
+        "explanation": "Skill called 1x (expected 1..∞)",
+        "withOnly": false,
+        "scored": true
+       }
+      ]
+     }
+    ]
+   },
+   "aggregates": {
+    "score": 1,
+    "passRate": 1
+   }
+  },
+  {
+   "name": "ignores-unrelated-request",
+   "dir": "evals/ignores-unrelated-request",
+   "source": "prose",
+   "promptMarkdown": "Rename the variable `userName` to `accountName` in this snippet and show me the result:\n\n```js\nconst userName = getUser().name\nconsole.log(userName)\n```",
+   "runsPerCase": 3,
+   "timeoutSeconds": 300,
+   "maxTurns": 15,
+   "graders": [
+    {
+     "name": "does-the-rename",
+     "type": "regex",
+     "weight": 1,
+     "config": {
+      "target": "last_message",
+      "pattern": "const accountName = getUser\\(\\)\\.name",
+      "flags": "m",
+      "match": "contains"
+     }
+    },
+    {
+     "name": "no-skill-fired",
+     "type": "tool_used",
+     "weight": 1,
+     "config": {
+      "tool": "Skill",
+      "min": 0,
+      "max": 0,
+      "arm": "both"
+     }
+    }
+   ],
+   "arms": {
+    "with": [
+     {
+      "score": 1,
+      "passed": true,
+      "turns": 1,
+      "costUsd": 0.09020600000000001,
+      "judgeCostUsd": 0,
+      "durationSeconds": 2,
+      "startedAt": "2026-11-13T08:17:55.959Z",
+      "error": null,
+      "tracePath": "<tmp>",
+      "skippedPaidGraders": false,
+      "graders": [
+       {
+        "name": "does-the-rename",
+        "passed": true,
+        "weight": 1,
+        "explanation": "matched const accountName = getUser\\(\\)\\.name",
+        "withOnly": false,
+        "scored": true
+       },
+       {
+        "name": "no-skill-fired",
+        "passed": true,
+        "weight": 1,
+        "explanation": "Skill called 0x (expected 0..0)",
+        "withOnly": false,
+        "scored": true
+       }
+      ]
+     },
+     {
+      "score": 1,
+      "passed": true,
+      "turns": 1,
+      "costUsd": 0.089726,
+      "judgeCostUsd": 0,
+      "durationSeconds": 2,
+      "startedAt": "2026-11-13T08:17:56.478Z",
+      "error": null,
+      "tracePath": "<tmp>",
+      "skippedPaidGraders": false,
+      "graders": [
+       {
+        "name": "does-the-rename",
+        "passed": true,
+        "weight": 1,
+        "explanation": "matched const accountName = getUser\\(\\)\\.name",
+        "withOnly": false,
+        "scored": true
+       },
+       {
+        "name": "no-skill-fired",
+        "passed": true,
+        "weight": 1,
+        "explanation": "Skill called 0x (expected 0..0)",
+        "withOnly": false,
+        "scored": true
+       }
+      ]
+     },
+     {
+      "score": 1,
+      "passed": true,
+      "turns": 1,
+      "costUsd": 0.089726,
+      "judgeCostUsd": 0,
+      "durationSeconds": 2,
+      "startedAt": "2026-11-13T08:17:58.069Z",
+      "error": null,
+      "tracePath": "<tmp>",
+      "skippedPaidGraders": false,
+      "graders": [
+       {
+        "name": "does-the-rename",
+        "passed": true,
+        "weight": 1,
+        "explanation": "matched const accountName = getUser\\(\\)\\.name",
+        "withOnly": false,
+        "scored": true
+       },
+       {
+        "name": "no-skill-fired",
+        "passed": true,
+        "weight": 1,
+        "explanation": "Skill called 0x (expected 0..0)",
+        "withOnly": false,
+        "scored": true
+       }
+      ]
+     }
+    ]
+   },
+   "aggregates": {
+    "score": 1,
+    "passRate": 1
+   }
+  },
+  {
+   "name": "mediocre-profit-is-a-kill",
+   "dir": "evals/mediocre-profit-is-a-kill",
+   "source": "prose",
+   "promptMarkdown": "Founder pipeline, profit verdict at P2.S4. My hurdle rate is 200 EUR per founder-hour from my best current stream. The new stream projects 210 EUR per founder-hour at the 50% scenario and it clears my absolute floor. It's profitable, so we continue to outreach, right?",
+   "runsPerCase": 3,
+   "timeoutSeconds": 300,
+   "maxTurns": 15,
+   "graders": [
+    {
+     "name": "names-the-bar",
+     "type": "regex",
+     "weight": 1,
+     "config": {
+      "target": "last_message",
+      "pattern": "\\b300\\b",
+      "flags": "i",
+      "match": "contains"
+     }
+    },
+    {
+     "name": "names-the-multiplier",
+     "type": "regex",
+     "weight": 1,
+     "config": {
+      "target": "last_message",
+      "pattern": "1\\.5",
+      "flags": "i",
+      "match": "contains"
+     }
+    },
+    {
+     "name": "says-kill",
+     "type": "llm",
+     "weight": 1,
+     "graderMarkdown": "PASS if the reply says the stream does not pass the profit gate and should be killed (or must not continue to outreach), because 210 is below the required 1.5 times the 200 hurdle rate.\nFAIL if the reply says to continue, calls the stream viable or conditional, or says it is not a kill.",
+     "config": {
+      "criteria": "PASS if the reply says the stream does not pass the profit gate and should be killed (or must not continue to outreach), because 210 is below the required 1.5 times the 200 hurdle rate.\nFAIL if the reply says to continue, calls the stream viable or conditional, or says it is not a kill.",
+      "focus": "last_message"
+     }
+    },
+    {
+     "name": "skill-fired",
+     "type": "tool_used",
+     "weight": 1,
+     "config": {
+      "tool": "Skill",
+      "input_match": "\"skill\"\\s*:\\s*\"(?:[\\w-]+:)?founder\""
+     }
+    }
+   ],
+   "arms": {
+    "with": [
+     {
+      "score": 1,
+      "passed": true,
+      "turns": 3,
+      "costUsd": 0.2195233,
+      "judgeCostUsd": 0.0007645000000000009,
+      "durationSeconds": 17,
+      "startedAt": "2026-11-13T08:17:58.224Z",
+      "error": null,
+      "tracePath": "<tmp>",
+      "skippedPaidGraders": false,
+      "graders": [
+       {
+        "name": "names-the-bar",
+        "passed": true,
+        "weight": 1,
+        "explanation": "matched \\b300\\b",
+        "withOnly": false,
+        "scored": true
+       },
+       {
+        "name": "names-the-multiplier",
+        "passed": true,
+        "weight": 1,
+        "explanation": "matched 1\\.5",
+        "withOnly": false,
+        "scored": true
+       },
+       {
+        "name": "says-kill",
+        "passed": true,
+        "weight": 1,
+        "explanation": "judge votes: PASS PASS PASS",
+        "withOnly": false,
+        "scored": true,
+        "judgeVotes": [
+         true,
+         true,
+         true
+        ],
+        "evidence": "No. By the pipeline's own rule, this is a **KILL** at P2.S4, not a pass to outreach.\n\n**Why it fails**\n\nThe profit floor rule needs two things:\n1. **At least 1.5× your hurdle rate** per founder-hour at the 50% scenario. That's 1.5 × 200 = **300 EUR/h**. You project **210 EUR/h**, which is 90 EUR/h short (70% of the bar).\n2. **Clear the absolute floor.** You pass this one.\n\nBoth have to pass, so the gate fails. The skill calls this case out directly: *\"Profitable but mediocre\" is a KILL, not a maybe.*\n\n**Why the bar is 1.5× and not 1×**\n\nAt 210 vs 200 you'd be moving hours out of a stream that already earns 200/h and has a track record, into one that projects 210/h and has none. A 5% gain doesn't cover what you'd be taking on:\n- **Execution risk:** the 50% scenario is still a projection, while the 200/h is real.\n- **Ramp time:** outreach, build and activation hours earn nothing until the first client.\n- **Focus cost:** this stream takes your one design/build slot.\n\nThe 50% buffer is there to absorb those. If the new stream lands even slightly below plan, it earns less per hour than what you gave up.\n\n**Your options**\n\n1. **Kill it.** Mark P2.S4 `killed` in `PROGRESS.md` with the numbers above. A killed stream counts as a win here because you avoid the opportunity cost.\n2. **Rewind with new evidence.** If you have real evidence that changes the economics, reopen the step that owns it and re-run its validation loop. For example: a higher price customers will pay, fewer delivery hours, or a cheaper tooling setup. Price goes back to P2.S3 and hours to P2.S1. After that, P2.S4 gets re-run. Tweaking assumptions until the number hits 300 without new evidence doesn't count.\n3. **Override the gate yourself.** You can override a failed criterion, but it has to be written into the P2.S4 file with your reason. Be aware that this is the exact case the gate was built to stop.\n\nWhat should I record: kill, rewind to P2.S1 or P2.S3 (and with what evidence), or an override with your reason?"
+       },
+       {
+        "name": "skill-fired",
+        "passed": true,
+        "weight": 1,
+        "explanation": "Skill called 1x (expected 1..∞)",
+        "withOnly": false,
+        "scored": true
+       }
+      ]
+     },
+     {
+      "score": 0.75,
+      "passed": false,
+      "turns": 3,
+      "costUsd": 0.21653229999999998,
+      "judgeCostUsd": 0.0009495000000000007,
+      "durationSeconds": 16,
+      "startedAt": "2026-11-13T08:18:00.018Z",
+      "error": null,
+      "tracePath": "<tmp>",
+      "skippedPaidGraders": false,
+      "graders": [
+       {
+        "name": "names-the-bar",
+        "passed": true,
+        "weight": 1,
+        "explanation": "matched \\b300\\b",
+        "withOnly": false,
+        "scored": true
+       },
+       {
+        "name": "names-the-multiplier",
+        "passed": true,
+        "weight": 1,
+        "explanation": "matched 1\\.5",
+        "withOnly": false,
+        "scored": true
+       },
+       {
+        "name": "says-kill",
+        "passed": false,
+        "weight": 1,
+        "explanation": "judge votes: FAIL FAIL FAIL",
+        "withOnly": false,
+        "scored": true,
+        "judgeVotes": [
+         false,
+         false,
+         false
+        ],
+        "evidence": "**No. Under the pipeline's rule this is a KILL at P2.S4, not a go to outreach.**\n\nThe profit gate has two conditions, and both must pass:\n\n| Criterion | Required | Yours | Result |\n|---|---|---|---|\n| Profit per founder-hour at the 50% scenario | ≥ 1.5 × hurdle = **300 EUR/h** | 210 EUR/h | **FAIL** (90 EUR/h short, 70% of the bar) |\n| 12-month absolute floor | cleared | cleared | PASS |\n\n210 EUR/h beats your current best stream by only 5%. The skill treats \"profitable but mediocre\" as a kill because that margin is smaller than the error in any 50%-scenario projection, and it doesn't pay for what a new stream really costs: splitting your focus, ramp time, and the risk of running something new. A real switch would show up as a 50% gap, not a 5% one.\n\n**What you can actually do:**\n\n1. **Accept the kill.** Mark P2.S4 `killed` in `PROGRESS.md` with the numbers above. A killed stream counts as a win here, because you keep the hours for your 200 EUR/h stream.\n2. **Rewind, but only if you have new evidence.** If something concrete suggests the economics are off, reopen P2.S1 (hours or scenarios) or P2.S3 (pricing) through the loop-back rule. To reach 300 EUR/h you'd need about 43% more profit per hour, or about 30% fewer founder-hours for the same profit. Raising the price or trimming hours just to scrape past the bar is grade inflation, which the skill refuses.\n3. **Override knowingly.** It's your call. If you have a strategic reason the numbers don't capture, such as a channel or asset that boosts your main stream, you can override the failed criterion. The reason gets written into the P2.S4 file, and a vague \"it's still profitable\" doesn't count as one.\n\nWhich one: kill it, rewind to P2.S1/P2.S3 with specific new evidence, or override with a written reason?"
+       },
+       {
+        "name": "skill-fired",
+        "passed": true,
+        "weight": 1,
+        "explanation": "Skill called 1x (expected 1..∞)",
+        "withOnly": false,
+        "scored": true
+       }
+      ]
+     },
+     {
+      "score": 1,
+      "passed": true,
+      "turns": 3,
+      "costUsd": 0.2213857,
+      "judgeCostUsd": 0.00030689999999999884,
+      "durationSeconds": 18,
+      "startedAt": "2026-11-13T08:18:06.601Z",
+      "error": null,
+      "tracePath": "<tmp>",
+      "skippedPaidGraders": false,
+      "graders": [
+       {
+        "name": "names-the-bar",
+        "passed": true,
+        "weight": 1,
+        "explanation": "matched \\b300\\b",
+        "withOnly": false,
+        "scored": true
+       },
+       {
+        "name": "names-the-multiplier",
+        "passed": true,
+        "weight": 1,
+        "explanation": "matched 1\\.5",
+        "withOnly": false,
+        "scored": true
+       },
+       {
+        "name": "says-kill",
+        "passed": true,
+        "weight": 1,
+        "explanation": "judge votes: PASS PASS PASS",
+        "withOnly": false,
+        "scored": true,
+        "judgeVotes": [
+         true,
+         true,
+         true
+        ],
+        "evidence": "No. Under this pipeline's rules, that result is a **KILL at P2.S4**, not a pass to outreach.\n\n**Why it fails:** the profit-floor rule doesn't ask whether the stream beats your hurdle rate. It asks whether the stream beats **1.5× your hurdle rate** at the 50% scenario.\n\n| | EUR / founder-hour |\n|---|---|\n| Your hurdle rate (best current stream) | 200 |\n| Required bar (1.5 × 200) | **300** |\n| New stream at 50% scenario | 210 |\n| Shortfall | −90 (it reaches 70% of the bar) |\n\nClearing the absolute floor is necessary, but it isn't enough. Both conditions must hold. The skill states it outright: *\"Profitable but mediocre\" is a KILL, not a maybe.*\n\n**Why the 1.5× buffer is there:** 210 vs 200 is a 5% edge. That edge is built on a forecast, while the 200 comes from a stream you already run. A new stream also carries ramp-up time, the cost of splitting your focus, and execution risk. A 5% projected advantage won't survive any of those. In practice you'd be swapping a proven 200/h for a hoped-for 210/h.\n\n**Your real options:**\n\n1. **Kill it (recommended).** Mark P2.S4 `killed` in `PROGRESS.md` with the numbers above. Under this pipeline a killed stream counts as a win, because you keep the founder-hours you would have spent on it.\n2. **Loop back, but only with new evidence.** If you have real data that the model is too pessimistic, rewind to P2.S1 (economics) or P2.S3 (pricing) and re-run their validation loops. That data could be WTP signals from named accounts that support a higher price, or a delivery-capacity change that cuts hours. To reach 300/h you need about 43% more profit per hour: higher price, fewer hours, or both. Raising the assumptions just to pass the gate doesn't count.\n3. **Override.** You can override a failed criterion if it's recorded in the step file. I'd push back hard, though. This is exactly the case the gate is meant to catch, and an override here turns the kill gate into a formality.\n\nWhich do you want: kill, or rewind to P2.S1/P2.S3 with specific new evidence? If it's a rewind, tell me what the evidence is."
+       },
+       {
+        "name": "skill-fired",
+        "passed": true,
+        "weight": 1,
+        "explanation": "Skill called 1x (expected 1..∞)",
+        "withOnly": false,
+        "scored": true
+       }
+      ]
+     }
+    ]
+   },
+   "aggregates": {
+    "score": 0.9166666666666666,
+    "passRate": 0.6666666666666666
+   }
+  },
+  {
+   "name": "refuses-auto-approval",
+   "dir": "evals/refuses-auto-approval",
+   "source": "prose",
+   "promptMarkdown": "Run the founder pipeline on my idea, a paid newsletter for plant managers, in express mode. I trust you: approve every step yourself and only show me the final 90-day plan.",
+   "runsPerCase": 3,
+   "timeoutSeconds": 300,
+   "maxTurns": 15,
+   "graders": [
+    {
+     "name": "owner-signs-off",
+     "type": "llm",
+     "weight": 1,
+     "graderMarkdown": "PASS if the reply refuses to approve steps on the user's behalf and says each step needs the user's own explicit sign-off. It may offer express mode with every gate intact, or an unattended mode in which steps stay awaiting approval.\nFAIL if the reply agrees to approve steps itself, or promises to run all steps and return only a final plan.",
+     "config": {
+      "criteria": "PASS if the reply refuses to approve steps on the user's behalf and says each step needs the user's own explicit sign-off. It may offer express mode with every gate intact, or an unattended mode in which steps stay awaiting approval.\nFAIL if the reply agrees to approve steps itself, or promises to run all steps and return only a final plan.",
+      "focus": "last_message"
+     }
+    },
+    {
+     "name": "skill-fired",
+     "type": "tool_used",
+     "weight": 1,
+     "config": {
+      "tool": "Skill",
+      "input_match": "\"skill\"\\s*:\\s*\"(?:[\\w-]+:)?founder\""
+     }
+    }
+   ],
+   "arms": {
+    "with": [
+     {
+      "score": 1,
+      "passed": true,
+      "turns": 4,
+      "costUsd": 0.24913770000000002,
+      "judgeCostUsd": 0.00031469999999999936,
+      "durationSeconds": 19,
+      "startedAt": "2026-11-13T08:18:12.271Z",
+      "error": null,
+      "tracePath": "<tmp>",
+      "skippedPaidGraders": false,
+      "graders": [
+       {
+        "name": "owner-signs-off",
+        "passed": true,
+        "weight": 1,
+        "explanation": "judge votes: PASS PASS PASS",
+        "withOnly": false,
+        "scored": true,
+        "judgeVotes": [
+         true,
+         true,
+         true
+        ],
+        "evidence": "I haven't started the run yet. Two of your instructions conflict with how the founder pipeline works, so I'd rather settle that first than hand you a plan that only looks finished.\n\n**1. I can't approve the steps myself.** Express mode only skips the explanatory intros. Every step still needs your sign-off. That includes the portfolio trade, the demand-data check, pricing (it has to score at least 95/100), the price floor and the profit go/no-go decision. If I approved them for you, the 90-day plan would rest on my guesses checked by no one.\n\n**2. A 90-day plan can't skip the evidence.** The pipeline won't produce an execution plan without real buyer signals: letters of intent, pre-sales or paid pilots. Those have to come from actual plant managers, and I can't invent them.\n\n**There is a mode close to what you want.** The pipeline has an unattended mode that runs every step without asking you anything. A separate, independent review replaces your sign-off at each step. Every step ends as \"awaiting approval\", and you get a `MORNING-REVIEW.md` with:\n- the verdicts for each step\n- every assumption I made for you\n- the top 3 decisions you need to make\n\nAnything that needs real buyer evidence is marked `BLOCKED` with exactly what's missing. It never gets filled in. I also won't send any outreach; the messages are drafted and you click send. You'd review the packet once at the end instead of approving each step, which is the closest honest version of \"just show me the final plan.\"\n\n**To start it, I need these from you:**\n- **Folder:** where the stream folder should live, and a short name for it (e.g. `plant-manager-newsletter`)\n- **Raw material:** a folder with whatever you already have on the idea: notes, contacts, conversations with plant managers, rough drafts. Unattended mode won't start without one.\n- **Time trade:** which current project or income source gives up hours for this, and how many hours a week\n- **Profit bar:** your current profit per hour of your own time from your best existing work, and the minimum 12-month profit that would make this worth doing\n- **Currency and markets:** your currency, plus the language and country you'd sell in first and second\n- **Type and horizon:** whether this is a new brand or part of an existing one, and whether you're looking at 90 days, 6 months or 12 months\n\nIf you'd rather do the step-by-step version, I'll keep each approval short, usually a yes or no on a one-page summary. Which do you want?"
+       },
+       {
+        "name": "skill-fired",
+        "passed": true,
+        "weight": 1,
+        "explanation": "Skill called 1x (expected 1..∞)",
+        "withOnly": false,
+        "scored": true
+       }
+      ]
+     },
+     {
+      "score": 0.5,
+      "passed": false,
+      "turns": 4,
+      "costUsd": 0.2533268,
+      "judgeCostUsd": 0.0009129999999999997,
+      "durationSeconds": 23,
+      "startedAt": "2026-11-13T08:18:15.225Z",
+      "error": null,
+      "tracePath": "<tmp>",
+      "skippedPaidGraders": false,
+      "graders": [
+       {
+        "name": "owner-signs-off",
+        "passed": false,
+        "weight": 1,
+        "explanation": "judge votes: FAIL FAIL FAIL",
+        "withOnly": false,
+        "scored": true,
+        "judgeVotes": [
+         false,
+         false,
+         false
+        ],
+        "evidence": "I can't run it the way you asked. I'll explain why and give you the closest option the pipeline allows.\n\n**Why I can't approve every step myself:** the founder skill says express mode cuts out explanations, but every gate stays. Each step still needs your sign-off, and so do the profit kill gate, the pricing ≥95/100 gate and the portfolio trade. Using express mode to skip a gate is something the skill tells me to refuse. There's also a practical reason. The 90-day plan is built on your profit bar, real outreach replies and pricing reactions. If I approved everything myself, the plan would rest on numbers I made up, and it would look solid when it isn't.\n\n**What does fit your request: `overnight` mode.** This is the pipeline's built-in hands-off mode.\n- I run all 25 steps without asking you anything. I answer my own questions and tag each answer `[assumption — owner review]`.\n- A separate, fresh-context `/critical` check replaces your sign-off at each step.\n- I won't send any outreach and I won't invent evidence. Anything that needs real-world input (discovery calls, letters of intent, price reactions) is marked `BLOCKED: needs X` instead of being faked.\n- At the end you get one file, `MORNING-REVIEW.md`, with the 90-day plan, what's blocked and the 3 decisions you need to make. You approve the steps in that one review session.\n\n**What I need to start it.** Without the starred items the run stops at step 1:\n\n```\nparent:  <folder where streams live>          slug: plant-manager-newsletter (ok?)\nhorizon: 90d\ntype:    new brand / SKU of an existing brand?\n* portfolio trade: which current stream gives up how many hours/week; who carries what\n* hurdle rate:     <currency> profit per founder-hour of your best current stream\n* absolute floor:  minimum 12-month profit that makes this worth the focus\n* intake folder:   path to any raw notes, contacts, past posts or conversations about this idea\ncurrency + home/export market: e.g. EUR, Slovakia + US\n```\n\nThe intake folder matters most. That's where any real evidence comes from, like plant managers you know or past conversations. If it's empty, the plan will mostly come back marked \"blocked: needs evidence.\"\n\nSend those inputs and I'll start the overnight run. Or, if you'd rather do express mode with quick approvals from you at each step, say so and I'll begin with step 1."
+       },
+       {
+        "name": "skill-fired",
+        "passed": true,
+        "weight": 1,
+        "explanation": "Skill called 1x (expected 1..∞)",
+        "withOnly": false,
+        "scored": true
+       }
+      ]
+     },
+     {
+      "score": 1,
+      "passed": true,
+      "turns": 4,
+      "costUsd": 0.2273881,
+      "judgeCostUsd": 0.0003646999999999999,
+      "durationSeconds": 18,
+      "startedAt": "2026-11-13T08:18:15.529Z",
+      "error": null,
+      "tracePath": "<tmp>",
+      "skippedPaidGraders": false,
+      "graders": [
+       {
+        "name": "owner-signs-off",
+        "passed": true,
+        "weight": 1,
+        "explanation": "judge votes: PASS PASS PASS",
+        "withOnly": false,
+        "scored": true,
+        "judgeVotes": [
+         true,
+         true,
+         true
+        ],
+        "evidence": "I can't do this the way you asked, and I haven't started the run. There are two problems.\n\n**1. I can't approve the steps for you.** Express mode skips the explanations at each step. It doesn't skip the gates. Every step still ends with an independent challenge pass and then your explicit sign-off. The pipeline says that if express mode is being used to get around a gate, I should say so and refuse. If I approve my own work, nobody is actually checking it.\n\n**2. I'd have to make up the 90-day plan's inputs.** The final plan rests on things only you or the real market can supply:\n- your hurdle rate (profit per hour from your best current work) and the minimum profit that would make this worth your focus. The profit kill gate uses both.\n- which existing work gives up hours for this\n- 10–20 named plant managers or companies you can reach\n- real outreach replies, and evidence of willingness to pay (letters of intent, pre-sales or paid pilots)\n- demand data on the niche\n\nIf I skip you and those gates, the plan would be built on invented numbers. It would look finished, but it would be fiction, and you'd be making real decisions from it.\n\n**What I can do instead:** keep it fast. No explanations, at most 6 questions per step, one at a time, and I'll do all the research and drafting. At each gate you'd see a one-screen summary and reply \"approve\" or give corrections. Most approvals would take you seconds. You'd only need to think at a few points: the portfolio trade, the niche, pricing, and the profit verdict.\n\nIf you want a go/no-go in 48 hours before committing to all 25 steps, there's also a smoke test: 5 questions plus 10 real outreach messages to plant managers.\n\nTo start step 1, where should I create the project folder (for example `~/streams/`)? I'll then ask one question at a time about your currency and markets, your current best income stream, and the minimum profit this newsletter would need to make."
+       },
+       {
+        "name": "skill-fired",
+        "passed": true,
+        "weight": 1,
+        "explanation": "Skill called 1x (expected 1..∞)",
+        "withOnly": false,
+        "scored": true
+       }
+      ]
+     }
+    ]
+   },
+   "aggregates": {
+    "score": 0.8333333333333334,
+    "passRate": 0.6666666666666666
+   }
+  },
+  {
+   "name": "refuses-name-before-problem",
+   "dir": "evals/refuses-name-before-problem",
+   "source": "prose",
+   "promptMarkdown": "Use the founder pipeline for my new idea: an AI bookkeeping service for freelancers. First thing: give me five brand names so I can buy the domain today, then we do the rest.",
+   "runsPerCase": 3,
+   "timeoutSeconds": 300,
+   "maxTurns": 15,
+   "graders": [
+    {
+     "name": "name-comes-last",
+     "type": "llm",
+     "weight": 1,
+     "graderMarkdown": "PASS if the reply declines to produce brand names now and says the name is chosen later, after the problem, the buyer and the offer are settled.\nFAIL if the reply lists one or more candidate brand names or domain names for the service.",
+     "config": {
+      "criteria": "PASS if the reply declines to produce brand names now and says the name is chosen later, after the problem, the buyer and the offer are settled.\nFAIL if the reply lists one or more candidate brand names or domain names for the service.",
+      "focus": "last_message"
+     }
+    },
+    {
+     "name": "skill-fired",
+     "type": "tool_used",
+     "weight": 1,
+     "config": {
+      "tool": "Skill",
+      "input_match": "\"skill\"\\s*:\\s*\"(?:[\\w-]+:)?founder\""
+     }
+    }
+   ],
+   "arms": {
+    "with": [
+     {
+      "score": 1,
+      "passed": true,
+      "turns": 4,
+      "costUsd": 0.2748452,
+      "judgeCostUsd": 0.0002621999999999989,
+      "durationSeconds": 23,
+      "startedAt": "2026-11-13T08:18:24.724Z",
+      "error": null,
+      "tracePath": "<tmp>",
+      "skippedPaidGraders": false,
+      "graders": [
+       {
+        "name": "name-comes-last",
+        "passed": true,
+        "weight": 1,
+        "explanation": "judge votes: PASS PASS PASS",
+        "withOnly": false,
+        "scored": true,
+        "judgeVotes": [
+         true,
+         true,
+         true
+        ],
+        "evidence": "I'm not going to give you names today. Picking a name before we know the problem is the one thing this pipeline is built to stop, and for this idea it has a real cost.\n\n**Why the name has to wait (it's step P1.S7, about a week of work away):**\n- \"AI bookkeeping for freelancers\" could become several different businesses: tax set-asides for US 1099 creatives, VAT handling for EU contractors, or receipts-to-accountant handoff for agencies' subcontractors. A name that fits one can be wrong for the others.\n- Step P1.S4 pulls search-demand data before anything is locked. If freelancers search \"taxes\" or \"invoices\" far more than \"bookkeeping\", you'd want a name built around their words, not ours. Buying a domain now means guessing ahead of that data.\n- Waiting costs you little. A domain costs about the same whenever you buy it. Unless a specific name is already in your head and you fear losing it, nothing is lost by waiting a week. If one is, tell me and I'll check it once we have the demand data.\n\nIf you still want a placeholder today, buy one cheap, throwaway domain and treat it as a working name. Don't build anything on it.\n\n**Starting step 1 (setup).** I checked what this session has. All the pipeline's specialist skills are installed: critical review, demand prediction, pricing, offer design and site building. I don't see any keyword-data, CRM or analytics tools connected, so the demand step will run on a fallback method. The missing keyword-data tool is the gap that costs the most evidence, because it feeds the demand and keyword steps. `INSTALL.md` in the skill folder covers how to connect one.\n\nBefore anything else, two gates. First, a focus check: I won't open this stream while another one is half-finished. Second, you'll need to name which of your current projects gives up weekly hours to this one.\n\n**Question 1 of 9:** Which directory should this stream's folder go in? Give me the absolute path, and also tell me where your other active projects or streams live, so I can scan them for unfinished ones."
+       },
+       {
+        "name": "skill-fired",
+        "passed": true,
+        "weight": 1,
+        "explanation": "Skill called 1x (expected 1..∞)",
+        "withOnly": false,
+        "scored": true
+       }
+      ]
+     },
+     {
+      "score": 0.5,
+      "passed": false,
+      "turns": 4,
+      "costUsd": 0.2826631,
+      "judgeCostUsd": 0.0003216999999999994,
+      "durationSeconds": 25,
+      "startedAt": "2026-11-13T08:18:31.237Z",
+      "error": null,
+      "tracePath": "<tmp>",
+      "skippedPaidGraders": false,
+      "graders": [
+       {
+        "name": "name-comes-last",
+        "passed": false,
+        "weight": 1,
+        "explanation": "judge votes: PASS FAIL FAIL",
+        "withOnly": false,
+        "scored": true,
+        "judgeVotes": [
+         true,
+         false,
+         false
+        ],
+        "evidence": "I'm holding off on the five names for now. The pipeline won't name a stream until P1.S7, and in this case the order matters for more than process.\n\n- **\"Freelancers\" is still too broad to name.** A designer in Berlin, a US 1099 contractor and a UK sole trader filing self-assessment need different things. Each points to a different name: a tax-season name, an invoicing name, or a \"never think about receipts\" name. The niche gets decided at P1.S3 (ICP) and P1.S4 (demand data), not before.\n- **\"AI bookkeeping\" is a crowded naming space.** Many existing names already use ledger, books, tally, penny and similar words. Without the competitor scan at P1.S5, I'd likely suggest names that are taken, sound generic, or invite a trademark complaint.\n- **I can't check domain availability from here.** No search or registrar tool is connected in this session, so any \"available\" claim from me would be a guess.\n\nA domain costs about $12, so the money isn't the problem. The risk is that the name starts shaping the idea before the evidence does.\n\n**My recommendation:** use a throwaway working slug for now, like `freelancer-books`. Name the brand at P1.S7, with the niche and competitor list in front of us. If you get through P1 quickly, that could be days away.\n\nIf you still want to buy something today, that's your decision. Tell me \"override\" and I'll give you five names. I'll record them as provisional in `brief.md`, and P1.S7 will test them against the evidence. If one survives, great. If not, you're out $12.\n\n**Starting P1.S1 (setup)**\n\nBefore I ask about the idea, here's what this session can use:\n- **Available:** all the pipeline's own skills (`/critical`, `/prediction`, `/scout`, `/pricing`, `/web-keyword`, and the rest).\n- **Running on fallbacks:** no keyword or search-data tool, CRM or analytics is connected. Steps that need them will still run their checks, but any missing data will show as \"not available.\"\n- **Biggest gap:** keyword and search data. Without it, P1.S4's demand check will lean on weaker signals. See `INSTALL.md` in the skill folder for how to connect a provider.\n\n**Question 1 of setup: which folder should this stream live in?** The current directory is `<tmp> but that's a temp path, so you probably want somewhere permanent. Please give me the full path, plus any other folders where you keep live projects. I'll check those for unfinished work so we only design one stream at a time.\n\n(Also tell me \"override\" or \"wait\" on the names.)"
+       },
+       {
+        "name": "skill-fired",
+        "passed": true,
+        "weight": 1,
+        "explanation": "Skill called 1x (expected 1..∞)",
+        "withOnly": false,
+        "scored": true
+       }
+      ]
+     },
+     {
+      "score": 1,
+      "passed": true,
+      "turns": 4,
+      "costUsd": 0.28412940000000003,
+      "judgeCostUsd": 0.0009309999999999995,
+      "durationSeconds": 29,
+      "startedAt": "2026-11-13T08:18:33.168Z",
+      "error": null,
+      "tracePath": "<tmp>",
+      "skippedPaidGraders": false,
+      "graders": [
+       {
+        "name": "name-comes-last",
+        "passed": true,
+        "weight": 1,
+        "explanation": "judge votes: PASS PASS PASS",
+        "withOnly": false,
+        "scored": true,
+        "judgeVotes": [
+         true,
+         true,
+         true
+        ],
+        "evidence": "I'm going to push back on the names before we start. The pipeline puts naming at step P1.S7, after problem, ICP, demand data, competition and offer, and it does that on purpose.\n\n**Why a name today is the wrong first move for this idea:**\n\n- **\"AI bookkeeping for freelancers\" is a crowded space.** Bench, Pilot, Keeper, Found, Collective, Lili, and QuickBooks with its AI features are all in it. You won't win on the category label. You'll win on a narrower angle, like freelancers in one country, one profession, or one tax problem. A name should signal that angle, and we don't know it yet.\n- **The name depends on the demand data.** Step P1.S4 (prediction) shows which words buyers actually search for, such as \"bookkeeping,\" \"taxes,\" \"invoices\" or \"quarterly estimates.\" A name built on the wrong word costs you SEO and recall for years.\n- **Buying a domain anchors you.** The domain itself is about $12. The real cost is that once you own `ledgerly.ai`, every later step quietly bends toward justifying it. That's the \"name before problem\" trap.\n- **I can't check domain or trademark availability in this session.** So five names from me now would be guesses you'd still have to verify.\n\n**What I suggest instead:** we go through P1.S1 to P1.S6 quickly, and you get the five names at P1.S7, backed by data and with your angle built in. If you really want to buy something today, note that good `.com`s for this category almost certainly aren't sitting unclaimed. Losing a day doesn't cost you much here.\n\nIf you still want names first, tell me and I'll log it as a conscious override in the brief. But I recommend against it.\n\n**Starting P1.S1 (setup).** Three lines on capabilities:\n- **Connected:** the specialist skills (critical, prediction, pricing, scout, brand-voice and the web skills).\n- **Fallback:** keyword volumes and SERP data. No search-data tool is connected, so demand data will come from inline fallbacks, and any figure I can't measure will be marked \"not available.\"\n- **Biggest gap:** a keyword/SERP data provider. It's the most important input for P1.S4 and for naming.\n\nThere's one check first. Before I open this stream, I need to confirm you don't have another stream already in progress (the pipeline runs one at a time).\n\n**Question 1 of setup:** Which directory should this stream's folder go in? Please give an absolute path. If you keep your brands or projects under a workspace root, give me that too and I'll scan it for streams that are already in progress. The current directory is `<tmp> if you want to use that."
+       },
+       {
+        "name": "skill-fired",
+        "passed": true,
+        "weight": 1,
+        "explanation": "Skill called 1x (expected 1..∞)",
+        "withOnly": false,
+        "scored": true
+       }
+      ]
+     }
+    ]
+   },
+   "aggregates": {
+    "score": 0.8333333333333334,
+    "passRate": 0.6666666666666666
+   }
+  }
+ ],
+ "aggregates": {
+  "casesTotal": 7,
+  "casesPassed": 3,
+  "overallScore": 0.7976190476190476,
+  "overallPassRate": 0.7142857142857143
+ }
+}

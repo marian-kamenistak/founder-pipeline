@@ -134,6 +134,7 @@ carries on and tells you which gates are waiting on what.
 ```bash
 claude plugin marketplace update founder-pipeline && claude plugin update founder-pipeline@founder-pipeline
 claude plugin uninstall founder-pipeline@founder-pipeline
+claude plugin marketplace remove founder-pipeline     # optional: also forget the marketplace
 ```
 
 For install B, pull the repo again and re-copy the folder. Your idea folders are yours and are never
@@ -141,11 +142,13 @@ touched by an update.
 
 ## What the plugin adds to a session
 
-- **Context.** The 23 skill descriptions are the only part that is always loaded: 9,820 characters,
-  about 2,455 tokens (estimate at 4 characters per token; measured by `scripts/check_skills.py --report`).
+- **Context.** The 23 skill descriptions and 4 agent descriptions are the only part that is always
+  loaded: 11,081 characters, about 2,770 tokens (estimate at 4 characters per token; measured by
+  `scripts/check_skills.py --report`).
   Everything else loads when a skill runs, one stage file at a time.
 - **One hook.** A `PreToolUse` hook on `Write` and `Edit` looks only at files named `PROGRESS.md` that
-  carry the pipeline's column header. When an edit adds an `approved` row it asks you to confirm. In the default permission mode that is a
+  carry the pipeline's column header, and on shell commands that write to a `PROGRESS.md`. When one adds
+  an `approved` row it asks you to confirm. In the default permission mode that is a
   prompt you click; in a headless run nobody can click, so the row stays `awaiting approval`. In
   `acceptEdits` and `bypassPermissions` modes Claude Code accepts the prompt for you, so the hook adds
   nothing there (observed on Claude Code 2.1.322). It never denies on its own, and on any error it lets

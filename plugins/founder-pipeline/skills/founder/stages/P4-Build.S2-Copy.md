@@ -2,7 +2,7 @@
 
 **Phase: P4-Build**
 
-**Routing:** plain (never fan out copywriting) · format spec MID, psychology pass HIGH, hero/tagline/opener and translation PEAK · gate critic at the step tier
+**Routing:** plain (never fan out copywriting) · format spec MID, psychology pass HIGH, hero/tagline/opener and translation PEAK · gate critic on the session model
 
 **Earns its keep** always — but format is a derived decision, not a creative one.
 

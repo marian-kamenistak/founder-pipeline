@@ -9,7 +9,11 @@ export const meta = {
 // Each critic reads the file itself in a fresh context. The script never passes one critic's
 // answer to another, so no framing can anchor the rest.
 
-const input = args || {}
+// Run from a slash command the arguments arrive as text, so accept a JSON string too.
+let input = args || {}
+if (typeof input === 'string') {
+  try { input = JSON.parse(input) } catch { throw new Error('judge-panel needs args { artifactPath, criteria: [..], framings?: [..] } as JSON') }
+}
 const criteria = input.criteria || []
 const framings = input.framings && input.framings.length ? input.framings : ['unframed']
 

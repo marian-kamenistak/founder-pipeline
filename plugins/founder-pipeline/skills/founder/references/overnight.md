@@ -46,5 +46,6 @@ prior evidence: <files or version-control history to inherit>
 **Launch mechanics:**
 - Start in a normal session with the kickoff template above.
 - **Pre-grant the permissions the run needs** through your agent's allowlist or project settings before starting: a single interactive permission prompt stalls the entire run until someone answers it. Grant the specific tools the pipeline uses; do not disable the permission system wholesale.
+- **Launch in the default permission mode, with an allowlist.** The plugin's approval hook can only hold a row at `awaiting approval` when a prompt cannot be answered. In `acceptEdits` or `bypassPermissions` mode the prompt is accepted automatically and the rule rests on this file alone.
 - **Keep the machine awake** for the duration — an unattended run dies with the session when the host sleeps.
 - **The run is resumable.** If it dies mid-pipeline, re-invoking resumes from the `PROGRESS.md` row marked `in progress` or `awaiting approval`.

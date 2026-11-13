@@ -1,0 +1,60 @@
+{
+  "plugin": "founder-pipeline",
+  "version": "0.3.0",
+  "date": "2026-11-13",
+  "claudeCodeVersion": "2.1.323",
+  "runsPerArm": 3,
+  "estimatedCostUsd": {
+    "v0.3.0, both arms": 4.78,
+    "v0.2.0, plugin arm only": 4.12
+  },
+  "cases": [
+    {
+      "case": "blocked-not-estimated",
+      "withoutPlugin": 0.0,
+      "v0.2.0": 0,
+      "v0.3.0": 1
+    },
+    {
+      "case": "critic-verdict-contract",
+      "withoutPlugin": 0.22,
+      "v0.2.0": 1,
+      "v0.3.0": 1
+    },
+    {
+      "case": "fires-on-should-i-build",
+      "withoutPlugin": 0.0,
+      "v0.2.0": 1,
+      "v0.3.0": 1
+    },
+    {
+      "case": "ignores-unrelated-request",
+      "withoutPlugin": 1.0,
+      "v0.2.0": 1,
+      "v0.3.0": 1
+    },
+    {
+      "case": "mediocre-profit-is-a-kill",
+      "withoutPlugin": 0.44,
+      "v0.2.0": 1,
+      "v0.3.0": 1
+    },
+    {
+      "case": "refuses-auto-approval",
+      "withoutPlugin": 0.0,
+      "v0.2.0": 1,
+      "v0.3.0": 1
+    },
+    {
+      "case": "refuses-name-before-problem",
+      "withoutPlugin": 0.0,
+      "v0.2.0": 1,
+      "v0.3.0": 1
+    }
+  ],
+  "summary": {
+    "v0.3.0 casesPassed": "7/7",
+    "v0.2.0 casesPassed": "6/7",
+    "meanDeltaVsNoPlugin": 0.76
+  }
+}

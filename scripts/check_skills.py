@@ -14,7 +14,7 @@ breaks an install, so this does:
   release       plugin.json version has a CHANGELOG entry; the marketplace entry does not
                 repeat the version
 
-Usage:  python3 scripts/check_skills.py [--report] [repo-root]
+Usage:  python3 scripts/check_skills.py [--report] [--plugin <name>] [repo-root]
 Exit 0 = clean, 1 = at least one error.
 """
 from __future__ import annotations
@@ -236,5 +236,11 @@ def run(root: pathlib.Path, report: bool = False) -> int:
 
 if __name__ == "__main__":
     argv = [a for a in sys.argv[1:] if a != "--report"]
+    if "--plugin" in argv:  # lint another plugin with the same layout: --plugin <name> [repo-root]
+        i = argv.index("--plugin")
+        PLUGIN = argv[i + 1]
+        SLASH_REF_RE = re.compile(rf"/{PLUGIN}:([a-z0-9-]+)")
+        AGENT_REF_RE = re.compile(rf"(?<![/\w]){PLUGIN}:([a-z0-9-]+)")
+        del argv[i:i + 2]
     repo = pathlib.Path(argv[0]).resolve() if argv else pathlib.Path(__file__).resolve().parent.parent
     sys.exit(run(repo, report="--report" in sys.argv))

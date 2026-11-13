@@ -98,6 +98,13 @@ test('gather-verify and judge-panel refuse to run without their arguments', asyn
   await assert.rejects(run('judge-panel', { artifactPath: 'x.md', criteria: [] }, () => null), /needs args/)
 })
 
+test('arguments may arrive as a JSON string, as they do from a slash command', async () => {
+  const { result } = await run('judge-panel', JSON.stringify({ artifactPath: 'x.md', criteria: ['a'] }),
+    () => ({ verdicts: [{ criterion: 'a', pass: true, evidence: 'l1' }], blocking: [], gate: 'PASS', score: 8 }))
+  assert.equal(result.gate, 'PASS')
+  await assert.rejects(run('gather-verify', 'enrich these accounts please', () => null), /as JSON/)
+})
+
 const verdicts = (n, pass = true) => Array.from({ length: n }, (_, i) => ({ criterion: `c${i + 1}`, pass, evidence: 'line 3' }))
 
 test('judge-panel: one blind critic per framing, and the gate passes only if every framing passes', async () => {

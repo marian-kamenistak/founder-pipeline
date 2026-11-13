@@ -34,7 +34,7 @@ The pipeline and its gates are the same. This release makes the plugin checkable
 - `user_invocable` in `health` and `scout` was a misspelling that Claude Code ignores silently. It is `user-invocable`.
 - `argument-hint` parsed as a list in 9 skills, and one `metadata` value parsed as a date.
 - The founder-only install was broken in 7 files that pointed at `${CLAUDE_PLUGIN_ROOT}`, which is empty outside a plugin install.
-- A cold request to "just estimate" a search volume for a stream already in the pipeline did not load the founder skill, and the model answered with a number. The eval caught it (0 of 3 runs passed); one sentence in the skill description fixed it (3 of 3).
+- A cold request to "just estimate" a search volume for a stream already in the pipeline did not load the founder skill, and the model answered with a number. 0.2.0 had the same gap. The eval caught it (0 of 3 runs passed on both versions); one sentence in the skill description fixed it (3 of 3).
 - `web-site-creator/references/seo.md` pointed at a `/robots-txt` skill that does not ship.
 - `blog-launch` hard-coded `model: 'sonnet'` for its research agents. It names a tier now.
 - The cost doc said a $50 deposit buys 200 to 260 runs and also that a run a day for a year would not use it up.

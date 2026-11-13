@@ -14,7 +14,11 @@ export const meta = {
 // Model tiers are not set here. They come from the agent definitions in agents/:
 // the scout runs on the small model, the skeptic and the critic inherit the session model.
 
-const input = args || {}
+// Run from a slash command the arguments arrive as text, so accept a JSON string too.
+let input = args || {}
+if (typeof input === 'string') {
+  try { input = JSON.parse(input) } catch { throw new Error('gather-verify needs args { question, fields: [..], items: [..] } as JSON') }
+}
 const items = (input.items || []).map((it, i) =>
   typeof it === 'string' ? { id: it, context: '' } : { id: it.id || `item-${i + 1}`, context: it.context || '' })
 const fields = input.fields || []

@@ -145,7 +145,10 @@ touched by an update.
   about 2,455 tokens (estimate at 4 characters per token; measured by `scripts/check_skills.py --report`).
   Everything else loads when a skill runs, one stage file at a time.
 - **One hook.** A `PreToolUse` hook on `Write` and `Edit` looks only at files named `PROGRESS.md` that
-  carry the pipeline's column header. When an edit adds an `approved` row it asks you to confirm. It never
-  blocks, and on any error it lets the edit through. Source: `hooks/approval-guard.mjs`. It needs Node.js
+  carry the pipeline's column header. When an edit adds an `approved` row it asks you to confirm. In the default permission mode that is a
+  prompt you click; in a headless run nobody can click, so the row stays `awaiting approval`. In
+  `acceptEdits` and `bypassPermissions` modes Claude Code accepts the prompt for you, so the hook adds
+  nothing there (observed on Claude Code 2.1.322). It never denies on its own, and on any error it lets
+  the edit through. Source: `hooks/approval-guard.mjs`. It needs Node.js
   on the `PATH`; without Node it does nothing and the rule rests on the skill's own instruction.
 - **Nothing else runs in the background.** No MCP server, no monitor, no telemetry.

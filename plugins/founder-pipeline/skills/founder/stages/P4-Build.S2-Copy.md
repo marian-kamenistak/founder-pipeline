@@ -2,6 +2,8 @@
 
 **Phase: P4-Build**
 
+**Routing:** plain (never fan out copywriting) · format spec MID, psychology pass HIGH, hero/tagline/opener and translation PEAK · gate critic on the session model
+
 **Earns its keep** always — but format is a derived decision, not a creative one.
 
 **Build rule — there is no pre-sale gate on this step.** Content and web build in every run, including overnight, without waiting for pre-sale evidence. What the removed gate leaves behind, and what still binds: the sell-first RUN ORDER (P3.S1 outreach opened before this step), and honesty about evidence tier — copy claims stay tagged to their evidence level; no fabricated proof (case studies, testimonials, client names) may ever enter the copy to fill the gap that pre-sale evidence would have filled. Record at the top of `P4-Build.S2-Copy.md`: `BUILD RULE: no pre-sale gate — build proceeds; proof elements limited to what actually exists.`

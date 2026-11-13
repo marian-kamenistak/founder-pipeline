@@ -4,7 +4,7 @@
 **Step:** P5.S2-Links (P5-Activation)
 **Last updated:** [date]
 
-> Executes TWO separate motions: the first link-building cycle via `/web-backlinks` (earned placements — adopting P1.S5's `_backlink-gap.md` + the surfaces in `${CLAUDE_PLUGIN_ROOT}/skills/founder/references/web-post-launch.md`), AND register-once identity presence via `/web-listings` (directories, registries, review sites, entity items). **Both, always.** The dividing test: needs an ask → `/web-backlinks`; self-serve form → `/web-listings`. Graduated link items live in the `/web-backlinks` playbook; listings state lives in `queues/` by default, or on your task board if you keep one (a `Listing` row type). Never merge the two counts — listings are citation surfaces, never referring domains.
+> Executes TWO separate motions: the first link-building cycle via `/web-backlinks` (earned placements — adopting P1.S5's `_backlink-gap.md` + the surfaces in `references/web-post-launch.md`), AND register-once identity presence via `/web-listings` (directories, registries, review sites, entity items). **Both, always.** The dividing test: needs an ask → `/web-backlinks`; self-serve form → `/web-listings`. Graduated link items live in the `/web-backlinks` playbook; listings state lives in `queues/` by default, or on your task board if you keep one (a `Listing` row type). Never merge the two counts — listings are citation surfaces, never referring domains.
 
 ---
 

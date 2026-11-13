@@ -1,12 +1,12 @@
 ---
-name: "ai-seo"
-description: "Optimize one page or one content set to get cited by AI search engines — ChatGPT, Perplexity, Google AI Overviews, Claude, Gemini, Copilot. Use when you want your content to appear in AI-generated answers, not just ranked in blue links. Triggers: 'optimize for AI search', 'get cited by ChatGPT', 'AI Overviews', 'Perplexity citations', 'AI SEO', 'generative search', 'LLM visibility', 'GEO' (generative engine optimization). NOT for traditional SEO ranking (use founder-pipeline:seo-audit). NOT for the ongoing measurement of whether you are actually cited — that is a standing cadence this plugin does not ship. NOT for writing the content itself (use founder-pipeline:blog-launch or founder-pipeline:web-site-creator). NOT for llms.txt (use founder-pipeline:ai-seo-llms-builder)."
+name: ai-seo
+description: "Use when a page or content set should get cited by AI search engines (ChatGPT, Perplexity, Google AI Overviews, Claude, Gemini, Copilot): \"optimize for AI search\", \"get cited by ChatGPT\", \"AI Overviews\", \"AI SEO\", \"GEO\", \"LLM visibility\". NOT for classic ranking (`/founder-pipeline:seo-audit`), writing the content (`/founder-pipeline:blog-launch`, `/founder-pipeline:web-site-creator`) or llms.txt (`/founder-pipeline:ai-seo-llms-builder`). Ongoing citation measurement is not shipped."
 license: MIT
 metadata:
-  version: 2.0.0
-  author: Alireza Rezvani (v1.0)
-  category: marketing
-  updated: 2026-08-22
+  version: "2.0.0"
+  author: "Alireza Rezvani (v1.0)"
+  category: "marketing"
+  updated: "2026-08-22"
 ---
 
 # AI SEO
@@ -111,60 +111,11 @@ AI systems need to be able to find and index your content. This is the technical
 
 ### Step 1 — Bot Access Check
 
-First: confirm AI crawlers can access your site. This plugin does not ship a robots.txt policy
-skill, so the working bot taxonomy is inlined here. Sort every user-agent into one of four tiers
-and decide the tier, not the individual bot:
-
-| Tier | What it is | Default |
-|---|---|---|
-| 1 — classic search | `Googlebot`, `Bingbot`, `Seznambot` and your market's equivalents | Always allow. Blocking one of these is never the right answer |
-| 2 — **AI retrieval** | `OAI-SearchBot`, `ChatGPT-User`, `Claude-SearchBot`, `Claude-User`, `PerplexityBot`, `Perplexity-User`, `Google-Extended`, `Applebot-Extended`, `DuckAssistBot`, `MistralAI-User`, `Meta-ExternalFetcher` | Always allow. **These are the crawlers that produce citations** |
-| 3 — AI training | `GPTBot`, `ClaudeBot`, `anthropic-ai`, `CCBot`, `Bytespider` | Allow by default; blocking is a deliberate business trade, not a fix |
-| 4 — scrapers and SEO tools | commercial crawlers with no user-facing surface | Operator's call. Nothing in this skill depends on them |
-
-**The fact that trips up most audits: training bots ≠ search bots.** Blocking `GPTBot` (training) does **nothing** to `OAI-SearchBot` (retrieval — the crawler that actually produces ChatGPT citations). They're different crawlers with different jobs, not "often the same crawl." Same split on Anthropic: `ClaudeBot` (training) vs `Claude-SearchBot` / `Claude-User` (retrieval). Field data: 79% of publishers block a training bot, and 71% *also* block a retrieval bot by mistake [Zhao & Berman, Rutgers/Wharton].
-
-**Check robots.txt** at `yourdomain.com/robots.txt`. If any Tier 2 agent is blocked, flag it immediately — that's an immediate visibility killer for that platform.
-
-Don't flag Tier 3 as a fix unless the operator has deliberately decided to trade training exposure for a traffic cost (Zhao & Berman: blocking AI crawlers costs ~−7% weekly human-only traffic within 6 weeks, without reliably preventing citation).
-
-**A robots.txt read is not enough on its own.** It misses edge-level blocks — WAF rules, bot-fight
-modes, CDN challenges — that return 403 to a crawler the file explicitly allows. Verify delivery by
-fetching the URL *as* each Tier 2 user-agent and asserting a 200 with real content in the body.
-`seo_checker.py`'s `crawler_fetch` check does exactly this for GPTBot and Googlebot:
-`python3 "${CLAUDE_PLUGIN_ROOT}/skills/seo-audit/scripts/seo_checker.py" --url <url> --json`.
+Read `references/bot-access-check.md` when running Mode 1 Step 1: it holds the four-tier crawler taxonomy, the training-vs-retrieval rule, the robots.txt check and the delivery check with `seo_checker.py`. Flag any blocked Tier 2 (AI retrieval) agent immediately.
 
 ### Step 2 — Current Citation Audit
 
-**Automated first, if you have a rank-data provider connected.** The worked example below is
-DataForSEO's MCP server (`dfs-mcp`), an **optional dependency you install separately**; any
-provider exposing equivalent LLM-mention endpoints substitutes, and the tool names change with it.
-Without one, skip straight to the manual spot-check table underneath.
-
-| Question | Tool |
-|---|---|
-| Where is my brand/domain mentioned in LLM answers? | `ai_opt_llm_ment_search` (query: brand or domain) |
-| Which domains win AI answers in my niche? | `ai_opt_llm_ment_top_domains` (topic query) |
-| Which specific pages get cited? | `ai_opt_llm_ment_top_pages` |
-| What does ChatGPT actually answer for my target query, with sources? | `ai_optimization_llm_response` / `ai_optimization_chat_gpt_scraper` |
-| How often are my target phrasings asked to LLMs? | `ai_optimization_keyword_data_search_volume` |
-
-Tag results `[source: <provider> <tool>, <date>]`. Then spot-verify manually:
-
-| Platform | How to test |
-|---|---|
-| Perplexity | Search your target query at perplexity.ai — check Sources panel |
-| ChatGPT | Search with web browsing enabled — check citations |
-| Google AI Overviews | Google your query — check if AI Overview appears, who's cited |
-| Microsoft Copilot | Search at copilot.microsoft.com — check source cards |
-
-For each query, document:
-- Are you cited? (yes/no)
-- Which competitors are cited?
-- What content type gets cited? (definition? list? stats?)
-- How is the answer structured?
-
-This tells you the pattern that's currently winning. Build toward it.
+Read `references/citation-audit.md` when running Mode 1 Step 2: it holds the DataForSEO tool table (optional dependency) and the manual per-platform spot-check table.
 
 ### Step 3 — Content Structure Audit
 
@@ -209,79 +160,9 @@ side — the canonical answer-capsule rule, the snippet-type → format map, PAA
 honest ceiling on what AEO will and will not do. **AEO is not AI citation**: its surface is Google's
 classic SERP, measured in GSC. Keep the two apart in any report.
 
-**Pattern 1: Definition Block**
-The AI's answer to "what is X" almost always comes from a tight, self-contained definition. Format:
+**Patterns 1-6 and Rewriting for Extractability** — read `references/extractable-content-patterns.md` when optimizing or rewriting a page in Mode 2 (definition block, numbered steps, comparison table, FAQ block, statistics, expert quote, and the five rewrite rules).
 
-> **[Term]** is [concise definition in 1-2 sentences]. [One sentence of context or why it matters].
-
-Placed within the first 300 words of the page. No hedging, no preamble. Just the definition.
-
-**Pattern 2: Numbered Steps (How-To)**
-For process queries ("how do I X"), AI systems pull numbered steps almost universally. Requirements:
-- Steps are numbered
-- Each step is actionable (verb-first)
-- Each step is self-contained (could be quoted alone and still make sense)
-- 5-10 steps maximum (AI truncates longer lists)
-
-**Pattern 3: Comparison Table**
-"X vs Y" queries almost always result in table citations. Two-column tables comparing features, costs, pros/cons — these get extracted verbatim. Format matters: clean markdown table with headers wins.
-
-**Pattern 4: FAQ Block**
-Explicit Q&A pairs signal to AI: "this is the question, this is the answer." Ship a **visible,
-server-rendered accordion** — the answers must be in the DOM without JavaScript — then mirror it
-1:1 into `FAQPage` JSON-LD. Order matters: the accordion is what gets read, the markup is policy
-(see the standing decision in the schema section below). Questions should exactly match how people
-phrase queries. Answer length is governed by the canonical capsule rule in
-[references/aeo-patterns.md](references/aeo-patterns.md) §2 — 40–60 words, first sentence
-self-contained at ≤25.
-
-**Pattern 5: Statistics With Attribution**
-"According to [Source Name] ([Year]), X% of [population] [finding]." This format is extractable because it has a complete citation. Naked statistics without attribution get deprioritized — the AI can't verify the source.
-
-**Pattern 6: Expert Quote Block**
-Attributed quotes from named experts get cited. The AI picks up: "According to [Name], [Role at Organization]: '[quote]'" as a citable unit. Build in a few of these per key piece.
-
-### Rewriting for Extractability
-
-When optimizing existing content:
-
-1. **Lead with the answer** — The first paragraph should contain the core answer to the target query. Don't save it for the conclusion.
-
-2. **Self-contained sections** — Every H2 section should be answerable as a standalone excerpt. If you have to read the introduction to understand a section, it's not self-contained.
-
-3. **Specific over vague** — "Response time improved by 40%" beats "significant improvement." AI systems prefer citable specifics.
-
-4. **Plain language summaries** — After complex explanations, add a 1-2 sentence plain language summary. This is what AI often lifts.
-
-5. **Named sources** — Replace "experts say" with "[Researcher Name], [Year]." Replace "studies show" with "[Organization] found in their [Year] survey."
-
-### Schema Markup for AI Discoverability
-
-**Schema is close to worthless for AI citation. Ship it for Google rich results, not for AI.**
-Google states officially there is "no special schema.org structured data that you need to add"
-for AI surfaces. An Otterly controlled test (4 URLs, 319 prompts, 3 months) found **6 of 7
-platforms could not fetch or interpret schema at all**, and a fact placed ONLY in FAQPage schema
-was retrieved by **zero** platforms. Shepard's 54-study meta-analysis scores schema 5.6/10.
-Corollary: never let a fact live only in markup. If it matters, put it in visible body text.
-
-Priority schemas, for RICH RESULTS and entity resolution only:
-
-| Schema Type | Use When | Impact |
-|---|---|---|
-| `Article` | Any editorial content | Establishes content as authoritative information |
-| `FAQPage` | Any page with a visible Q&A accordion | **Ships by standing decision (2026-08-22), not by evidence.** The rich result ended 7 May 2026 and Ahrefs' causal DiD experiment (1,885 pages with JSON-LD added vs. ~4,000 matched controls) found no significant lift on AI Overviews/AI Mode/ChatGPT, and −4.6% specifically on AI Overviews. Implement it; forecast nothing from it. The accordion is what does the work |
-| `HowTo` | Step content with visible numbered steps | **Ships by standing decision (2026-08-22), not by evidence.** Rich result removed in 2023; same DiD null result. Mirror the visible steps; expect no lift |
-| `Speakable` | Pages with a clean lead answer | **Ships by standing decision (2026-08-22).** `SpeakableSpecification` selector pointing at the answer capsule |
-| `Product` | Product pages | Medium — appears in product comparison queries |
-| `Organization` | Company pages | Medium — establishes entity authority |
-| `Person` | Author pages | Medium — entity/author hygiene, not a proven ranking lever |
-
-The standing decision is carried in one place —
-`${CLAUDE_PLUGIN_ROOT}/skills/web-site-creator/references/metadata.md` §8.4 — with the AEO-side rationale in
-[references/aeo-patterns.md](references/aeo-patterns.md) §8. Do not re-argue it per page.
-
-**The rule that survives the decision:** markup mirrors visible content, never replaces it.
-Implement via JSON-LD in the page `<head>`. Validate at schema.org/validator.
+**Schema markup for AI discoverability** — read `references/schema-for-ai.md` when you specify, add or review schema (`Article`, `FAQPage`, `HowTo`, `Speakable`, `Product`, `Organization`, `Person`) or when someone argues schema will lift AI citations; it carries the evidence, priority table and standing decision.
 
 ---
 
@@ -306,17 +187,7 @@ What stays here is the two things that are genuinely this skill's job.
 
 ### One-time free-tier setup
 
-Before anyone buys a prompt-panel SaaS, stand these up. Free, and about 80% of the value:
-
-- **Bing Webmaster Tools → AI Performance** (free, public preview Feb 2026). The only view anywhere
-  of Copilot's internal *grounding queries*.
-- **Your CDN's AI-crawler log** (free on most CDNs; Cloudflare ships this as AI Crawl Control).
-  Tracks `ChatGPT-User` / `Perplexity-User` / `Claude-User` hits — each one is roughly a real human
-  whose question pulled your URL.
-- **Google Search Console → Generative AI tab.** Impressions only, and no backfill before
-  ~18 May 2026, so start it now rather than when you want the data.
-
-Then hand the ongoing run to the standing cadence described above.
+Read `references/free-tier-setup.md` when setting up Mode 3 monitoring for the first time, before anyone buys a prompt-panel SaaS: the three free views and the handoff to the standing cadence.
 
 ### When Your Citations Drop
 
@@ -365,18 +236,7 @@ confirmations. Future entries get dated individually, on the day the finding was
 
 ### Entries
 
-<!-- - YYYY-MM-DD · <page type> · <territory/vertical> — <pattern observed>. Action: <what to do about it>. [🟢/🟡/🔴] -->
-
-- 2026-08-08 · any page · all — **AI crawlers execute ZERO JavaScript.** Vercel/MERJ, 500M+ GPTBot fetches: GPTBot requested JS in 11.5% of fetches and never ran it; only Googlebot and AppleBot render. Any client-fetched content is invisible to AI search. Found live on a real B2B site whose `/mentor` page shipped three widgets rendering the literal string "Loading…". Action: every widget server-renders its real summary; JS only REPLACES it on success. Audit any dashboard/chart/live-counter block this way. [🟢]
-- 2026-08-08 · any page · all — **llms.txt is a cargo cult.** Ahrefs, 137,210 domains: 97% of llms.txt files get ZERO requests; retrieval bots are 1.1% of what traffic they do get; and AI bots never request the file on sites that don't have one. SE Ranking, 300k domains: no significant correlation, and removing llms.txt from the model IMPROVED accuracy. Mueller: "comparable to the keywords meta tag." Kill shot: `cats.txt`, a fake spec listing fictional office cats, passed all four "proofs" used to justify llms.txt. Action: keep the file (costs nothing, genuinely useful for coding agents reading docs), stop investing in it, and never sell it as a citation lever. [🟢]
-- 2026-08-08 · any page · all — **Schema ≈ 0 for AI citation.** Google: no special structured data needed. Otterly controlled test: 6 of 7 platforms couldn't fetch/interpret schema; a fact only in FAQ schema was retrieved by zero platforms. Action: ship schema for rich results; never let a fact exist only in markup. [🟢]
-- 2026-08-08 · any page · all — **82–89% of AI citations are earned media; ~4% are owned domains.** Muck Rack (25M+ links, 3 replications), corroborated by 5W (85.5%), AirOps (~85%), Cited Index (4.1% owned); dissent Meltwater 39.5%. Action: on-site work is a FLOOR you must clear, not the lever. Budget accordingly and say so out loud when scoping AI-SEO work. [🟡]
-- 2026-08-08 · article · all — **Syndication is the strongest owned-side lever measured.** Stacker/Scrunch, 944 prompt-platform combos with a real control: identical article went 7.6% → 34% cited (+325%) when republished to third-party publishers; Mar 2026 replication +239%. Caveat: Stacker sells syndication. Action: pilot 3 posts before believing it. [🟡]
-- 2026-08-08 · any page · **smaller non-English markets** (worked example: Czech and Slovak) — **Language dominates citation variance.** arXiv 2607.13304, 12,933 responses, 20 Central-European brands, 8 languages incl. Czech and Slovak: **query language explains 26.5% of variance, brand identity only 0.7–1.5%.** A language block buys ~15× the variance reduction of a repeat block. And **per-engine mention data simply does not exist for the smaller markets** — for Czech and Slovak, Google AI Overviews is the only measurable surface, ChatGPT mention data is absent. Action: in any non-English home market, check first which engines are even measurable there, test prompts per-language, and never average an English result into a local-language conclusion. [🟢]
-- 2026-08-08 · any page · all — **Headings that mirror literal query wording.** AirOps, 548,534 retrieved pages: ≥50% title-word/query overlap → 20.1% citation rate vs 9.3% below 10%. Only 15% of retrieved pages are ever cited. Action: name the query in the H2. [🟡]
-- 2026-08-08 · any page · all — **Crawl ≠ citation; never use bot hits as a KPI.** Otterly: ChatGPT crawled a test site 5,332 times and cited it zero times; Perplexity crawled ~100 times and cited 1,129. [🟢]
-- 2026-08-08 · measurement · all — **Free tier is 80% of the value.** Bing Webmaster → AI Performance (free, public preview Feb 2026) uniquely exposes Copilot's internal *grounding queries*. Cloudflare AI Crawl Control (free) tracks ChatGPT-User/Perplexity-User/Claude-User hits, each ≈ a real human whose question pulled your URL. GSC's Generative AI tab is impressions-only, no backfill before ~18 May 2026. Action: set these up before buying any prompt-panel SaaS. [🟢]
-- 2026-08-08 · any page · all — **Being cited without ranking is now normal.** Overlap with Google top-10: Perplexity 28.6%, Copilot 8.6%, Gemini 8.2%, ChatGPT 6–8%; Moz: 88% of AI-Mode citations don't rank top-10. Cross-engine citation overlap ~17% — **there is no single "AI SERP"**, so per-engine routing is required. Ceiling: ChatGPT invokes search on only 34.5% of queries (Datos, 1B+ lines); for the rest only training-corpus presence matters. [🟢]
+Read `references/learnings-entries.md` before running Mode 1 or Mode 2 (the dated seed entries) and when adding a new entry, to match the shape of the existing ones.
 
 ---
 

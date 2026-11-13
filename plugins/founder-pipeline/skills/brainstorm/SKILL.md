@@ -1,8 +1,8 @@
 ---
 name: brainstorm
-description: Structured brainstorming before creative work. Use when the user needs to think through a workshop design, proposal, strategy, business idea, or any non-trivial decision. Asks focused questions one by one, then suggests options.
+description: "Use when the user needs to think something through before creative or strategic work: a workshop design, proposal, strategy, business idea, name, angle, or any non-trivial decision. Asks focused questions one at a time, then proposes distinct options with a recommendation."
 allowed-tools: Read, Glob, Grep
-argument-hint: [topic or problem to brainstorm]
+argument-hint: "[topic or problem to brainstorm]"
 ---
 
 # Brainstorm

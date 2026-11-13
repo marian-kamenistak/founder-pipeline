@@ -2,9 +2,13 @@
 
 **Phase: P1-Ideation**
 
+**Routing:** fan-out (by segment, channel, competitor's customers; agents blind to each other) · gather CHEAP, verify PEAK · gate critic on the session model
+
 **Earns its keep when** segmentation is non-obvious (CTO vs VP Eng vs Eng Director have different jobs), or geography matters (CEE willingness-to-pay ≠ US).
 
 **Becomes performative when** there is one clear buyer ("Series A-C SaaS CTO in EU, 50–300 engineers"). Lock it fast.
+
+**Grill pass first** (`references/grilling.md`): map this step's decisions and what depends on what, look up every fact in the intake, `brief.md` and approved step files instead of asking, then ask only the open decisions, each with a recommended answer. Play the answers back and get a yes before drafting.
 
 **Ask one at a time:**
 1. Primary ICP firmographic — stage, size, vertical, geography. Force specificity.

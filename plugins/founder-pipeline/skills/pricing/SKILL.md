@@ -1,8 +1,8 @@
 ---
 name: pricing
-description: Design pricing for a product, offer, package, or service using Jobs-To-Be-Done (JTBD) + Value-Based Pricing. Runs as a sequence of steps with a 10-criterion scorecard. Won't declare the offer ready to ship until it scores ≥95/100. Use for community products (partnership tiers, membership products, workshops, curated directories), service offers, and any new product packaging.
+description: "Use when pricing a product, offer, package or service: community products (partnership tiers, memberships, workshops, directories), service offers, new product packaging. Runs Jobs-To-Be-Done plus value-based pricing as a sequence of steps with a 10-criterion scorecard, and does not call the offer ready until it scores at least 95/100."
 allowed-tools: Read, Glob, Grep, Write
-argument-hint: [product or offer to price]
+argument-hint: "[product or offer to price]"
 ---
 
 # Pricing

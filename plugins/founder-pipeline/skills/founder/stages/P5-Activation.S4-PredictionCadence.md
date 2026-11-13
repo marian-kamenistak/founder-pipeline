@@ -2,6 +2,8 @@
 
 **Phase: P5-Activation** (closes the phase)
 
+**Routing:** plain (may draft ∥ with P5.S3) · tiers not stated · gate critic on the session model
+
 **Earns its keep** for every stream with an ongoing content/service motion — the P1.S4 hypothesis run made the founding bets; this step makes sure they get GRADED and refreshed on a schedule, not by vibes. **Skip only if** the stream is a one-off engagement or has no content/SEO motion (record the skip in `brief.md`).
 
 ## Steps

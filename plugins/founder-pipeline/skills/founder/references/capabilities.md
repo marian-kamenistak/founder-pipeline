@@ -29,6 +29,22 @@ order, once per run, and record the result in the stream's `CAPABILITIES.md`:
 
 Never stop a run because a skill is missing. Never silently skip the work a skill would have done.
 
+## Agents, workflows and the approval hook (full plugin only)
+
+The full plugin ships the pipeline's roles as real components. The founder-only install has none of them and runs the same roles from the cards below; the gates are identical.
+
+| Component | What it is | Founder-only fallback |
+|---|---|---|
+| `founder-pipeline:gate-critic` | Read-only critic on the session model, fresh context, fixed verdict block | A generic subagent given the **Critic card** below |
+| `founder-pipeline:evidence-scout` | Read-only research worker pinned to the small model, one question, fixed fields | A generic subagent on your smallest model, given the scaffolding in `references/engine-routing.md` |
+| `founder-pipeline:claim-refuter` | Skeptic on the session model, one claim, answers REFUTED when unsure | A generic subagent told to refute one claim and to default to refuted |
+| `founder-pipeline:completeness-critic` | Asks only "what is missing" before a sweep is called done | A generic subagent given the question, the coverage and the findings |
+| `/founder-pipeline:gather-verify` | Workflow: scout per item, skeptic per claim, completeness critic. Background, resumable | The same three roles dispatched by hand, in that order |
+| `/founder-pipeline:judge-panel` | Workflow: one blind gate critic per framing; one FAIL fails the gate | Parallel critic subagents, one per framing, never in one response |
+| Approval hook | Turns any edit that adds an `approved` row to `PROGRESS.md` into a permission prompt | The rule in `SKILL.md`: only the owner's explicit sign-off flips a row |
+
+A workflow starts many agents at once. Offer it, say roughly how many agents it will run, and start it only on the owner's yes. Record in the step's Validation loop block which path ran: agent, workflow or fallback.
+
 ## Capability preflight (runs once, at P1.S1, before any questions)
 
 1. List the skills available in this session. For each name in the **Skills** table below, record
@@ -72,7 +88,8 @@ Never stop a run because a skill is missing. Never silently skip the work a skil
 
 ### Critic card (fallback for `/critical`)
 
-Run as a **fresh subagent** that has not seen the drafting conversation (PEAK tier for kill passes and final
+With the full plugin, this card is the `founder-pipeline:gate-critic` agent; dispatch that. Otherwise run it as a
+**fresh subagent** that has not seen the drafting conversation (PEAK tier for kill passes and final
 verifies, HIGH for money gates, otherwise the step's tier). Give it the step file, the stage file's
 def-of-success list pasted in, and, if the step names one, the framing to adopt (e.g. "refute the profit
 case"). It must:

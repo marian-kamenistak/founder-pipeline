@@ -215,7 +215,7 @@ for m in re.findall(r"(?s)<script[^>]*application/ld\+json[^>]*>(.*?)</script>",
 - [ ] `robots.txt` matches the `/robots-txt` skill's canonical template (§8.5) — 4-tier UA list, no ad-hoc allowlist.
 - [ ] `robots.txt` carries a `Sitemap:` line for **every** sitemap the site emits (index + any standalone feeds), not just one.
 - [ ] **Split-domain check:** if the app is a subpath on a foreign root (Wix/Webflow), the app's `/subpath/robots.txt` is invisible to crawlers — the app's `Sitemap:` line MUST be added to the **root** domain's `robots.txt`, and the root must not `Disallow` the subpath (§8.5).
-- [ ] **Crawler-delivery matrix passes** (`/robots-txt` → `references/verify.md`) — the file allowing a bot means nothing if the edge 403/429s the actual fetch; this is the check, not the file read, that catches it.
+- [ ] **Crawler-delivery matrix passes** (request each key page with every AI crawler's user-agent and confirm a 200; the crawler tiers are in the bundled `ai-seo` skill's `references/bot-access-check.md`) — the file allowing a bot means nothing if the edge 403/429s the actual fetch; this is the check, not the file read, that catches it.
 - [ ] `@astrojs/sitemap` integration installed; verify `sitemap-index.xml` and `sitemap-0.xml` reach at the production URL.
 - [ ] `noindex` pages excluded from sitemap.
 

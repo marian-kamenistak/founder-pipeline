@@ -2,6 +2,8 @@
 
 **Phase: P6-Adoption**
 
+**Routing:** plain (may run ∥ with P6.S1) · draft MID, stage judge MID · gate critic on the session model
+
 **Earns its keep** always.
 
 **Hard rule:** One north-star **behavioral** metric tied to revenue. Plus 3–5 leading indicators + 2 lagging. **Vanity metrics rejected** — every metric scored against the "would someone change behavior based on this?" test. If no, it's vanity.

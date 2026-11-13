@@ -1,16 +1,7 @@
 ---
 name: ai-seo-llms-builder
-description: >
-  Build, audit and score `llms.txt` and `llms-full.txt`, and run the on-page GEO extractability pass on
-  the money pages those files route to. Use when writing an llms file for a new property, when auditing
-  an existing pair ("is our llms.txt any good", "AI SEO audit", "are we citable", "GEO pass"), when a
-  price or stat changed and the llms files may have drifted, or when a stream ships one file but not the
-  other. Also the skill that settles the recurring "does llms.txt help us rank in AI search" argument:
-  it carries the evidence. NOT for measuring whether ChatGPT/Perplexity actually cite you (that is a
-  standing measurement cadence this plugin does not ship — see `/founder-pipeline:ai-seo` Mode 3),
-  NOT for getting pages indexed or pinging IndexNow (`/founder-pipeline:web-indexation`), and NOT for a
-  one-off advisory rewrite of a single page (`/founder-pipeline:ai-seo`).
-argument-hint: <audit|build|extract|score> [domain|stream|path] — e.g. "audit example.com" or "build <stream>"
+description: "Use when building, auditing or scoring `llms.txt` / `llms-full.txt`, or running the on-page GEO extractability pass on the money pages they route to: \"is our llms.txt any good\", \"AI SEO audit\", \"are we citable\", \"GEO pass\", or a price or stat changed and the llms files may have drifted. Carries the evidence on whether llms.txt helps AI search. NOT for getting pages indexed (`/founder-pipeline:web-indexation`) or a one-off advisory rewrite of a single page (`/founder-pipeline:ai-seo`)."
+argument-hint: "<audit|build|extract|score> [domain|stream|path] — e.g. \"audit example.com\" or \"build <stream>"
 ---
 
 # ai-seo-llms-builder — llms files that are worth reading, pages worth quoting

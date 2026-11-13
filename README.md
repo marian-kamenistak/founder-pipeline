@@ -9,7 +9,11 @@ personally sign it off.
 
 It is allowed to tell you the idea is bad. Three of the steps can kill it outright. That's the point.
 
+[![ci](https://github.com/marian-kamenistak/founder-pipeline/actions/workflows/ci.yml/badge.svg)](https://github.com/marian-kamenistak/founder-pipeline/actions/workflows/ci.yml)
+
 **How it works, step by step, with the model behind every substep:** [How to Use Claude Code to Kill or Launch a Business Idea](https://www.marian.coach/blog/how-to-validate-a-business-idea-before-building/)
+
+**How it is built and tested** (subagents, workflows, the approval hook, evals, context budget): [docs/ARCHITECTURE.md](docs/ARCHITECTURE.md)
 
 ---
 
@@ -34,7 +38,7 @@ week one saves you the six months.
 
 ---
 
-## What actually happens when you run it
+## What happens when you run it
 
 You'll type one command, and then have a long conversation. Here's the shape of it:
 
@@ -44,7 +48,7 @@ You'll type one command, and then have a long conversation. Here's the shape of 
 | **2. Viability** | Counts the money and the hours. Ends with a verdict: is this worth your time, yes or no? | 4 |
 | **3. Clients** | Talk to 10–20 real people. Before you build anything. | 1 |
 | **4. Build** | Email, keywords, copy, website, competitor teardown, deck. The slow stuff that pays off later. | 6 |
-| **5. Activation** | Actually publish it. A finished website nobody has seen is not a launch. | 4 |
+| **5. Activation** | Publish it. A finished website nobody has seen is not a launch. | 4 |
 | **6. Adoption** | Pick your channels from real data, pick your numbers, write the 90-day plan. | 3 |
 
 Each step writes one file into a folder for your idea. At the end you have a complete, evidenced
@@ -60,14 +64,15 @@ three of them will talk to you. If nobody replies, you just saved yourself weeks
 
 ### Step 1 — Get Claude Code
 
-If you don't have it, install it first:
+If you don't have it, install it first. The [official setup page](https://code.claude.com/docs/en/setup) has the current installer for your system. With Node.js 18 or newer, this also works:
 
 ```bash
 npm install -g @anthropic-ai/claude-code
 ```
 
 You'll need a **Claude Pro plan or higher** ($17/month billed annually). Claude Code isn't included
-in the free tier. [Sign up here.](https://claude.com/pricing)
+in the free tier. On Pro, the top-tier model the pipeline prefers is billed in credits on top; see
+[What it costs to run](#what-it-costs-to-run). [Sign up here.](https://claude.com/pricing)
 
 ### Step 2 — Add this repo
 
@@ -95,10 +100,10 @@ You should see `founder-pipeline` in the list, with a version number and `enable
 
 ### Step 5 — Start it
 
-Open Claude Code in whatever folder you want your work saved in, and type:
+Open Claude Code in whatever folder you want your work saved in, and type the command with your idea in one sentence. Add `smoke` for the 48-hour smoke test, which is the recommended first run:
 
 ```
-/founder-pipeline:founder
+/founder-pipeline:founder a paid onboarding checklist for small agencies smoke
 ```
 
 It will start asking you questions. Answer them honestly — it's checking your answers against real
@@ -111,11 +116,14 @@ falling back to built-in instructions for anything you don't:
 
 ```bash
 git clone https://github.com/marian-kamenistak/founder-pipeline.git
+mkdir -p ~/.claude/skills
 cp -r founder-pipeline/plugins/founder-pipeline/skills/founder ~/.claude/skills/founder
 ```
 
 Then type `/founder`. Its first step writes a `CAPABILITIES.md` into your idea's folder, listing
-what it found and the one missing connection that costs you the most evidence.
+what it found and the one missing connection that costs you the most evidence. This install leaves
+out the subagents, the workflows and the approval hook; the skill runs the same roles as generic
+subagents and the gates stay the same.
 
 **Connecting tools** (search data, CRM, analytics, mail, task board) is optional and takes one command
 each: **[plugins/founder-pipeline/skills/founder/INSTALL.md](plugins/founder-pipeline/skills/founder/INSTALL.md)**.
@@ -133,6 +141,7 @@ claude plugin update founder-pipeline@founder-pipeline
 
 ```bash
 claude plugin uninstall founder-pipeline@founder-pipeline
+claude plugin marketplace remove founder-pipeline     # optional: also forget the marketplace
 ```
 
 Nothing you've written is deleted. Your idea folders are yours and stay where they are.
@@ -141,20 +150,21 @@ Nothing you've written is deleted. Your idea folders are yours and stay where th
 
 ## What it costs to run
 
-**Short answer: about $27–37 a month**, most of which is your Claude plan.
+**Short answer: about $27–37 a month for the whole pipeline on a Claude Pro plan, plus the top-tier model, which Pro bills separately.** The first two phases, the ones that decide whether to build at all, need the Claude plan alone.
 
-Seven of the thirteen tools involved are genuinely free at the scale one person works at — not
-trials, actual free plans. Two costs are unavoidable: a Claude plan, and email on your own domain.
+The pipeline keeps its main loop, its critics and every customer-facing word on your top-tier model. On Claude Pro, that model is paid in credits from the first token and does not count toward your plan limits. The $27–37 does not include those credits, and the cost breakdown has no figure for them. On Max, up to half the weekly limit covers the top-tier model.
 
-| | Per month |
+Seven of the thirteen tools involved are free at the scale one person works at. These are real free plans, not trials. The only cost you cannot avoid is a Claude plan. Email on your own domain becomes a cost once you build a website.
+
+| | Cost |
 |---|---|
-| Bare minimum | **$27 – $37** |
-| Comfortable | **$205 – $233** |
+| Bare minimum, per month | **$27 – $37**, plus top-tier model credits on Pro |
+| Comfortable, per month | **$205 – $233** |
 | One research run | **$0.66 – $2.02** |
 
-You do **not** need to buy everything before you start. Phases 1 and 2 — the half that decides
-whether to build at all — need a Claude plan and one pay-as-you-go API with a $50 deposit that lasts
-roughly 200 runs.
+You do **not** need to buy everything before you start. Phases 1 and 2, the half that decides whether to build at all, run on a Claude plan. Add one pay-as-you-go API with a $50 deposit, which covers roughly 200 to 260 research runs, and those phases get measured search demand instead of blocked checks.
+
+The $27–37 includes the domain and the email you only need from phase 4. Prices were checked on 2026-08-27; check the vendor's page before you budget.
 
 Full breakdown, with every price sourced and dated: **[docs/TOOLING-AND-COSTS.md](docs/TOOLING-AND-COSTS.md)**
 
@@ -164,25 +174,26 @@ Full breakdown, with every price sourced and dated: **[docs/TOOLING-AND-COSTS.md
 
 **Required:**
 
-- Claude Code, and a Claude Pro plan or higher
+- Claude Code, and a Claude Pro plan or higher. On Pro, budget separately for the top-tier model (see above). Keep Claude Code current with `claude update`; this release was tested on 2.1.322.
 - A folder to work in
 - About an hour where nobody will interrupt you, for the first session
 
-**Required for the research steps (phase 1 onward):**
+**Optional, but the one gap you'll feel (phase 1 onward):**
 
-- A [DataForSEO](https://dataforseo.com/) account. Pay-as-you-go, $50 minimum deposit, no monthly
-  fee. This is what turns "I think people want this" into an actual number. It's the one paid thing
-  the early phases genuinely can't fake.
+- A [DataForSEO](https://dataforseo.com/) account. Pay-as-you-go, $50 minimum deposit, no monthly fee. This is what turns "I think people want this" into a measured number. Without it the pipeline still runs, but the demand and competitor checks are marked `BLOCKED`. It does not make up a search volume to fill the gap. If you connect only one tool, connect this one.
 
 **Only needed if you get as far as building a website (phase 4+):**
 
-- A domain name (~$10/year for a .com)
-- A [Cloudflare](https://www.cloudflare.com/) account — free
-- [Google Workspace](https://workspace.google.com/) if you want email on your domain — $7/user/month
+- A domain name ($10.46/year for a .com at Cloudflare)
+- A [Cloudflare](https://www.cloudflare.com/) account, which is free
+- [Google Workspace](https://workspace.google.com/) for email on your domain, $7/user/month billed annually
 - [Firecrawl](https://www.firecrawl.dev/), [PostHog](https://posthog.com/),
-  [Resend](https://resend.com/) — all have free tiers that are enough
+  [Resend](https://resend.com/): all have free tiers that are enough
 
 **Optional, and it works fine without them:**
+
+- Node.js on your `PATH`, for the hook that asks before a step is marked approved. Without it the hook stays silent.
+- Python 3, for three helper scripts in the SEO and listings skills. The skills fall back to doing the same checks by hand.
 
 - The [PostHog](https://posthog.com/docs/ai/claude-code) and Notion plugins for Claude Code, if you
   want analytics and task tracking wired in automatically
@@ -198,7 +209,8 @@ measured, it writes "not available" and says why — never a zero, never a blank
 read like an answer when they aren't.
 
 **It stops for you, every single time.** No step is finished because the AI thinks it looks good. It
-finishes when *you* say so. There is no auto-advance and no skipping ahead.
+finishes when *you* say so. There is no auto-advance and no skipping ahead. With the full plugin a hook
+enforces this in code: an edit that marks a step `approved` becomes a permission prompt you have to click.
 
 **"Profitable but mediocre" counts as a failure.** If a new idea won't clearly beat the thing you're
 already doing, it gets killed rather than kept as a small side project. Small side projects are how
@@ -208,7 +220,7 @@ focus dies.
 gates, the gates aren't working. A killed idea is a win — it's months you didn't waste.
 
 **It won't let you name it first.** The name comes at step seven, after you know what the thing
-actually is. Naming first is how people fall in love with an idea before checking if it's real.
+is. Naming first is how people fall in love with an idea before checking if it's real.
 
 ---
 
@@ -231,7 +243,7 @@ skip cleanly. The gates and kill steps never skip.
 You can override any failed check. It records that you did, and why. It's a pipeline, not a boss.
 
 **Do I need all the other skills and tools?**
-No. Version 0.2 made every one of them optional. Each step uses a bundled skill if it's there, then
+No. Every one of them is optional. Each step uses a bundled skill if it's there, then
 your own skill with the same name, then a fallback card that ships inside the founder skill. Missing
 search data is the one gap you'll feel: those checks show as `BLOCKED` rather than being filled with
 a guess. See [plugins/founder-pipeline/skills/founder/INSTALL.md](plugins/founder-pipeline/skills/founder/INSTALL.md).
@@ -243,17 +255,16 @@ No. It's specifically built not to. If that's what you want, ask a normal chatbo
 
 ## What changed
 
-**0.2.0 (2026-11-04)**
-- The founder skill runs standalone. Every skill and tool it mentions is optional, resolved at run
-  time, with one fallback card per item in `references/capabilities.md`.
-- Step 1 opens with a capability preflight that writes `CAPABILITIES.md`.
-- New [plugins/founder-pipeline/skills/founder/INSTALL.md](plugins/founder-pipeline/skills/founder/INSTALL.md): three ways to install, one command per tool, and the
-  model tiers mapped to current Claude models.
-- Ported two months of fixes from the source pipeline: an asset audit for ideas that productize
-  something you already run, a promise backtest in the offer step, a sanitization check before
-  launch, and search-data calls rewritten for the REST API.
+**0.3.0 (2026-11-13)** keeps every gate and makes the plugin checkable:
+- The critic, the claim refuter, the completeness critic and the evidence scout ship as subagents, with their model tier set in the agent file.
+- Two workflows, `gather-verify` and `judge-panel`, for large research sweeps and kill-gate panels.
+- A hook that asks you before any step is marked `approved`.
+- The ideation questions follow a grill pass: facts are looked up, only decisions are asked, each with a recommended answer.
+- An eval suite, a linter with its own tests, and CI on every push.
+- 29% less always-loaded context, even with four new agent descriptions in it, and the founder skill's main file is 48% smaller.
+- Unattended mode now deploys to a preview URL unless you ask for production, and has a time limit and a stop file.
 
-**0.1.0 (2026-08-30)**: first public release.
+Full history: [CHANGELOG.md](CHANGELOG.md).
 
 ---
 
@@ -262,7 +273,12 @@ No. It's specifically built not to. If that's what you want, ask a normal chatbo
 MIT. Do what you like with it.
 
 Portions of `signals-and-scoring` are adapted from
-[gtm-engine](https://github.com/himanshusaleria/gtm-engine), also MIT.
+[gtm-engine](https://github.com/himanshusaleria/gtm-engine), also MIT. The grill pass in the
+ideation steps is adapted from the `grilling` skill in
+[mattpocock/skills](https://github.com/mattpocock/skills), also MIT.
+
+Built and maintained by Marian Kamenistak. The story behind it, with a full run on a real idea:
+[How to Use Claude Code to Kill or Launch a Business Idea](https://www.marian.coach/blog/how-to-validate-a-business-idea-before-building/).
 
 The frameworks it uses — Lean Canvas, the Value Proposition Canvas, Dunford positioning, the Raskin
 narrative, Van Westendorp pricing — belong to their authors and are cited where used.

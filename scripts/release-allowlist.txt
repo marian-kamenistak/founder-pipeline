@@ -1,0 +1,66 @@
+# Reviewed and cleared for public release.
+#
+# Every line here was flagged by verify-release.sh and then cleared by a human
+# who looked at its surrounding context. Format: the exact matched string, then
+# `#` and the reason it is safe.
+#
+# Rules for adding a line:
+#   1. Read the surrounding context, not just the match.
+#   2. It is only clearable if it is ALREADY public AND belongs to the
+#      organisation being listed, not to a private individual.
+#   3. A personal mobile is never clearable, even if the person published it.
+#   4. If you are unsure, do not add it. Change the content instead.
+#
+# Reviewed 2026-08-27, extended 2026-08-30.
+
+# --- Author identity (intentional — this is a public repo authored by Marian) ---
+# The IDENT check exists to catch UNINTENDED leaks in skill content ported from a
+# private workspace. It is not meant to flag the author's own name on the four
+# files that are SUPPOSED to carry it: the licence, the plugin manifest, the
+# marketplace listing, and the README's install commands.
+file: LICENSE
+file: plugins/founder-pipeline/.claude-plugin/plugin.json
+file: .claude-plugin/marketplace.json
+file: README.md
+file: docs/ARCHITECTURE.md   # the architecture doc names the author and links the launch post, on purpose
+file: CHANGELOG.md
+file: AGENTS.md
+file: plugins/founder-pipeline/skills/founder/INSTALL.md   # install guide: carries the author GitHub handle in clone/marketplace commands, like README (added 2026-11-04)
+
+# --- Template placeholders --------------------------------------------------
++420 000 000 000    # placeholder in the entity-pack template's worked example
++420000000000       # same, normalised form asserted in the test fixtures
+
+# --- Published business contact points of the directories in the catalog ----
+# These are the switchboards and enquiry addresses the listing targets publish
+# on their own contact pages. A directory catalog is not usable without them.
++420 224 810 055               # atmoskop.cz sales line, from its own contact page
+pomuzeme@atmoskop.cz           # atmoskop.cz employer enquiries
+hello@cocuma.cz                # cocuma.cz sales enquiries
+hello@leaddev.com              # leaddev.com general enquiries
+hello@listennotes.com          # listennotes.com submissions
+hello@fractionaljobs.io        # fractionaljobs.io submissions
+coachoperations@torch.io       # torch.io coach applications
+EU@pspeakers.com               # professional speakers bureau, EU desk
+spcr@spcr.cz                   # Svaz průmyslu a dopravy ČR, membership desk
+tajemnik@cacio.cz              # CACIO, secretary
+vnitrnikomunikace@komora.cz    # Hospodářská komora ČR, internal comms desk
+
+# --- Path exemptions (prefix `file:`) ---------------------------------------
+# ~/.claude and ~/.local/bin are standard locations on ANY machine running
+# Claude Code, not this author's layout. A health check that scans for shell
+# wrappers has to name them. The owner-specific job directory was removed and
+# the list is overridable via WRAPPER_SCAN_DIRS.
+file: plugins/founder-pipeline/skills/health/checks.sh
+
+# --- Documentation examples -------------------------------------------------
+dmarc@brand.com                # generic example in the email-auth walkthrough
+leads@brand.com                # generic example in the forms walkthrough
+site@your-product.com          # generic example placeholder
++claudebot@anthropic.com       # public crawler contact, cited in the robots/UA tier table
+
+# --- The scanner and its own inputs ----------------------------------------
+# The scan script contains the path patterns it greps for, and this allowlist
+# contains the strings it clears. Neither is a leak.
+file: scripts/verify-release.sh
+file: scripts/release-allowlist.txt

@@ -1,6 +1,6 @@
 ---
 name: prediction
-description: Use when the owner wants demand or opportunity predictions for ANY product, service, or idea — including ideas that don't exist yet (ideation-time niche, keyword, query, and content selection), a new stream inside a `/founder-pipeline:founder` run (P1.S4 hypothesis run, P5.S4 cadence wiring), or any stream not covered by a scheduled prediction job. Triggers "predict demand", "will this sell", "is there a market for", "which niche should I pick", "what will be a hit", "prediction for <idea>", "/prediction". NOT for a stream whose recurring prediction cadence already runs on your scheduler, NOT for current-state SEO gap analysis against live competitors (a different question — see the boundary note below), and NOT for market segment mapping (`/founder-pipeline:scout`).
+description: "Use when the owner wants demand or opportunity predictions for a product, service or idea, including ideas that do not exist yet: \"predict demand\", \"will this sell\", \"is there a market for\", \"which niche should I pick\", \"what will be a hit\". Also runs inside `/founder-pipeline:founder` (P1.S4 hypothesis run, P5.S4 cadence wiring). NOT for a stream whose recurring prediction already runs on your scheduler, current-state SEO gap analysis, or market segment mapping (`/founder-pipeline:scout`)."
 ---
 
 # Prediction — falsifiable demand bets for any product, service, or idea

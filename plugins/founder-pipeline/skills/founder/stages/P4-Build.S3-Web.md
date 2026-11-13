@@ -2,10 +2,12 @@
 
 **Phase: P4-Build**
 
+**Routing:** delegated (one background build subagent) · tiers not stated · gate critic on the session model
+
 **Earns its keep when** the format decision in P4.S2 includes a web surface. **Skip entirely** (with one line in `brief.md` saying why) when the stream is deck-only or app-only. A stream that sells entirely through warm outreach and has no page to send anyone to skips this step and P4.S4 with it — that is a normal outcome, not a shortfall.
 
 **Hard gates:**
-- ~~Pre-sale gate~~ **removed. The web builds in every run — and in OVERNIGHT runs P4.S3 is a MUST-HAVE step: build AND deploy live, with the URL + diff + rollback note in the morning review.**
+- ~~Pre-sale gate~~ **removed. The web builds in every run — and in OVERNIGHT runs P4.S3 is a MUST-HAVE step: build and deploy to a preview URL (to production only when the kickoff says `deploy: production`), with the URL + diff + rollback note in the morning review.**
 - **Copy sources section of `P4-Build.S2-Copy.md` approved by the owner** (overnight: fresh-judge-passed, flagged for morning approval). Builders lay out and style; they do not write copy.
 
 ## Default stack — the house stack, declared once

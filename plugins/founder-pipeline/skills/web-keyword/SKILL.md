@@ -1,22 +1,6 @@
 ---
 name: web-keyword
-description: >
-  Decide which keywords a site should target, in which language, and prove it with measured data —
-  then check whether the pages that exist actually target them. Two modes: build a keyword contract
-  for new pages, or audit a live site against one. Owns the locale decision (which markets and
-  languages the site serves, declared once) and the localization question ("is the native-language
-  phrase what buyers in that market actually type, or did we translate the English term and hope?")
-  along with the translation-quality layer that comes with it. Use whenever the question is which
-  words a page should be built around, whether existing titles/H1s target real demand, or whether a
-  non-English page set is targeting phrases nobody searches. Triggers: "keyword research", "are we
-  using the right keywords", "what do people search for", "keyword contract", "which keywords
-  should this page target", "search volume", "Google Trends", "keyword gap on my own site", "our
-  non-English pages aren't ranking", "did we translate the keywords correctly", "localize the
-  page titles", "/founder-pipeline:web-keyword". Also invoke when someone hands you a list of
-  guessed keywords and asks if they're right — that is exactly the question this skill answers with
-  data instead of intuition. NOT /founder-pipeline:seo-audit (technical site health), NOT competitor
-  gap and rankings work (this calls that out, it doesn't replace it), NOT the ongoing AI-visibility
-  measurement loop (this feeds it), NOT page translation (this supplies its glossary).
+description: "Use when the question is which keywords a site should target, in which language, and whether existing titles and H1s target real demand: \"keyword research\", \"are we using the right keywords\", \"keyword contract\", \"search volume\", \"our non-English pages aren't ranking\", \"did we translate the keywords correctly\", or a list of guessed keywords to check. Builds a keyword contract for new pages or audits a live site against one with measured data, and owns the locale decision. NOT technical site health (`/founder-pipeline:seo-audit`) or competitor gap work."
 ---
 
 # Web Keyword

@@ -91,7 +91,7 @@ Notes on `@graph` nesting shape, `sameAs` arrays, and `Article`/`BlogPosting` fi
 
 ## Gap table — every row gets a verdict
 
-> `Reject` is a first-class verdict and must be used where it applies. Two mandatory rejections: schema the stream cannot truthfully populate (no invented `AggregateRating` / `reviewCount` / credentials — see `${CLAUDE_PLUGIN_ROOT}/skills/seo-audit/references/review-stars-rich-snippets.md`), and anything contradicting `P1-Ideation.S6-Offer.md`. Reader-facing words route back through P4.S2 + `/brand-voice` — this step ships structure, not copy.
+> `Reject` is a first-class verdict and must be used where it applies. Two mandatory rejections: schema the stream cannot truthfully populate (no invented `AggregateRating` / `reviewCount` / credentials — see the bundled `seo-audit` skill's `references/review-stars-rich-snippets.md` (full plugin install only)), and anything contradicting `P1-Ideation.S6-Offer.md`. Reader-facing words route back through P4.S2 + `/brand-voice` — this step ships structure, not copy.
 
 | Layer | Gap | Competitors shipping it | Our page | Severity | Verdict + one-line reason | Status |
 |---|---|---|---|---|---|---|

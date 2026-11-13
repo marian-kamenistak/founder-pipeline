@@ -2,6 +2,8 @@
 
 **Phase: P5-Activation**
 
+**Routing:** plain (starts with P5.S1) · tiers not stated · gate critic on the session model
+
 **Earns its keep** in every stream with a web surface — domain authority and internal linking are the two compounding inputs SEO/GEO actually responds to, and both historically fell into queues nobody worked. This stage EXECUTES the first link-building cycle; `queues/backlink-queue.md` then carries the ongoing motion into Adoption. **Performative when** there's no web asset — record the skip.
 
 ## What to do

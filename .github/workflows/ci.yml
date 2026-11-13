@@ -1,0 +1,49 @@
+name: ci
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+permissions:
+  contents: read
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+
+      - name: Lint skills, agents, workflows and manifests
+        run: |
+          pip install --quiet pyyaml
+          python3 scripts/check_skills.py --report
+
+      - name: Linter tests (the linter must fail on the defects it claims to catch)
+        run: python3 -m unittest discover -s tests -p 'test_*.py' -v
+
+      - name: Hook and workflow tests (mocked runner, no model calls)
+        run: node --test "tests/*.test.mjs"
+
+      - name: Bundled skill tests
+        run: python3 plugins/founder-pipeline/skills/web-listings/tests/test_targets.py
+
+      - name: Release scan (personal data, credentials, machine paths, structure)
+        run: bash scripts/verify-release.sh .
+
+      - name: Validate the plugin against the Claude Code schema
+        run: |
+          npm install --global --silent @anthropic-ai/claude-code
+          claude plugin validate . --strict
+          claude plugin validate plugins/founder-pipeline --strict
+
+# Behaviour evals (`claude plugin eval`) call a model, so they run before each release on the
+# maintainer's machine, not on every push. See AGENTS.md and docs/ARCHITECTURE.md.

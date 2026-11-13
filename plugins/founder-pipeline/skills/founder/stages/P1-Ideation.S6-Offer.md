@@ -2,6 +2,8 @@
 
 **Phase: P1-Ideation**
 
+**Routing:** judge panel (3 lenses) + plain convergence · draft MID · gate critic HIGH
+
 **Earns its keep** always — this is where competition analysis (P1.S5) and demand data (P1.S4) become a concrete, differentiated offer. Differentiators and solution are one decision, not two: the onliness statement IS the value prop's unique mechanism, so they lock in one gate. **Becomes performative when** the offer already has one obvious, evidenced, ICP-valued differentiator and a locked scope — write the onliness statement + VPC and move on.
 
 The uniqueness test is NOT global originality — it's **uniqueness within the territory and for the ICP**. Spine: Marty Neumeier's onliness statement:
@@ -9,6 +11,8 @@ The uniqueness test is NOT global originality — it's **uniqueness within the t
 > *"[Offer] is the ONLY [category from P1.S5] that [differentiator] for [ICP] in [territory]."*
 
 If the sentence can't be filled truthfully, the offer doesn't have a differentiator yet — it has features.
+
+**Grill pass first** (`references/grilling.md`): map this step's decisions and what depends on what, look up every fact in the intake, `brief.md` and approved step files instead of asking, then ask only the open decisions, each with a recommended answer. Play the answers back and get a yes before drafting.
 
 **Ask one at a time (cap 6):**
 1. Take the unique attributes from `P1-Ideation.S5-Competition.md` — classify each: unique **globally** / unique **in the territory** / merely **uncommon** / **table stakes**. Then fill the onliness statement from the survivors. Can every word survive a fact-check against competitors' websites? Evidence per surviving differentiator (`[source: ...]` per claim — countable and checkable, "412 onboarding audits shipped", not "deep experience").

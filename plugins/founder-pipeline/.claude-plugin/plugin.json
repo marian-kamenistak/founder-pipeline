@@ -1,10 +1,11 @@
 {
   "name": "founder-pipeline",
   "displayName": "Founder Pipeline",
-  "description": "A gated 25-step pipeline for designing a new revenue stream. Forces evidence over assumption, refuses to advance without a human signature, and is allowed to kill the idea.",
-  "version": "0.2.0",
+  "description": "A gated 25-step pipeline for designing a new revenue stream. Evidence over assumption, a fresh-context critic and a human signature at every step, and three gates that can kill the idea. Ships 23 skills, 4 subagents, 2 workflows and an approval hook.",
+  "version": "0.3.0",
   "author": {
-    "name": "Marian Kamenistak"
+    "name": "Marian Kamenistak",
+    "url": "https://www.marian.coach/blog/how-to-validate-a-business-idea-before-building/"
   },
   "homepage": "https://github.com/marian-kamenistak/founder-pipeline",
   "repository": "https://github.com/marian-kamenistak/founder-pipeline",
@@ -17,7 +18,10 @@
     "go-to-market",
     "product-discovery",
     "market-research",
-    "seo"
+    "seo",
+    "subagents",
+    "workflows",
+    "evals"
   ],
   "skills": "./skills/"
 }

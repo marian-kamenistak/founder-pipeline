@@ -2,6 +2,8 @@
 
 **Phase: P4-Build**
 
+**Routing:** fan-out + delegated (one agent per competitor, then one fix subagent) · research CHEAP, fix MID · gate critic on the session model
+
 **Earns its keep when** P4.S3 shipped a live web surface. The site just passed its own hardening pass — but hardening checks the site against a *checklist*. This step checks it against the *competitors who actually rank*, by reading their shipped HTML. Checklists tell you what's broken; rivals' source tells you what's missing. **Skip entirely** (one line in `brief.md`) only when P4.S3 was skipped — no site, nothing to diff. That skip is common and legitimate: a stream with no web surface has nothing to compare.
 
 **Partial skip:** if the stream ships no blog/article surface, run the landing-page half only and record the skip + why. Never skip the landing half.
@@ -42,7 +44,7 @@ Record the 6 URLs + why each was picked in the step file before pulling anything
 
 **6. Re-verify by artifact, not by claim.** After the fix pass: re-crawl each of our changed pages with the on-page crawl API, schema-validate every added JSON-LD block, and **re-run P4.S3's severity-ranked SEO/GEO error table** so that file stays true (append the re-run + date to `P4-Build.S3-Web.md`; the project's own post-change rule applies). Paste the evidence.
 
-**7. Write the durable learning back into the two SEO skills.** Append a dated bullet to the `## Learnings` section of BOTH `${CLAUDE_PLUGIN_ROOT}/skills/seo-audit/SKILL.md` and `${CLAUDE_PLUGIN_ROOT}/skills/ai-seo/SKILL.md` (SEO/on-page/schema findings → `/seo-audit`; AI-citability and extractability-surface findings → `/ai-seo`; a finding that is genuinely both goes in both). If your plugin directory is not writable in your install, the learning goes wherever those skills' local overrides live for you — the requirement is that it lands where the NEXT site's run will read it, never that it sits in this step's file.
+**7. Write the durable learning back into the two SEO skills.** Append a dated bullet to the `## Learnings` section of BOTH the bundled `seo-audit` skill's `SKILL.md` (full plugin install only) and the bundled `ai-seo` skill's `SKILL.md` (full plugin install only) (SEO/on-page/schema findings → `/seo-audit`; AI-citability and extractability-surface findings → `/ai-seo`; a finding that is genuinely both goes in both). If your plugin directory is not writable in your install, the learning goes wherever those skills' local overrides live for you — the requirement is that it lands where the NEXT site's run will read it, never that it sits in this step's file.
 
 **The learning filter — generalize or don't write it.** Only patterns that will hold for the NEXT site go into those skills: *"B2B service pages in a smaller non-English market consistently ship `Service` + `BreadcrumbList` but never `FAQPage` — the FAQ block is free whitespace there"* is a learning. *"Competitor X's pricing page has no canonical"* is a stream fact and stays in this step's file. Every entry: dated, one or two lines, names the page type and territory it was observed in, and states the action it implies. No entry that just restates the skill's existing checklist.
 

@@ -1,9 +1,8 @@
 ---
 name: humanize
-description: "Use when a draft sounds AI-generated or must not read as AI: 'humanize', 'de-AI', 'make this sound human', 'less AI', 'AI-smooth', 'sounds like ChatGPT', AI-detector concerns, or any external-facing text before delivery. Also invoked by the brand-voice skill as its mandatory universal base layer. Language-aware: the English rules are explicit, and the method for building the equivalent list in any other language ships with one worked example."
-disable-model-invocation: false
+description: "Use when a draft sounds AI-generated or must not read as AI: \"humanize\", \"de-AI\", \"make this sound human\", \"less AI\", \"sounds like ChatGPT\", AI-detector concerns, or any external-facing text before delivery. The base layer `/founder-pipeline:brand-voice` runs on every string. English rules are explicit; a method and one worked example cover other languages."
 allowed-tools: Read, Grep, Glob
-argument-hint: [paste the draft to humanize]
+argument-hint: "[paste the draft to humanize]"
 ---
 
 # Humanize

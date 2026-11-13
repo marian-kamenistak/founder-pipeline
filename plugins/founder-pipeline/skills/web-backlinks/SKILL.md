@@ -1,7 +1,7 @@
 ---
 name: web-backlinks
-description: Use when you want to build backlinks, raise domain authority, grow referring domains, run link-building outreach, create a link-magnet directory, or execute/refresh a backlink playbook for any property in your portfolio. Triggers: "backlinks", "link building", "domain authority", "DR", "referring domains", "link exchange", "backlink playbook", "/founder-pipeline:web-backlinks".
-argument-hint: <domain> | run <property> [N] | status
+description: "Use when the user wants to build backlinks, raise domain authority, grow referring domains, run link-building outreach, create a link-magnet directory, or execute or refresh a backlink playbook for any property in their portfolio: \"backlinks\", \"link building\", \"domain authority\", \"DR\", \"referring domains\", \"link exchange\", \"backlink playbook\"."
+argument-hint: "<domain> | run <property> [N] | status"
 ---
 
 # Backlinks — plan once, execute with cheap models
@@ -38,37 +38,11 @@ it ships with example rows only. A domain that isn't in the registry: ask.
 
 ## The AI-citation layer — why off-page work is worth more than the referring-domains KPI shows
 
-**The headline: off-page is where the measured AI-citation effects actually are.** On-page formatting has *no published correlation coefficient at all*; off-page signals have several, and they beat backlinks:
-
-| Signal | Correlation with AI visibility |
-|---|---|
-| **Branded web mentions (linked OR unlinked)** | **Spearman 0.664** |
-| Branded anchor text | 0.527 |
-| Brand search volume | 0.392 |
-| Domain Rating | 0.326 |
-| Referring domains | 0.295 |
-| **Backlinks** | **0.218** |
-
-[Ahrefs, n=75,000 brands, DR>40, keyword volume ≥800.] Vendor study — Ahrefs sells a brand-mention tracker, so treat 0.664 with more caution than their negative results. Correlational throughout; big brands get both mentions and citations for shared reasons.
-
-**Four consequences for how this skill runs — none of them changes the Four Laws:**
-
-- [ ] **A mention is a win even when it never becomes a link.** Family 4 tells you to reclaim unlinked mentions FIRST; keep doing that for ranking, but stop scoring an un-converted mention as a failure — on this evidence the mention was already carrying ~3× the correlation of the link you were chasing. Log mentions on their own line, like entity work; never merge them into referring domains.
-- [ ] **Third-party listicles are the single highest-value placement target, and your own listicle is a trap.** 63% of AI citations point to listicle pages [Evertune, ~400M citations]; in professional services, **third-party listicles take 80.9% of citations vs 19.1% for self-promotional ones** [Wix Studio, 75,000 AI answers / 1M+ citations — platform vendor, reported via Semrush-owned Search Engine Land, two layers of interest]. **Never publish your own "best [category]" self-ranking listicle:** of 323 self-promotional listicle citations studied, **224 (69%) cited the brand's own page and then recommended a competitor** [Ray/Amsive, 100 B2B "best X" queries, independently replicated by Solis]. You'd be funding the answer that promotes a rival. This is a live risk for the Family 1 directory play — a niche *directory* of other people is fine; a ranked "best X" list with you on it is not.
-- [ ] **Entity work has a per-engine shape.** Ship the Wikidata item early (already Family 7 policy) — but know which engine it buys: ChatGPT leans Wikipedia (47.9% of its top-10 sources), Perplexity leans Reddit (46.7%), AI Overviews lean Reddit + YouTube (~21% / 18.8%) [Profound, 30M citations, Aug 2024–Jun 2025]. On a total-volume basis these shares are far smaller (Wikipedia is 7.8% of ChatGPT citations) — Profound's "share of top-10 sources" framing inflates apparent concentration ~6×. A Wikipedia/Wikidata play is disproportionately a **ChatGPT** play; a Reddit play is disproportionately a **Perplexity** play. Law 1 is unchanged: notability-first, never COI link insertion, never bare-link drops.
-- [ ] **Being named matters more than being linked.** Citation rate was 53.1% when a brand was mentioned in the answer vs 10.6% when it wasn't — a 5× gap, with "ghost citations" where the source is cited but the brand never named [Seer, 541,213 responses, 20 brands, 6 platforms — the vendor's own client portfolio, not a random sample]. Reinforces Law 4's existing framing: badge and swap links are worth having for brand and AI surface, never for PageRank.
-
-**What this does NOT license.** Don't retarget the playbook away from links on the strength of a correlation table. Referring domains stay the KPI this skill is measured on; the AI-citation layer is a second scoreboard reported alongside it, never instead of it.
+Read `references/ai-citation-layer.md` when scoping or reporting a playbook, choosing placement targets, or when someone asks why mentions and listicles outrank backlinks for AI visibility: it carries the correlation table, the four consequences and what the layer does not license.
 
 ## Phase 1 — Intake & prereqs (sequential, cheap)
 
-0. **Bootstrap.** Create if missing, under the property's working folder: `backlinks/` with `outreach-log.md` (same schema as the ledger), a portfolio-wide `backlinks/ledger.md` (header: `date | recipient email/domain | category (journalist/podcast/editor/peer/vendor/other) | property | block | status (sent/blocked/deferred/parked/dead)`), and `backlinks/do-not-contact.md`. The ledger and do-not-contact list are shared across every property — put them one level above the per-property folders and record the path in the playbook header. Velocity counts only `sent` rows.
-1. **Adopt existing work FIRST.** Intake sources, in order: (a) `queues/backlink-queue.md` — the shipped default queue — plus, if you have wired one up, your external task board's open rows for this property with Type ∈ {Backlink, Listing}. An external board is an optional integration, not a requirement; when one is in use, adopted rows get a `→ BL-NNN` note on the board, don't delete them — **and the row's URL is recorded in the block's `board_row:` field, which is what Phase 4.8b writes terminal state back to; an adopted row with no `board_row:` on its block is an adoption bug**. (b) the WHOLE property tree for prior campaign state: `backlink*`, `backlinks/`, `competitor_analysis/**/outreach*`, `competitor_analysis/ACTION-PLAN.md` (often carries outreach state), placement/outreach logs. Every adopted file gets a pointer header to the new playbook. Build a `## Migrated state` table: target | contact | channel | last action + date | status. Status vocabulary: prose maps to `sent` (email/DM/PR sent, connect pending), `blocked`, `parked`, `dead`. **Lifecycle (one rule everywhere):** follow-up gate = last send + 21 days; ONE follow-up ever; no reply 21 days after the follow-up → `parked` (silent targets may be revisited after 6+ months with a genuinely new angle); explicit no, opt-out, or invalid address → `dead` (never resurrect). **Backfill the portfolio ledger from migrated contacts.** Never re-pitch a contacted target.
-2. **Competitors.** Accept `competitors/INDEX.md` OR ≥5 profile files in `competitors/` (generate a lightweight INDEX from them, note it). Only if NEITHER exists, ASK: build competitor profiles first (`/founder-pipeline:founder` step 04 produces them), or proceed with discovered competitors — discovery = a backlink-competitors pull plus a SERP-competitors pull from your rank-data provider, spam ≤30, same-audience only. Batch run with no human available → discovered-only, note it in the header.
-3. **Backlink-gap data.** Needs step 2's list. `competitor_analysis/` snapshot <30 days old → reuse it (freshness is the criterion; method drift is fine, note it). Otherwise run the cheap tier yourself: for each competitor pull referring domains, intersect the sets, subtract your own referring domains, and rank the remainder by referring-domain count and topical fit. Intersection input: 3-6 competitors of comparable size/geo — exclude DR>80 generic platforms (large developer-content networks and Q&A sites), their gap tables are noise.
-4. **Baseline snapshot.** Reuse any <30-day `me.md`/snapshot numbers before paying for a fresh pull. Otherwise pull bulk ranks and bulk referring domains for the property. Young domain with no data → record `baseline: unranked, 0 referring domains`. Baseline → header; every run reports the delta.
-5. **Context resolution (binding everywhere).** Property context = the property's own agent-instructions file if present, else its entry in your portfolio context file — never scratch/notes files. Shared numbers (audience size, attendees, sessions, career-history figures) come from your single numbers source of truth and ALWAYS beat property-folder drafts. No positioning in either place → ask the owner for 3 lines before Phase 2; in a batch run with nobody available, STOP after Phase 1 and leave the ask in the run summary — never fan out without positioning (this outranks step 2's discovered-only fallback).
-6. **Sending infrastructure.** Cold outreach must NOT default to the primary community/client mailbox. Check the playbook header for a recorded sending decision; if absent, ask the owner once: dedicated address on the property domain (preferred) or explicit OK to use the main inbox at reduced cap (8/day). Record the answer in the header. **Mechanics for a dedicated address:** it must exist as a verified send-as alias in the sending account — confirm it appears in the account's from-options AND that SPF+DKIM+DMARC pass for the property domain before block one; log both checks. Replies land in the primary inbox and feed the Phase 4 triage as normal. Alias not configured → that's an owner-only setup item; until it's done, the property runs at the 8/day fallback only with the owner's recorded OK.
+Read `references/phase-1-steps.md` when running Phase 1: it holds steps 0-6 (bootstrap, adopt existing work, competitors, backlink-gap data, baseline snapshot, context resolution, sending infrastructure).
 
 **Cost gate (all phases, all paid calls):** stating the estimated cost in-chat is sufficient below the equivalent of 5 units of your reporting currency per run; above that, ask first. Cache every raw JSON response under `competitor_analysis/<date>/raw/`.
 
@@ -76,30 +50,13 @@ it ships with example rows only. A domain that isn't in the registry: ask.
 
 **Pre-step: classify the brand** — community / conference / personal brand / marketplace / SaaS — and tag 1-2 priority families for it (community → badges + survey; conference → event listings + speaker badges + media partners; personal brand → directories + podcasts + PR; marketplace/SaaS → linkbait tools + reviews). Priority families get the instruction "go deep"; others "go wide, top 5 only".
 
-Each agent receives: the domain, brand class, property context per Phase 1.5 (resolved paths — no bare filenames), competitor INDEX, backlink-gap table, **the exclusion list from the Migrated-state table (sent/in-flight, parked, dead — do not re-propose)**, and its family brief from `${CLAUDE_PLUGIN_ROOT}/skills/web-backlinks/references/platform-matrix.md`. Toolset: Read, WebSearch, WebFetch or `/founder-pipeline:firecrawl-scrape` — NO paid rank-data calls inside fan-out agents; if a family needs one (e.g. a content-mention search for unlinked mentions), the orchestrator runs it under the cost gate and passes results in. Internal spreadsheets (e.g. speaker lists) are permitted contact sources; emails from them must be confirmed against the CFP or mail thread they came from, not the live site.
-
-Families 2-6 return the scored table (`target | contact route | effort S/M/L | impact H/M/L (+DR if known) | cost | risk | evidence URL`). Family 1 (directory play) returns a design doc instead: niche, listing schema, submission + verification mechanics (Law 4 compliant), seed list, invite template. Merge, dedupe (also against Migrated state), write to `<property>/backlinks/opportunities.md`.
-
-| Family | One-line brief |
-|---|---|
-| Directory play | Link-magnet directory on the property domain; listing free, verification = identity, link-back optional invite. Build → `/founder-pipeline:web-site-creator`. **A directory OF OTHERS is the play; a ranked "best X" list with you on it is not** — 69% of self-promotional listicle citations ended up recommending a competitor (see the AI-citation layer above). |
-| Partners & exchanges | Adjacent players worth ONE-WAY plays first; reciprocal only within Law 4 caps. |
-| Platform placements | **Earned** placements needing a pitch: awesome-lists, speaker DBs, podcast guest slots, roster pages that require an ask. Register-once identity/profile listings — coach directories, event-listing self-serve forms, business/startup registries — are owned by **`/founder-pipeline:web-listings`**, not this family; don't re-propose a target that skill already tracks. **Portfolio rule (still applies wherever this family DOES apply): on any registry/directory that hosts multiple orgs or products, list EVERY owned property in your registry, not just the one that triggered the run.** Each stays a separate entity pointing to its own domain. These are identity listings, not swaps, so the anti-PBN "own domains never appear in each other's directories" rule does not apply to third-party registries. |
-| Digital PR & citations | Unlinked-mention reclamation (do FIRST), wrong/dead-link fixes, journalist pipelines, regional media pitches, broken-link building. **Score mentions separately from links** — an unconverted mention is still a win (r=0.664 vs 0.218 for backlinks). Also hunt EARNED placement on third-party "best X" listicles: 63% of AI citations point at listicles, 80.9% of them third-party. |
-| Linkbait assets | Original data (survey), citation-engineered stat pages, free tools. Highest ceiling, slowest fuse. |
-| Non-standard | Badge embeds (nofollow — brand/traffic/AI-surface value), awards, .edu lectures, testimonials (owner-approved), newsletter swaps. |
+Read `references/phase-2-fanout.md` when dispatching the Phase 2 research subagents: it holds what each agent receives, the scored-table format and the one-line family briefs.
 
 ## Phase 3 — Compile the playbook
 
 Write `<property>/backlinks/PLAYBOOK.md` from `${CLAUDE_PLUGIN_ROOT}/skills/web-backlinks/references/playbook-template.md`. Non-negotiables:
 
-- The playbook is the domain-specific execution plan and tracks its own completion: the **Plan tracker** section counts blocks by status, % complete, stalled and blocked items, next gates. Complete = every block terminal (won/parked/dead) AND both queues empty.
-- Header carries (template has slots for all): baseline, sending decision, autonomy contract, velocity budget (15 sends/day TOTAL across all properties — compile writes the constant into the header slot; the orchestrator computes and passes the day's remaining budget at run time), SUPPRESSION rules, do-not-contact pointer, the Four Laws digest, anchor rule, voice rules (top 8 + banned words, distilled from `/founder-pipeline:brand-voice` and your own style guide if you have one).
-- Blocks sorted impact/effort, IDs `BL-NNN` (migrated state keeps history in its own table, new blocks number from BL-001). `gate:` takes a date OR a block ID (`gate: BL-002` = dependency).
-- **Compile one gated follow-up block per in-flight Migrated-state row** (gate = last send + 21 days, reply-in-thread, one ever). Without this the history table rots — "none rots silently" covers migrated rows too. Second-language rows: follow-up only if the mail is fix-request/housekeeping class; pitch rows go terminal at gate + 21 unanswered.
-- **Non-primary-language templates are compiled, never composed.** Template text in any language other than the executor's primary is written at compile time by a strong model, with `/founder-pipeline:brand-voice` applied and a native-quality translation pass (formal register and full diacritics where the language has them — e.g. Czech "Díky", not "Diky"). Executors only fill {slots}. Every such template starts as CANARY regardless of its English sibling.
-- Three queues besides executor blocks: **Owner-only** (signups, payments, posts/PRs/answers from the owner's identity — Reddit, Quora, GitHub, X, LinkedIn — with executor-drafted content attached), **Owner decisions** (e.g. a marketplace profile that may outrank the owner's own name), **Build blocks** (`model: build` — badge SVGs, directory pages, stat pages → routed to `/founder-pipeline:web-site-creator`, and gating their dependent outreach via `gate: BL-NNN`).
-- Every number in TEMPLATE **and CONTEXT** verified against your numbers source of truth this run. Compile checklist in the template — run it before saving.
+Read `references/phase-3-compile-rules.md` when compiling or refreshing PLAYBOOK.md in Phase 3: it holds the non-negotiable bullets for the tracker, header, block order, follow-ups, templates, queues and number checks.
 
 ## Phase 4 — Execute (`/founder-pipeline:web-backlinks run <property> [N]`)
 
@@ -134,21 +91,7 @@ Write `<property>/backlinks/PLAYBOOK.md` from `${CLAUDE_PLUGIN_ROOT}/skills/web-
 
 ## Common mistakes
 
-| Mistake | Fix |
-|---|---|
-| Re-pitching a contacted/dead target | Adoption + ledger backfill are mandatory; Phase 2 agents get the exclusion list |
-| Requiring a link-back "to verify" a listing | Law 4: verification = identity; link invite is optional and says so |
-| Followed badge links at scale | Badges ship `rel="nofollow"`; value is brand + AI surface, not PageRank |
-| Cold mail from the community mailbox | Phase 1.6 sending decision; dedicated address preferred |
-| Executor defaults to draft-only on graduated templates | Autonomy contract is in the header; graduated = send |
-| Keyword anchors | Anchor = brand/name or bare URL, in the executor contract |
-| Cold-templating someone the owner already knows | Mailbox-history suppression check is per-send and mandatory |
-| Counting DA daily | Referring domains monthly; judge quarterly |
-| Executing a block and leaving its board row on `Ready` | Phase 4.8b write-back — terminal block flips its `board_row`; stale `Ready` rows drown the real `/founder-pipeline:web-listings` queue in false alerts |
-| Creating a fresh board row for a block that was never adopted from one | `board_row: none` means no row; Phase 1 owns the mapping, `/founder-pipeline:founder` P5.S3 owns seeding |
-| Writing off an unlinked mention that won't convert | It's a win on its own line — mentions correlate 0.664 vs 0.218 for backlinks |
-| Proposing your own "best [category]" listicle as a linkbait asset | 69% of self-promotional listicle citations recommend a competitor — pitch for placement on OTHER people's lists |
-| Reporting AI-citation wins inside the referring-domains KPI | Separate line, same rule as entity work |
+Read `references/common-mistakes.md` when reviewing a run or an executor's output for known failure modes: it holds the mistake and fix table.
 
 ## Optional dependencies
 

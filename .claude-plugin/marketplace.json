@@ -1,5 +1,6 @@
 {
   "name": "founder-pipeline",
+  "description": "Founder Pipeline: a gated, evidence-first pipeline for validating and launching a business idea with Claude Code.",
   "owner": {
     "name": "Marian Kamenistak",
     "url": "https://github.com/marian-kamenistak"
@@ -9,8 +10,7 @@
       "name": "founder-pipeline",
       "source": "./plugins/founder-pipeline",
       "displayName": "Founder Pipeline",
-      "description": "A gated 25-step pipeline for designing a new revenue stream. Forces evidence over assumption, refuses to advance without a human signature, and is allowed to kill the idea.",
-      "version": "0.2.0",
+      "description": "A gated 25-step pipeline for designing a new revenue stream. Evidence over assumption, a fresh-context critic and a human signature at every step, and three gates that can kill the idea. Ships 23 skills, 4 subagents, 2 workflows and an approval hook.",
       "keywords": [
         "founder",
         "validation",

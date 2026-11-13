@@ -12,17 +12,17 @@ plausible-looking number. Prices change; re-check before budgeting.
 
 | | Monthly | What you get |
 |---|---|---|
-| **Minimum viable** | **$27 – $37** | The full pipeline, using free tiers everywhere they genuinely suffice |
+| **Minimum viable** | **$27 – $37** | The full pipeline, using free tiers everywhere they genuinely suffice. On Claude Pro, top-tier model credits come on top (see Tier 0) |
 | **Comfortable** | **$205 – $233** | Paid tiers only where the free tier actually bites |
 | **Per research run** | **$0.66 – $2.02** | Metered APIs for one round of keyword, SERP, backlink and social research |
 
-Seven of the thirteen tools below run at **$0** for a solo founder. Only two costs are unavoidable:
-a Claude plan (Claude Code is not on the free tier) and custom-domain email (Google Workspace has no
-free tier).
+Seven of the thirteen tools below run at **$0** for a solo founder. Only one cost is unavoidable:
+a Claude plan (Claude Code is not on the free tier). Custom-domain email becomes a cost once you
+reach the building half (Google Workspace has no free tier).
 
 If you want the cheapest useful version: **Claude Pro + a $50 DataForSEO deposit + a domain.** That
 runs the whole evidence-and-kill half of the pipeline — the part that decides whether to build at
-all — for about $20/month plus pennies per run.
+all — for the Pro price plus pennies per run, and on Pro the top-tier model's credits on top.
 
 ---
 
@@ -31,7 +31,7 @@ all — for about $20/month plus pennies per run.
 | What | Why | Cost |
 |---|---|---|
 | **Claude Pro or higher** | Claude Code is not included in Claude Free | **$17/mo** annual, $20 monthly |
-| **A top-tier model** | The adversarial critic passes and reader-facing copy degrade badly on cheaper tiers | included in the plan |
+| **A top-tier model** | The adversarial critic passes and reader-facing copy degrade badly on cheaper tiers | on Max, inside the plan's limits; on Pro, paid in credits (see below) |
 | **You, present, to approve each step** | Every step waits for a human signature. This is not automatable and is not meant to be | free, but it is the real cost |
 | **A writable folder** | One folder per idea, one file per step | free |
 
@@ -70,8 +70,7 @@ backlinks  5 × ($0.024 + 1 row)          = $0.120
                      live, full depth    = $0.61
 ```
 
-A **$50 deposit buys roughly 200–260 runs of that shape.** Running one every day for a year still
-does not exhaust the minimum deposit.
+A **$50 deposit buys roughly 200–260 runs of that shape** ($0.25 live to $0.19 standard per run).
 
 *Source: [dataforseo.com/pricing](https://dataforseo.com/pricing), accessed 2026-08-27.
 Per-endpoint backlink rates beyond the two above: not available — the pricing page does not break
@@ -159,7 +158,8 @@ xAI is roughly half the cost, driven entirely by the $5-vs-$10 search call price
 | DataForSEO, amortised from the $50 deposit | ~$1 – $5 |
 | OpenAI + xAI search, amortised | ~$1 – $3 |
 | Firecrawl, PostHog, CRM, Notion, Cloudflare, Resend, Apollo | **$0** |
-| **Total** | **$27 – $37** |
+| Top-tier model credits on Pro | not included — this document has no figure for them |
+| **Total** | **$27 – $37**, plus those credits |
 
 ### Comfortable — $205 to $233 per month
 
@@ -179,14 +179,15 @@ Paid only where the free tier genuinely stops being enough.
 | PostHog, CRM, Resend | **$0** | free tiers still hold at this scale |
 | **Total** | **$205 – $233** | |
 
-Drop Apollo and stay on Claude Pro: **$75 – $90**. Add a paid CRM and Resend Pro past three seats:
-**$265 – $300**.
+Drop Apollo and stay on Claude Pro: the total falls by Apollo's $49 and by the gap between Max 5x
+($100) and Pro ($17), and the top-tier model moves onto credits. Past three seats, add a paid CRM
+(priced in EUR only, see Tier 2) and Resend Pro ($20).
 
 ---
 
 ## Before you budget
 
-1. **Roughly $150/month of this stack runs at zero.** PostHog, the CRM free tier, Resend, Cloudflare
+1. **Much of this stack runs at zero.** PostHog, the CRM free tier, Resend, Cloudflare
    Workers and solo Notion are not trials — they are free plans that hold at founder scale.
 2. **The top-tier model on a Pro plan is credits-only from the first token.** Budget for it separately
    or move to Max.
